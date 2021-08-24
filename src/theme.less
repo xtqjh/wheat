@@ -1,0 +1,29 @@
+// -------- 引入官方提供的 less 样式入口文件 -----------
+@import "~ng-zorro-antd/ng-zorro-antd.less";
+@import "~ng-zorro-antd/resizable/style/entry.less";
+@import "~@angular/cdk/overlay-prebuilt.css";
+
+// -------- 自定义参数覆盖 -----------
+@color: #1890ff;
+@primary-color: @color;
+@link-color: @color;
+@border-radius-base: 2px;
+
+:root {
+  --theme-color: @color;
+  --theme-border-radius: @border-radius-base;
+  --top-height: 50px;
+  --top-padding: 0px 16px;
+  --top-bg-color: rgb(0, 0, 51);
+  --sidebar-height: 36px;
+  --sidebar-padding: 10px 0px;
+  --sidebar-bg-color: rgb(0, 0, 51);
+}
+
+@theme-color: var(--theme-color);
+.theme-back {
+  background-color: @theme-color;
+}
+.theme-color {
+  color: @theme-color;
+}

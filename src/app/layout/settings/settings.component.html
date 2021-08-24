@@ -1,0 +1,133 @@
+<div class="pos-r" [ngStyle]="{'height.px':clientHeight||600}">
+
+  <div class="pd-10" style="overflow-y:auto;" [ngStyle]="{'height.px':transHeight||600}">
+
+    <div class="set-item">
+      <div class="set-title">主题色</div>
+      <div class="set-content">
+        <ng-container *ngFor="let item of themes">
+          <span class="setting-theme-tag" [ngStyle]="{'background-color':item}"
+            (click)="setting.theme=item;setting.topBgColor=item;setting.sidebarBgColor=item;setViewHtml();runLess();">
+            <i nz-icon nzType="check" nzTheme="outline" *ngIf="setting.theme==item"></i>
+          </span>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="set-item">
+      <div class="set-title">顶部</div>
+      <div class="set-content flex flex-row flex-wrap">
+        <!-- <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="topHeight">高</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-input-number name="topHeight" [(ngModel)]="setting.topHeight" (ngModelChange)="setViewHtml()"
+              [nzMin]="50" [nzMax]="100" [nzStep]="1">
+            </nz-input-number> px
+          </nz-form-control>
+        </nz-form-item> -->
+        <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="topBgColor">背景色</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input  zcTrim type="color" name="topBgColor" [(ngModel)]="setting.topBgColor" (ngModelChange)="setViewHtml()">
+            <span class="color-999 font-12 mg-l4">默认同主色系</span>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="topPadding">左右内边距</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-input-number name="topPadding" [(ngModel)]="setting.topPadding" (ngModelChange)="setViewHtml()"
+              [nzMin]="10" [nzMax]="100" [nzStep]="1">
+            </nz-input-number> px
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div class="set-item">
+      <div class="set-title">侧边栏</div>
+      <div class="set-content flex flex-row flex-wrap">
+        <!-- <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="sidebarHeight">高</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-input-number name="sidebarHeight" [(ngModel)]="setting.sidebarHeight" (ngModelChange)="setViewHtml()"
+              [nzMin]="40" [nzMax]="80" [nzStep]="1"></nz-input-number> px
+          </nz-form-control>
+        </nz-form-item> -->
+        <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="sidebarBgColor">背景色</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input  zcTrim type="color" name="sidebarBgColor" [(ngModel)]="setting.sidebarBgColor"
+              (ngModelChange)="setViewHtml()">
+            <span class="color-999 font-12 mg-l4">默认同主色系</span>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="sidebarPadding">上下内边距</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-input-number name="sidebarPadding" [(ngModel)]="setting.sidebarPadding" (ngModelChange)="setViewHtml()"
+              [nzMin]="10" [nzMax]="100" [nzStep]="1"></nz-input-number> px
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div class="set-item">
+      <div class="set-title">表格</div>
+      <div class="set-content flex flex-row flex-wrap">
+        <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="tableSize">大小类型</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-select name="tableSize" [(ngModel)]="setting.tableSize" class="w90">
+              <nz-option nzValue="small" nzLabel="迷你"></nz-option>
+              <nz-option nzValue="middle" nzLabel="正常"></nz-option>
+              <nz-option nzValue="default" nzLabel="超大"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="mg-b0 w300" *ngIf="false">
+          <nz-form-label [nzSpan]="8" nzFor="tableShowPageSize">页数选择器</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-switch name="tableShowPageSize" [(ngModel)]="setting.tableShowPageSize"
+              [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate">
+            </nz-switch>
+            <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+            <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="mg-b0 w300">
+          <nz-form-label [nzSpan]="8" nzFor="tableShowPageJumper">快速跳转</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-switch name="tableShowPageJumper" [(ngModel)]="setting.tableShowPageJumper"
+              [nzCheckedChildren]="checkedTemplate" [nzUnCheckedChildren]="unCheckedTemplate">
+            </nz-switch>
+            <ng-template #checkedTemplate><i nz-icon nzType="check"></i></ng-template>
+            <ng-template #unCheckedTemplate><i nz-icon nzType="close"></i></ng-template>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="mg-b0 w300" *ngIf="setting.tableShowPageSize">
+          <nz-form-label [nzSpan]="8" nzFor="tablePageSizeOptions">页数可选值</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-select name="tablePageSizeOptions" [(ngModel)]="setting.tablePageSizeOptions" class="wb100">
+              <nz-option nzValue="[ 10, 20, 30, 40, 50 ]" nzLabel="[ 10, 20, 30, 40, 50 ]"></nz-option>
+              <nz-option nzValue="[ 10, 20, 50, 70, 100 ]" nzLabel="[ 10, 20, 50, 70, 100 ]"></nz-option>
+              <nz-option nzValue="[ 10, 20, 50, 100, 200 ]" nzLabel="[ 10, 20, 50, 100, 200 ]"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    
+    <pre *ngIf="base.debuger">{{setting|json}}</pre>
+
+  </div>
+
+  <nz-form-item id="transFooter" nz-row class="border-top back-f4 pd-t15 pd-b15 text-r pos-a wb100 mg-b0"
+    style="bottom:0;">
+    <nz-form-control [nzOffset]="1" [nzSpan]="22">
+      <button nz-button nzType="danger" class="mg-r8" (click)="clickClearCache()">清除缓存</button>
+      <button nz-button nzType="primary" class="" (click)="submitForm()">保存当前方案</button>
+    </nz-form-control>
+  </nz-form-item>
+
+</div>

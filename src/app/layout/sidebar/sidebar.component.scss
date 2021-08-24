@@ -1,0 +1,74 @@
+$sidebar-bg-color: var(--sidebar-bg-color);
+$sidebar-height: var(--sidebar-height);
+$sidebar-padding: var(--sidebar-padding);
+
+.sidebar {
+  width: 100%;
+  min-height: 100%;
+  padding: $sidebar-padding;
+  position: relative;
+  .sidebar-box {
+    padding: $sidebar-padding;
+    & > ul {
+      height: calc(100vh - 76px);
+      overflow-y: auto;
+      &.ant-menu-dark {
+        background-color: $sidebar-bg-color;
+        .submenu {
+          margin: -4px 0;
+          padding: 4px 0;
+          background-color: $sidebar-bg-color;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) inset;
+        }
+        .menu-title {
+          height: $sidebar-height;
+          line-height: $sidebar-height;
+          margin: 0;
+        }
+      }
+    }
+  }
+  .sidebar-logo {
+    margin: 0 auto;
+    text-align: center;
+    .logo {
+      width: 86px;
+      height: 34px;
+      cursor: pointer;
+      &.narrow {
+        width: 69px;
+        height: 27px;
+        margin-left: 8px;
+        margin-top: 3px;
+      }
+    }
+  }
+  .sidebar-footer {
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    .text {
+      color: rgba(200, 200, 200, 0.5);
+      font-size: 12px;
+      transform: scale(0.75);
+      margin: 0;
+    }
+  }
+}
+
+::ng-deep .ant-menu-submenu-title {
+  height: $sidebar-height !important;
+  line-height: $sidebar-height !important;
+  margin: 0;
+}
+
+::ng-deep .ant-menu-submenu-title,
+::ng-deep .menu-title {
+  padding-left: 14px !important;
+}
+
+::ng-deep .ant-menu-submenu-title + .ant-menu-sub > ul > .menu-title.ant-menu-item {
+  padding-left: 38px !important;
+}

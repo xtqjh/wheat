@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+
+// 重写菜单栏样式
+.ant-menu-inline-collapsed {
+  width: 40px !important;
+}
+.ant-menu-inline-collapsed > .ant-menu-item,
+.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+  padding: 0 12px !important;
+}
+.ant-menu-submenu-title {
+  margin: 0 !important;
+}
+.ant-menu-vertical .ant-menu-item {
+  margin: 0 !important;
+  height: 32px !important;
+  line-height: 32px !important;
+}
+.ant-menu-vertical .submenu {
+  padding: 8px 0 !important;
+}
+
+.ant-form-item-label,
+.ant-form-item-control {
+  line-height: 28px !important;
+}
+.ant-form-explain{
+  font-size: 12px !important;
+}
+.ant-form-item{
+  margin-bottom: 19px !important;
+}
+.ant-form-item-with-help {
+  margin-bottom: 0px !important;
+}

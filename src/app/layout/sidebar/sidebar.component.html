@@ -1,0 +1,42 @@
+<div class="sidebar">
+  <div class="sidebar-logo">
+    <img class="logo" [ngClass]="{'narrow': isOpenMenu}" src="assets/img/logo.png" (click)="tabs('/layout/home','首页')">
+  </div>
+
+  <div class="sidebar-box">
+    <ul nz-menu nzMode="inline" nzTheme="dark" [nzSelectable]="false" [nzInlineCollapsed]="isOpenMenu"
+      class="user-select">
+
+      <nz-alert nzBanner nzType="error" [nzShowIcon]="false" [nzMessage]="templateErrorMenu" *ngIf="isMenuError">
+      </nz-alert>
+      <ng-template #templateErrorMenu>
+        <span class="font-12 color-666">菜单同步失败！</span>
+        <a class="font-12 cur-p" (click)="getLoadMenu()">重新载入</a>
+      </ng-template>
+
+      <nz-skeleton [nzLoading]="isLoading" [nzActive]="true" class="pd-l20 pd-r20" *ngIf="isLoading"></nz-skeleton>
+
+      <ng-container *ngIf="!isLoading">
+        <ng-container *ngFor="let menu of menuList">
+          <li *ngIf="menu.type !== 'self'" nz-menu-item class="menu-title"
+            (click)="tabs(menu.path,menu.title || menu.text)" nz-tooltip nzPlacement="right"
+            [nzTitle]="isOpenMenu ? menu.title || menu.text : ''">
+            <i nz-icon [nzType]="menu.icon"></i>
+            <span>{{menu.title || menu.text}}</span>
+            <i nz-icon nzType="loading" nzTheme="outline" *ngIf="menu.isLoading"></i>
+          </li>
+          <li *ngIf="menu.type === 'self'" nz-menu-item class="menu-title"
+            (click)="tabs(menu.path,menu.title || menu.text)">
+            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+            <a [href]="menu.urlPath" target="_blank">{{menu.title || menu.text}}</a>
+          </li>
+        </ng-container>
+      </ng-container>
+
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">
+    <div class="text">新麦</div>
+  </div>
+</div>

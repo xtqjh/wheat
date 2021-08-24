@@ -1,0 +1,85 @@
+<div class="pd-20 back-f4 pos-r" style="overflow-y:auto;" [ngStyle]="{'height.px':clientHeight||600}">
+  <div class="home-content">
+    <div class="flex flex-row flex-justify-between mg-t20 h-50">
+      <div class="flex flex-row flex-items-center">
+        <span class="zd-icon-50 back-theme bor-r4"><i nz-icon nzType="bell" nzTheme="outline"
+            class="color-white font-24"></i></span>
+        <p class="flex flex-column flex-justify-center mg-l20 mg-b0">
+          <span class="font-20">消息</span>
+          <span class="font-12">通知与告警</span>
+        </p>
+      </div>
+      <div class="flex flex-items-center font-22">{{meridiem + '好'}}，{{item?.name || '同学'}}</div>
+    </div>
+
+    <div class="flex flex-row mg-t24">
+      <div class="home-left">
+        <!--消息-->
+        <div class="home-Notice">
+          <div class="mg-t40">
+            <nz-empty></nz-empty>
+          </div>
+        </div>
+        <!--消息 end-->
+
+        <!--公告-->
+        <div class="flex flex-row flex-items-center mg-t50">
+          <span class="zd-icon-50 back-theme bor-r4"><i nz-icon nzType="notification" nzTheme="outline"
+              class="color-white font-24"></i></span>
+          <p class="flex flex-column flex-justify-center mg-l20 mg-b0">
+            <span class="font-20">公告</span>
+            <span class="font-12">系统公告</span>
+          </p>
+        </div>
+        <!--消息-->
+        <div class="home-Notice mg-t24">
+          <div class="mg-t40">
+            <nz-empty></nz-empty>
+          </div>
+        </div>
+        <!--消息 end-->
+        <!--公告 end-->
+
+      </div>
+      <!--右侧内容-->
+      <div class="home-right">
+        <div><img [src]="item?.companyLogoWeb || 'assets/img/logo.png'" style="width: 100%; max-height: 90px;"
+            alt="企业 Logo">
+        </div>
+        <div class="font-18 pd-t30">{{item?.companyName || '公司名称'}}</div>
+        <div class="pd-t30">
+          <p class="line-26">
+            <span class="mg-r10">部门：{{item?.departmentCount || 0}}个</span>
+            <span class="mg-l10">成员：{{item?.staffCount || 0}}人</span>
+          </p>
+        </div>
+        <div class="pd-t20">
+          <p class="line-26">主体类型：承运商
+            <nz-tag [nzColor]="'#4890C7'">已认证</nz-tag>
+          </p>
+          <p class="line-26 mg-b0">
+            已使用/人数上限
+            <span class="fr">
+              {{item?.staffCount||0}}/{{item?.limitNum||200}}
+            </span>
+          </p>
+        </div>
+
+        <ng-container *ngIf="item?.staffCount <= 200">
+          <nz-progress [nzPercent]="item?.staffCount/5" [nzShowInfo]="false"></nz-progress>
+        </ng-container>
+
+        <ng-container *ngIf="item?.staffCount >= 200">
+          <nz-progress [nzPercent]="100" [nzShowInfo]="false" nzStatus="exception"></nz-progress>
+        </ng-container>
+
+        <div class="pd-t20">
+          <p class="line-26">联系电话：<span>{{item?.telphone||'000-0000000'}}</span></p>
+          <p class="line-26">企业地址：<span>{{item?.address||'----'}}</span></p>
+        </div>
+
+      </div>
+      <!--右侧内容 end-->
+    </div>
+  </div>
+</div>

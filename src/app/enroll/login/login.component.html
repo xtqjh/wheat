@@ -1,0 +1,67 @@
+<div class="login">
+
+  <canvas></canvas>
+
+  <div class="login-content">
+    <form nz-form [formGroup]="dynForm" class="login-form" (ngSubmit)="submitForm()">
+      <div class="text-c mg-b10">
+        <img class="login-logo" src="assets/img/logo.png">
+        <span class="font-28 color-d8 mg-l8 mg-r8">·</span>
+        <span class="font-28 color-d8">采购</span>
+      </div>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="userNameErrorTpl">
+          <nz-input-group nzPrefixIcon="user">
+            <input type="text" nz-input zcTrim formControlName="loginName" placeholder="账户" />
+          </nz-input-group>
+          <ng-template #userNameErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              请输入您的登录账户!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">
+              {{control.errors['duplicated']}}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzErrorTip]="passwordErrorTpl">
+          <nz-input-group [nzSuffix]="suffixTemplate" nzPrefixIcon="lock">
+            <input [type]="passwordVisible ? 'text' : 'password'" nz-input zcTrim placeholder="密码"
+              formControlName="password" />
+          </nz-input-group>
+          <ng-template #suffixTemplate>
+            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
+              (click)="passwordVisible = !passwordVisible"></i>
+          </ng-template>
+          <ng-template #passwordErrorTpl let-control>
+            <ng-container *ngIf="control.hasError('required')">
+              请输入您的登录密码!
+            </ng-container>
+            <ng-container *ngIf="control.hasError('duplicated')">
+              {{control.errors['duplicated']}}
+            </ng-container>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <div id="captcha"></div>
+        <nz-form-control nzErrorTip="请正确操作图像校验">
+          <input type="hidden" formControlName="jigsaw" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control>
+          <button nz-button class="login-form-button" [nzType]="'primary'" [nzLoading]="submitStatus">登录</button>
+          <span class="color-bbb opac-4 font-12">新麦</span>
+        </nz-form-control>
+      </nz-form-item>
+      <p class="font-12 color-333" *ngIf="isExplore==true || isResolving==true">为了获得最佳操作体验，建议您使用谷歌浏览器或火狐浏览器，支持1024 X
+        768以上分辨率</p>
+    </form>
+  </div>
+
+  <div class="login-footer">
+    Copyright © 2021 WHEAT 新麦 蜀ICP备 xxxxxxx
+  </div>
+</div>

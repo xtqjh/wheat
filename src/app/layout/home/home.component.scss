@@ -1,0 +1,18 @@
+$theme-color: var(--theme-color);
+
+.back-theme {
+  background-color: $theme-color;
+}
+.color-theme {
+  color: $theme-color;
+}
+
+
+.home-content{max-width: 1080px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column;}
+.home-left{width: 650px; display: flex; flex-direction: column}
+.home-Notice{width: 100%; background: #fff; height: 268px; padding: 0 38px}
+.home-right{width: 400px; margin-left: 30px; background: #fff; padding: 30px; box-sizing: border-box}
+.home-h62{height: 62px;}
+.home-map{width: 100%; height: 120px; box-sizing: border-box; padding: 10px 0}
+.home-map img{width: 340px; height: 100px}
+

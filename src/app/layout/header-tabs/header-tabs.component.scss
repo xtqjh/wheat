@@ -1,0 +1,92 @@
+.tabs {
+  position: relative;
+  flex: 1;
+  z-index: 9;
+  .tabs-nav {
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: -20px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 24px;
+    background-color: #fff;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+    white-space: nowrap;
+    .tabs-title {
+      padding: 0;
+      margin: 0;
+      display: inline-block;
+      box-sizing: border-box;
+      -webkit-transition: all 0.2s;
+      .tabs-tab {
+        display: inline-block;
+        font-size: 14px;
+        transition: all 0.2s;
+        -webkit-transition: all 0.2s;
+        position: relative;
+        padding: 0 15px;
+        text-align: center;
+        cursor: pointer;
+        max-width: 160px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        border-right: 1px solid #f6f6f6;
+        vertical-align: top;
+        &:hover,
+        &.active {
+          background-color: #f6f6f6;
+        }
+        &.active:after {
+          position: absolute;
+          left: 0;
+          top: 0;
+          content: "";
+          width: 100%;
+          border-radius: 2px 2px 0 0;
+          box-sizing: border-box;
+          pointer-events: none;
+          height: 2px;
+          background-color: #292b34;
+        }
+        .tabs-closes {
+          width: 12px;
+          height: 12px;
+          overflow: hidden;
+          color: rgba(0, 0, 0, 0.45);
+          font-size: 12px;
+          vertical-align: middle;
+          transition: all 0.3s;
+          z-index: 10;
+          &:hover {
+            color: red;
+            transform: rotate(180deg);
+          }
+        }
+      }
+    }
+  }
+  .tabs-control {
+    position: absolute;
+    top: -20px;
+    width: 24px;
+    height: 40px;
+    line-height: 46px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    border-left: 1px solid #f6f6f6;
+    z-index: 9;
+    background-color: white;
+    &.tabs-control-left {
+      left: 0;
+      border-left: none;
+      border-right: 1px solid #f6f6f6;
+    }
+    &.tabs-control-right {
+      right: 0px;
+    }
+  }
+}

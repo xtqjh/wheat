@@ -1,0 +1,45 @@
+.header {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  .menu-btn {
+    width: 40px;
+    color: #fff;
+    cursor: pointer;
+  }
+  .user {
+    font-size: 13px;
+    max-width: 200px;
+    margin-left: 10px;
+    text-align: right;
+    .menu {
+      color: #fff;
+      margin-right: 10px;
+      &:hover {
+        color: #eee;
+      }
+    }
+    .icon {
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      &:hover {
+        color: #eee;
+      }
+    }
+    .name {
+      margin-left: 10px;
+      color: #fff;
+      .icon {
+        transition: transform 0.45s;
+        transform-style: preserve-3d;
+      }
+      &:hover {
+        color: #eee;
+        .icon {
+          transform: rotateX(180deg);
+        }
+      }
+    }
+  }
+}

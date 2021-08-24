@@ -1,0 +1,18 @@
+<div #container class="tabs">
+  <div #navContainerElement class="tabs-nav">
+    <div #navListElement class="tabs-title user-select">
+      <ng-container *ngFor="let tab of tabItems; index as i">
+        <div class="tabs-tab" [ngClass]="{'active':selectTab==tab.url}" (click)="onGoToUrl(tab.url)">
+          {{tab.title}}
+          <ng-container *ngIf="tab.closable && selectTab==tab.url">
+            <i nz-icon type="close" class="tabs-closes" (click)="closeTab(i)"></i>
+          </ng-container>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <i nz-icon nzType="double-left" nzTheme="outline" class="tabs-control tabs-control-left user-select"
+    (click)="scrollHeader('left')"></i>
+  <i nz-icon nzType="double-right" nzTheme="outline" class="tabs-control tabs-control-right user-select"
+    (click)="scrollHeader('right')"></i>
+</div>

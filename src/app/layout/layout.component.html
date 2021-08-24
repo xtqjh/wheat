@@ -1,0 +1,33 @@
+<nz-layout>
+
+  <!-- 菜单栏 -->
+  <nz-sider nzWidth="{{!isOpenMenu?130:40}}px" nzTheme="light">
+    <app-sidebar></app-sidebar>
+  </nz-sider>
+
+
+  <nz-layout>
+
+    <!-- 上部导航条 -->
+    <nz-header>
+      <app-header></app-header>
+    </nz-header>
+
+    <nz-layout class="middle-layout">
+      <!-- 左侧菜单收缩按钮 -->
+      <div class="dislpayArrow">
+        <div class="pngfix" (click)="clickPngFix()">
+          <i nz-icon nzType="caret-left" nzTheme="outline" *ngIf="isOpenMenu"></i>
+          <i nz-icon nzType="caret-right" nzTheme="outline" *ngIf="!isOpenMenu"></i>
+        </div>
+      </div>
+
+      <nz-content>
+        <zc-reuse-tab [isShowTabsHead]="false" class="reuse-tab">
+          <router-outlet></router-outlet>
+        </zc-reuse-tab>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+
+</nz-layout>

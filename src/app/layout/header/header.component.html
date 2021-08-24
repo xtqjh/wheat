@@ -1,0 +1,19 @@
+<div class="header">
+
+  <app-header-tabs></app-header-tabs>
+
+  <div class="user user-select">
+    <a class="name" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
+      {{user?.sellerName || user?.name}}
+      <i class="icon" nz-icon nzType="down" nzTheme="outline"></i>
+    </a>
+    <ng-template #contentTemplate>
+      <div class="font-12 line-24 cur-p" (click)="onClickGoto('./settings')">
+        <i class="mg-r6" nz-icon nzType="bug" nzTheme="outline"></i>个性设置
+      </div>
+      <div class="font-12 line-24 cur-p" (click)="onClickExit()">
+        <i class="mg-r6" nz-icon nzType="logout" nzTheme="outline"></i>退出
+      </div>
+    </ng-template>
+  </div>
+</div>

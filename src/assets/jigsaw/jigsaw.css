@@ -1,0 +1,121 @@
+.block {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.sliderContainer {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  height: 32px;
+  line-height: 30px;
+  margin-top: 6px;
+  background: #f7f9fa;
+  color: #45494c;
+  border: 1px solid #e4e7eb;
+}
+
+.sliderContainer_active .slider {
+  height: 30px;
+  top: -1px;
+  border: 1px solid #1991FA;
+}
+
+.sliderContainer_active .sliderMask {
+  height: 30px;
+  border-width: 1px;
+}
+
+.sliderContainer_success .slider {
+  height: 30px;
+  top: -1px;
+  border: 1px solid #52CCBA;
+  background-color: #52CCBA !important;
+}
+
+.sliderContainer_success .sliderMask {
+  height: 30px;
+  border: 1px solid #52CCBA;
+  background-color: #D2F4EF;
+}
+
+.sliderContainer_success .sliderIcon {
+  color: #fff;
+}
+
+.sliderContainer_fail .slider {
+  height: 30px;
+  top: -1px;
+  border: 1px solid #f57a7a;
+  background-color: #f57a7a !important;
+}
+
+.sliderContainer_fail .sliderMask {
+  height: 30px;
+  border: 1px solid #f57a7a;
+  background-color: #fce1e1;
+}
+
+.sliderContainer_fail .sliderIcon {
+  color: #fff;
+}
+
+.sliderContainer_active .sliderText, .sliderContainer_success .sliderText, .sliderContainer_fail .sliderText {
+  display: none;
+}
+
+.sliderText {
+  font-size: 13px;
+}
+
+.sliderMask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 32px;
+  border: 0 solid #1991FA;
+  background: #D1E9FE;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 30px;
+  background: #fff;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background .2s linear;
+}
+
+.slider:hover {
+  background: #1991FA;
+  color: #fff;
+}
+
+.slider:hover .sliderIcon {
+  background-position: 0 -13px;
+}
+
+.sliderIcon {
+  position: absolute;
+  top: 9px;
+  left: 5px;
+  line-height: 1;
+  font-size: 12px;
+}
+
+.refreshIcon {
+  text-align: center;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 34px;
+  height: 24px;
+  line-height: 24px;
+  cursor: pointer;
+  color: #1890ff;
+  font-size: 12px;
+}
