@@ -1,8 +1,3 @@
-/**
- * @作者: zc
- * @时间: 2021-02-20 15:35:58
- * @描述: 入口 - 登录、忘记密码
- */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';

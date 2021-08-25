@@ -12,5 +12,13 @@ export class LayoutService {
     private http: HttpClient,
   ) { }
 
+  public getInfo() {
+    return this.http.get(`/member/info`);
+  }
+
+  public getLogout() {
+    return this.http.get(`/member/logout`);
+  }
+
 }
 

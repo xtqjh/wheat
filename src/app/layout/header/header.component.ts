@@ -1,12 +1,7 @@
-/**
- * @作者: zc
- * @时间: 2021-02-21 11:58:13
- * @描述: 头部
- */
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { BaseService } from 'src/app/share/service';
+import { BaseService, MessageService } from 'src/app/share/service';
 import { LayoutService } from '../layout.service';
 
 @Component({
@@ -26,6 +21,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private base: BaseService,
+    private msg: MessageService,
     private router: Router,
     private activeRoute: ActivatedRoute,
     private layoutService: LayoutService,
@@ -37,10 +33,13 @@ export class HeaderComponent implements OnInit {
   }
 
   private getUserInfo() {
-    const userInfo: any = this.base.getUserInfo;
-    if (userInfo) {
-      this.user = userInfo;
-    }
+    this.layoutService.getInfo().subscribe((res: any) => {
+      if (res.code === 200 && res.success) {
+        this.user = res.data;
+      } else {
+        this.msg.error(res.message);
+      }
+    });
   }
 
   public onClickGoto(url: string) {
@@ -48,6 +47,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public onClickExit() {
+    this.layoutService.getLogout().subscribe();
     this.base.cleanCacheRecords();
     this.router.navigate(['/login']);
   }

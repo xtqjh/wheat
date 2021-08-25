@@ -26,29 +26,6 @@ export class BaseService {
   }
 
   /**
-   * 用户信息
-   */
-  public get getUserInfo() {
-    const userInfo = this.cookieService.getObject(environment.storageUserInfo) as UserInfo;
-    if (!userInfo) {
-      this.msg.info('身份信息失效,请执行“退出”操作并重新登录！');
-      // this.router.navigate(['/login']);
-      this.cleanCacheRecords();
-      return;
-    }
-
-    return userInfo;
-  }
-
-  /**
-   * 用户菜单权限
-   */
-  public get getUserResources() {
-    const resou = JSON.parse(sessionStorage.getItem(environment.storageUserResources)) as Array<string>;
-    return resou || [];
-  }
-
-  /**
    * 关闭标签
    */
   public closeTab = (route: ActivatedRoute, targetUrl?: string, targetRefresh?: boolean | { function: string, value?: any }) => {

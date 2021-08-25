@@ -4,7 +4,7 @@
 
   <div class="user user-select">
     <a class="name" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
-      {{user?.sellerName || user?.name}}
+      {{user?.username || user?.name}}
       <i class="icon" nz-icon nzType="down" nzTheme="outline"></i>
     </a>
     <ng-template #contentTemplate>

@@ -1,8 +1,3 @@
-/**
- * @作者: zc
- * @时间: 2019-12-12 13:55:56
- * @描述: 布局
- */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';

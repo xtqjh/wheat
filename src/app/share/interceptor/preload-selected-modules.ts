@@ -1,8 +1,4 @@
-/**
- * @作者: zc
- * @时间: 2021-02-04 11:28:02
- * @描述: 预加载配置
- */
+
 import { Observable, of, timer } from 'rxjs';
 import { delay, flatMap, } from 'rxjs/operators';
 import { PreloadingStrategy, Route } from '@angular/router';

@@ -33,18 +33,18 @@ export class HomeComponent implements OnInit, AfterViewInit, OnDestroy {
     // private organizeService: OrganizeService,
     // private employeesService: EmployeesService,
   ) {
-    this.item = {
-      name: this.base.getUserInfo.name,
-      companyName: this.base.getUserInfo.company.name,
-      telphone: this.base.getUserInfo.company.contactTel,
-      address: this.base.getUserInfo.company.address,
-      // companyName: 'this.base.getUserInfo.company.name',
-      // telphone: 'this.base.getUserInfo.company.contactTel',
-      // address: 'this.base.getUserInfo.company.address',
-      limitNum: 200,
-      staffCount: 0,
-      departmentCount: 0,
-    };
+    // this.item = {
+    //   name: this.base.getUserInfo.name,
+    //   companyName: this.base.getUserInfo.company.name,
+    //   telphone: this.base.getUserInfo.company.contactTel,
+    //   address: this.base.getUserInfo.company.address,
+    //   // companyName: 'this.base.getUserInfo.company.name',
+    //   // telphone: 'this.base.getUserInfo.company.contactTel',
+    //   // address: 'this.base.getUserInfo.company.address',
+    //   limitNum: 200,
+    //   staffCount: 0,
+    //   departmentCount: 0,
+    // };
   }
 
   ngOnInit() {

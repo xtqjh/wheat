@@ -1,8 +1,3 @@
-/**
- * @作者: zc
- * @时间: 2021-02-21 11:56:27
- * @描述: 个性设置
- */
 import { Component, OnInit, AfterViewInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';

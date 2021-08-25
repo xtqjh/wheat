@@ -1,14 +1,9 @@
-/**
- * @作者: zc
- * @时间: 2019-12-12 13:15:09
- * @描述: 拦截器 - 请求
- */
 import { Injectable } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
 import { HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, HttpResponse, HttpEvent } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, tap } from 'rxjs/operators';
 import { NzNotificationService } from 'ng-zorro-antd';
 import { CookieService } from 'ng-ylzx/core/service';
 import { getExplore, getOS } from 'ng-ylzx/core/util';
@@ -56,15 +51,6 @@ export class HttpsInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    const started = Date.now();
-    let $headers = new HttpHeaders()
-      .set('X-Requested-Source', 'Browser')
-      .set('X-Requested-With', 'XMLHttpRequest');
-    req.headers.keys().forEach(item => {
-      $headers = $headers.set(item, req.headers.get(item));
-    });
-
-    // const token = sessionStorage.getItem(environment.storageToken);
     const token = this.cookieService.get(environment.storageToken);
     if (!token) {
       this.msg.error('身份标识凭证失效,请重新登录！');
@@ -73,9 +59,17 @@ export class HttpsInterceptor implements HttpInterceptor {
       return;
     }
 
+    const started = Date.now();
+    let $headers = new HttpHeaders()
+      .set('Authorization', token)
+      .set('Content-Type', 'application/x-www-form-urlencoded');
+    req.headers.keys().forEach(item => {
+      $headers = $headers.set(item, req.headers.get(item));
+    });
+
     const authReq = req.clone({
       headers: $headers,
-      url: req.url.indexOf('?') > 0 ? `${req.url}&access_token=${token}` : `${req.url}?access_token=${token}`
+      // url: req.url.indexOf('?') > 0 ? `${req.url}&access_token=${token}` : `${req.url}?access_token=${token}`
     });
 
     return next
@@ -86,6 +80,11 @@ export class HttpsInterceptor implements HttpInterceptor {
           if (this.base.debuger) {
             console.log(`请求 ${authReq.urlWithParams} 耗时 ${elapsed} ms.`);
           }
+        }),
+        tap(f => {
+          console.log(f);
+        }, f => {
+          console.log(f);
         }),
         catchError((res: HttpResponse<any>) => {
           clearTimeout(this.timer);
@@ -100,14 +99,14 @@ export class HttpsInterceptor implements HttpInterceptor {
 
   // 报错信息
   private handleError(error) {
-    if ((error.status >= 200 && error.status < 300) || error.status === 401) {
-      if (error.status === 401) {
-        this.msg.error((error.error && error.error.message || null) || (error.error && error.error.sys_message || null) || '登录超时，重新登录。');
-        this.base.cleanCacheRecords();
-        this.router.navigate(['/login'], { replaceUrl: false });
-      }
-      return;
-    }
+    // if ((error.status >= 200 && error.status < 300) || error.status === 401) {
+    //   if (error.status === 401) {
+    //     this.msg.error((error.error && error.error.message || null) || (error.error && error.error.sys_message || null) || '登录超时，重新登录。');
+    //     this.base.cleanCacheRecords();
+    //     this.router.navigate(['/login'], { replaceUrl: false });
+    //   }
+    //   return;
+    // }
     if (error.status === 0) {
       this.notification.error(
         '网络不可用，无法连接到服务器！',
@@ -126,12 +125,4 @@ export class HttpsInterceptor implements HttpInterceptor {
     this.msg.error((error.error && error.error.message || null) || (error.error && error.error.sys_message || null) || errortext || '未知错误，请检查网络。');
   }
 
-}
-
-
-function ajaxPost(url, data) {
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', url);
-  xhr.setRequestHeader('content-type', 'application/json');
-  xhr.send(JSON.stringify(data));
 }

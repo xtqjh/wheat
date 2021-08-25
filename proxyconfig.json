@@ -1,7 +1,9 @@
 [
   {
     "context": [
-      "/company"
+      "/company",
+      "/member",
+      "/auth"
     ],
     "target": "http://111.0.99.143:9000"
   },

@@ -1,8 +1,4 @@
-/**
- * @作者: zc
- * @时间: 2020-03-12 10:15:08
- * @描述: 文件
- */
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Observable, from } from 'rxjs';

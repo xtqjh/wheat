@@ -1,67 +1,88 @@
 <div class="login">
-
-  <canvas></canvas>
-
-  <div class="login-content">
-    <form nz-form [formGroup]="dynForm" class="login-form" (ngSubmit)="submitForm()">
-      <div class="text-c mg-b10">
-        <img class="login-logo" src="assets/img/logo.png">
-        <span class="font-28 color-d8 mg-l8 mg-r8">·</span>
-        <span class="font-28 color-d8">采购</span>
+  <div class="login-content bor-r8">
+    <div class="row back-white">
+      <div class="col-lg-6 d-none d-lg-flex" style="width: 480px;">
+        <div class="flex-grow-1 bg-login-image"
+          style="background: url(assets/img/ads/loginbg1.jpg) center / cover no-repeat;opacity: 1;">
+          <div>
+            <p
+              style="color: rgb(255,255,255);font-size: 28px;text-align: center;margin: 0;margin-top: 188PX;border-style: none;text-shadow: 1px 1px 1px rgb(0,0,0);">
+              我们用心，企业放心！<br>新麦 您的税务好帮手！<br>新麦 您身边的财税专家！<br></p>
+          </div>
+        </div>
       </div>
-      <nz-form-item>
-        <nz-form-control [nzErrorTip]="userNameErrorTpl">
-          <nz-input-group nzPrefixIcon="user">
-            <input type="text" nz-input zcTrim formControlName="loginName" placeholder="账户" />
-          </nz-input-group>
-          <ng-template #userNameErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              请输入您的登录账户!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('duplicated')">
-              {{control.errors['duplicated']}}
-            </ng-container>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control [nzErrorTip]="passwordErrorTpl">
-          <nz-input-group [nzSuffix]="suffixTemplate" nzPrefixIcon="lock">
-            <input [type]="passwordVisible ? 'text' : 'password'" nz-input zcTrim placeholder="密码"
-              formControlName="password" />
-          </nz-input-group>
-          <ng-template #suffixTemplate>
-            <i nz-icon [nzType]="passwordVisible ? 'eye-invisible' : 'eye'"
-              (click)="passwordVisible = !passwordVisible"></i>
-          </ng-template>
-          <ng-template #passwordErrorTpl let-control>
-            <ng-container *ngIf="control.hasError('required')">
-              请输入您的登录密码!
-            </ng-container>
-            <ng-container *ngIf="control.hasError('duplicated')">
-              {{control.errors['duplicated']}}
-            </ng-container>
-          </ng-template>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <div id="captcha"></div>
-        <nz-form-control nzErrorTip="请正确操作图像校验">
-          <input type="hidden" formControlName="jigsaw" />
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <button nz-button class="login-form-button" [nzType]="'primary'" [nzLoading]="submitStatus">登录</button>
-          <span class="color-bbb opac-4 font-12">新麦</span>
-        </nz-form-control>
-      </nz-form-item>
-      <p class="font-12 color-333" *ngIf="isExplore==true || isResolving==true">为了获得最佳操作体验，建议您使用谷歌浏览器或火狐浏览器，支持1024 X
-        768以上分辨率</p>
-    </form>
-  </div>
+      <div class="col-lg-6">
+        <div class="p-5">
+          <div class="text-center">
+            <div><img src="assets/img/ads/logo.png"
+                style="filter: contrast(101%) saturate(100%);width: 208px;margin-bottom: 19px;color: rgb(40,115,187);">
+            </div>
+            <h4 class="text-dark mb-4">欢迎回来!</h4>
+          </div>
+          <form nz-form [formGroup]="dynForm" class="user" (ngSubmit)="submitForm()">
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="phoneErrorTpl">
+                <input nz-input class="form-control form-control-user" type="tel" id="phone" formControlName="phone" />
+                <ng-template #phoneErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    请输入手机号码!
+                  </ng-container>
+                  <ng-container *ngIf="control.hasError('mobile')">
+                    {{control.errors['mobile']}}
+                  </ng-container>
+                  <ng-container *ngIf="control.hasError('duplicated')">
+                    {{control.errors['duplicated']}}
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
 
-  <div class="login-footer">
-    Copyright © 2021 WHEAT 新麦 蜀ICP备 xxxxxxx
+            <nz-form-item>
+              <nz-form-control [nzErrorTip]="codeErrorTpl">
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                  <input class="form-control form-control-user" type="text" nz-input id="verify_code"
+                    placeholder="输入验证码" formControlName="smsCode">
+                </nz-input-group>
+                <ng-template #suffixButton>
+                  <button class="btn btn-primary" id="btn_verify_code" type="button" style="height: 50px;"
+                    [disabled]="dynForm.get('phone').errors" (click)="clickGetCode()">
+                    {{ !isCountdown ? '获取验码' : countdownNumber+' 秒'}}
+                  </button>
+                </ng-template>
+                <ng-template #codeErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    请输入验码!
+                  </ng-container>
+                  <ng-container *ngIf="control.hasError('duplicated')">
+                    {{control.errors['duplicated']}}
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-control nzErrorTip="请同意《新麦平台须知》《隐私权政策》">
+                <div class="custom-control custom-checkbox small">
+                  <div class="form-check">
+                    <input class="form-check-input custom-control-input" type="checkbox" id="formCheck-1" checked=""
+                      formControlName="read">
+                    <label class="form-check-label custom-control-label" id="agree" for="formCheck-1">同意意&nbsp;<a
+                        href="https://staticdoc.kingmogu.com/user_register">《新麦平台须知》</a>与&nbsp;<a
+                        href="https://staticdoc.kingmogu.com/company_private">《隐私权政策》</a><br>
+                    </label>
+                  </div>
+                </div>
+              </nz-form-control>
+            </nz-form-item>
+
+            <button class="btn btn-primary btn-block text-white btn-user" id="btn_submit" type="button"
+              (click)="submitForm()">登录</button>
+            <hr>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">

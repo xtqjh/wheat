@@ -33,14 +33,16 @@
               }
             ],
             "styles": [
-              "src/theme.less",
-              "src/styles.scss",
               "node_modules/ng-ylzx/index.scss",
               "src/assets/fonts/fontawesome-all.min.css",
               "src/assets/fonts/font-awesome.min.css",
-              "src/assets/fonts/fontawesome5-overrides.min.css"
+              "src/assets/fonts/fontawesome5-overrides.min.css",
+              "src/theme.less",
+              "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+
+            ]
           },
           "configurations": {
             "production": {

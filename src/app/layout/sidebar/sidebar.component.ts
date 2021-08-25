@@ -1,8 +1,4 @@
-/**
- * @作者: zc
- * @时间: 2021-02-21 11:56:42
- * @描述: 菜单
- */
+
 import { Component, OnDestroy } from '@angular/core';
 import { Router, NavigationError, NavigationEnd, NavigationStart } from '@angular/router';
 import { debounceTime, filter, tap } from 'rxjs/operators';
