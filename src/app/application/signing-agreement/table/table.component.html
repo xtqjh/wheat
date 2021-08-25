@@ -1,0 +1,86 @@
+<div class="pd-t10 pd-b10" id="tableHeader">
+  <div class="flex flex-row flex-wrap ">
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">项目名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <nz-select class="wb100" id="projectName" name="projectName" [(ngModel)]="page.projectName">
+          <nz-option *ngFor="let option of projectList" [nzValue]="option.name" [nzLabel]="option.name">
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">姓名</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.trueName" id="trueName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">手机号</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.phone" id="phone" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">身份证号</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.identityCard" id="identityCard" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">成员状态</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <nz-select class="wb100" id="workStatus" name="workStatus" [(ngModel)]="page.workStatus">
+          <nz-option nzValue="0" nzLabel="未电签"></nz-option>
+          <nz-option nzValue="1" nzLabel="已电签"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w200">
+      <nz-form-control [nzOffset]="4">
+        <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
+          <i nz-icon nzType="search" *ngIf="!isLoading"></i>
+          <i nz-icon nzType="loading" *ngIf="isLoading"></i>
+          查询
+        </a>
+        <a nz-button class="user-select" (click)="searchData(true)">
+          重置
+        </a>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="pd-l10 pd-r10">
+    <nz-button-group>
+      <button nz-button (click)="getImport()"><i nz-icon nzType="upload" nzTheme="outline"></i>导入成员</button>
+      <button nz-button (click)="getDownload()"><i nz-icon nzType="download" nzTheme="outline"></i>导出成员</button>
+      <button nz-button (click)="getImportIndividual()"><i nz-icon nzType="upload" nzTheme="outline"></i>导入个体户</button>
+    </nz-button-group>
+  </div>
+</div>
+<zc-table fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
+  (searchData)="searchData($event)">
+</zc-table>
+
+
+<ng-template #tplContent>
+  <nz-form-item class="w300">
+    <nz-form-label [nzSpan]="6">所属项目</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <nz-select class="wb100" id="projectId" name="projectId" [(ngModel)]="company.projectId">
+        <nz-option *ngFor="let option of projectList" [nzValue]="option.id" [nzLabel]="option.name">
+        </nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="w300">
+    <nz-form-label [nzSpan]="6">上传文件</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <nz-upload [nzBeforeUpload]="changeFile">
+        <button nz-button><i nz-icon nzType="upload"></i><span>Click to Upload</span></button>
+      </nz-upload>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- {{company|json}} -->
+</ng-template>

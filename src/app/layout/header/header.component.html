@@ -1,6 +1,8 @@
 <div class="header">
 
-  <app-header-tabs></app-header-tabs>
+  <div style="flex:1;">
+    {{selectTitle}}
+  </div>
 
   <div class="user user-select">
     <a class="name" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
@@ -8,6 +10,9 @@
       <i class="icon" nz-icon nzType="down" nzTheme="outline"></i>
     </a>
     <ng-template #contentTemplate>
+      <div class="font-12 line-24 cur-p" (click)="clickSelectEnterprise()">
+        <i class="mg-r6" nz-icon nzType="reconciliation" nzTheme="outline"></i>选择公司
+      </div>
       <div class="font-12 line-24 cur-p" (click)="onClickGoto('./settings')">
         <i class="mg-r6" nz-icon nzType="bug" nzTheme="outline"></i>个性设置
       </div>
@@ -17,3 +22,12 @@
     </ng-template>
   </div>
 </div>
+
+<ng-template #tplContent>
+  请选择以下需要管理的公司：
+  <br />
+  <nz-select class="wb100" id="companyId" name="companyId" [(ngModel)]="company.companyId">
+    <nz-option *ngFor="let option of listEnterprise" [nzValue]="option.companyId" [nzLabel]="option.companyName">
+    </nz-option>
+  </nz-select>
+</ng-template>

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { environment } from 'src/environments/environment';
+import { NzModalService } from 'ng-zorro-antd';
 import { BaseService, MessageService } from 'src/app/share/service';
+import { ReuseTabService } from 'ng-ylzx/reuse-tab';
 import { LayoutService } from '../layout.service';
 
 @Component({
@@ -11,25 +12,35 @@ import { LayoutService } from '../layout.service';
 })
 export class HeaderComponent implements OnInit {
 
-  public helpBox = false;
+  user: any;
 
-  public user: any;
+  selectTitle = null;
 
-  public environment = environment;
+  @ViewChild('tplContent', { static: false }) tplContent: TemplateRef<any>;
 
-  public msgList = [];
+  listEnterprise = [];
+
+  company = { companyId: null };
 
   constructor(
     private base: BaseService,
     private msg: MessageService,
     private router: Router,
+    private modalService: NzModalService,
     private activeRoute: ActivatedRoute,
     private layoutService: LayoutService,
+    private reuseTabService: ReuseTabService,
   ) {
     this.getUserInfo();
   }
 
   ngOnInit() {
+    this.reuseTabService.change.subscribe(
+      res => {
+        const snapshotTrue = this.reuseTabService.getTruthRoute(this.activeRoute.snapshot);
+        this.selectTitle = this.reuseTabService.getTitle(this.reuseTabService.curUrl, snapshotTrue);
+      }
+    );
   }
 
   private getUserInfo() {
@@ -42,18 +53,50 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  public onClickGoto(url: string) {
+  onClickGoto(url: string) {
     this.router.navigate([url], { relativeTo: this.activeRoute, replaceUrl: false });
   }
 
-  public onClickExit() {
+  onClickExit() {
     this.layoutService.getLogout().subscribe();
     this.base.cleanCacheRecords();
     this.router.navigate(['/login']);
   }
 
-  public onGoToUrl(url) {
+  onGoToUrl(url) {
     this.router.navigate([url]);
+  }
+
+  clickSelectEnterprise() {
+    this.layoutService.getCompany().subscribe(
+      (res: any) => {
+        if (res.success) {
+          this.listEnterprise = res.extData;
+          const modal = this.modalService.confirm({
+            nzTitle: '选择管理公司',
+            nzContent: this.tplContent,
+            nzWidth: '400',
+            nzOnOk: () =>
+              new Promise((resolve, reject) => {
+                this.layoutService.getCompanyChoose(this.company).subscribe(
+                  (com: any) => {
+                    if (com.success) {
+                      location.reload();
+                      resolve();
+                    } else {
+                      this.msg.error(com.message);
+                      reject();
+                    }
+                  }
+                );
+              })
+          });
+        } else {
+          this.msg.error(res.message);
+        }
+      }
+    );
+
   }
 
 }

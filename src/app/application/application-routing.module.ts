@@ -7,8 +7,10 @@ const routes: Routes = [
     path: '',
     component: ApplicationComponent,
     children: [
-      // { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule), data: { title: '账号' } },
-      // { path: 'role', loadChildren: () => import('./role/role.module').then(m => m.RoleModule), data: { title: '角色' } },
+      { path: 'user/signing', loadChildren: () => import('./signing-agreement/signing-agreement.module').then(m => m.SigningAgreementModule), data: { title: '电签协议管理' } },
+      { path: 'user/bank', loadChildren: () => import('./bank-cards/bank-cards.module').then(m => m.BankCardsModule), data: { title: '银行卡管理' } },
+      { path: 'record', loadChildren: () => import('./record/record.module').then(m => m.RecordModule), data: { title: '记录管理' } },
+      { path: 'apply', loadChildren: () => import('./apply/apply.module').then(m => m.ApplyModule), data: { title: '申请管理' } },
     ]
   }
 ];

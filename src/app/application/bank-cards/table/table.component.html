@@ -1,0 +1,32 @@
+<div class="pd-t10" id="tableHeader">
+  <div class="flex flex-row flex-wrap ">
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">姓名</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.trueName" id="trueName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">手机号</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.phone" id="phone" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w200">
+      <nz-form-control [nzOffset]="4">
+        <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
+          <i nz-icon nzType="search" *ngIf="!isLoading"></i>
+          <i nz-icon nzType="loading" *ngIf="isLoading"></i>
+          查询
+        </a>
+        <a nz-button class="user-select" (click)="searchData(true)">
+          重置
+        </a>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+<zc-table fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
+  (searchData)="searchData($event)">
+</zc-table>
+

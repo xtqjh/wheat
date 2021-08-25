@@ -8,8 +8,7 @@ export const environment = {
   storageUserInfo: 'YLZX_WHEAT_USER_INFO',
   storageUserResources: 'YLZX_WHEAT_USER_RESOURCES',
   storageWbis: 'YLZX_WHEAT_WBIS',
-  storageSetting: 'YLZX_WHEAT_SETTINGS',
-  clientId: 'purchaseWebApp',
+  storageSetting: 'YLZX_WHEAT_SETTINGS'
 };
 
 /*

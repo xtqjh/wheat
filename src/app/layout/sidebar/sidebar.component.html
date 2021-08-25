@@ -18,18 +18,36 @@
 
       <ng-container *ngIf="!isLoading">
         <ng-container *ngFor="let menu of menuList">
-          <li *ngIf="menu.type !== 'self'" nz-menu-item class="menu-title"
-            (click)="tabs(menu.path,menu.title || menu.text)" nz-tooltip nzPlacement="right"
-            [nzTitle]="isOpenMenu ? menu.title || menu.text : ''">
-            <i nz-icon [nzType]="menu.icon"></i>
-            <span>{{menu.title || menu.text}}</span>
-            <i nz-icon nzType="loading" nzTheme="outline" *ngIf="menu.isLoading"></i>
-          </li>
-          <li *ngIf="menu.type === 'self'" nz-menu-item class="menu-title"
-            (click)="tabs(menu.path,menu.title || menu.text)">
-            <i nz-icon nzType="question-circle" nzTheme="outline"></i>
-            <a [href]="menu.urlPath" target="_blank">{{menu.title || menu.text}}</a>
-          </li>
+          <ng-container *ngIf="!menu.children">
+            <li *ngIf="menu.type !== 'self'" nz-menu-item class="menu-title"
+              (click)="tabs(menu.path,menu.title || menu.text)" nz-tooltip nzPlacement="right"
+              [nzTitle]="isOpenMenu ? menu.title || menu.text : ''">
+              <i nz-icon [nzType]="menu.icon"></i>
+              <span>{{menu.title || menu.text}}</span>
+              <i nz-icon nzType="loading" nzTheme="outline" *ngIf="menu.isLoading"></i>
+            </li>
+            <li *ngIf="menu.type === 'self'" nz-menu-item class="menu-title"
+              (click)="tabs(menu.path,menu.title || menu.text)">
+              <i nz-icon nzType="question-circle" nzTheme="outline"></i>
+              <a [href]="menu.urlPath" target="_blank">{{menu.title || menu.text}}</a>
+            </li>
+          </ng-container>
+          <ng-container *ngIf="menu.children">
+            <li nz-submenu [nzOpen]="isCollapsed" [nzTitle]="menu.title || menu.text" [nzIcon]="menu.icon">
+              <ul class="submenu">
+                <ng-container *ngFor="let cm of menu.children">
+                  <li *ngIf="cm.type !== 'self'" nz-menu-item class="menu-title"
+                    (click)="tabs(cm.path,cm.title || cm.text)">
+                    {{cm.title || cm.text}}
+                    <i nz-icon nzType="loading" nzTheme="outline" *ngIf="cm.isLoading"></i>
+                  </li>
+                  <li *ngIf="cm.type === 'self'" nz-menu-item class="menu-title">
+                    <a [href]="cm.urlPath" target="_blank">{{cm.title || cm.text}}</a>
+                  </li>
+                </ng-container>
+              </ul>
+            </li>
+          </ng-container>
         </ng-container>
       </ng-container>
 
