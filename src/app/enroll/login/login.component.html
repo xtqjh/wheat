@@ -40,11 +40,11 @@
             <nz-form-item>
               <nz-form-control [nzErrorTip]="codeErrorTpl">
                 <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-                  <input class="form-control form-control-user" type="text" nz-input id="verify_code"
+                  <input class="form-control form-control-user smsCode" type="text" nz-input id="verify_code"
                     placeholder="输入验证码" formControlName="smsCode">
                 </nz-input-group>
                 <ng-template #suffixButton>
-                  <button class="btn btn-primary" id="btn_verify_code" type="button" style="height: 50px;"
+                  <button class="btn btn-primary btn_verify_code" id="btn_verify_code" type="button" style="height: 50px;"
                     [disabled]="dynForm.get('phone').errors" (click)="clickGetCode()">
                     {{ !isCountdown ? '获取验码' : countdownNumber+' 秒'}}
                   </button>

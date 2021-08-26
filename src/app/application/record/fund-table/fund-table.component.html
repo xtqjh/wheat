@@ -1,36 +1,48 @@
 <div class="pd-t10" id="tableHeader">
   <div class="flex flex-row flex-wrap ">
-    <nz-form-item class="w500">
+    <nz-form-item class="w500 mg-b6">
       <nz-form-label [nzSpan]="5">交易时间</nz-form-label>
       <nz-form-control [nzSpan]="19">
         <nz-range-picker [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
           (ngModelChange)="onChange($event)" [nzPlaceHolder]="['交易开始时间','交易结束时间']" nzShowTime></nz-range-picker>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w300">
+    <nz-form-item class="w300 mg-b6">
       <nz-form-label [nzSpan]="8">交易类别</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <input nz-input [(ngModel)]="page.phone" id="phone" />
+        <nz-select nzAllowClear class="wb100" id="transactionType" name="transactionType" [(ngModel)]="page.transactionType">
+          <nz-option nzValue="1" nzLabel="充值"></nz-option>
+          <nz-option nzValue="2" nzLabel="付款"></nz-option>
+          <nz-option nzValue="9" nzLabel="退款"></nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w300">
+    <nz-form-item class="w300 mg-b6">
       <nz-form-label [nzSpan]="8">账户</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <input nz-input [(ngModel)]="page.phone" id="phone" />
+        <nz-select nzAllowClear class="wb100" id="accountId" name="accountId" [(ngModel)]="page.accountId">
+          <nz-option *ngFor="let option of accountList" [nzValue]="option.accountId" [nzLabel]="option.accountName">
+          </nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w200">
+    <nz-form-item class="w200 mg-b6">
       <nz-form-control [nzOffset]="4">
         <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
           <i nz-icon nzType="search" *ngIf="!isLoading"></i>
           <i nz-icon nzType="loading" *ngIf="isLoading"></i>
           查询
         </a>
-        <a nz-button class="user-select" (click)="searchData(true)">
+        <a nz-button class="user-select" (click)="clickReset()">
           重置
         </a>
       </nz-form-control>
     </nz-form-item>
+  </div>
+  <div class="font-14 pd-l10 pd-r10">
+    <span class="mg-r20">充值总金额：<span class="font-18 theme-color">{{total?.totalIncome}}</span> 元</span>
+    <span class="mg-r20">付款总金额：<span class="font-18 theme-color">{{total?.totalExpenditure}}</span> 元</span>
+    <span class="mg-r20">退款总金额：<span class="font-18 theme-color">{{total?.totalRefund}}</span> 元</span>
   </div>
 </div>
 <zc-table fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"

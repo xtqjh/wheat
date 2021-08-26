@@ -17,7 +17,7 @@ export class FlowTableComponent implements OnInit, OnDestroy {
   private getser$: any;
 
   page: any = {
-    total: 0, page: 1, size: 10,
+    total: 0, page: 1, size: 20,
     areaId: null, companyId: null, isAdd: null, isAutocommission: null,
     projectId: null, status: null, taskId: null, taskName: null, userName: null,
     date: null, beginTime: null, endTime: null,
@@ -62,6 +62,16 @@ export class FlowTableComponent implements OnInit, OnDestroy {
     this.service.getProjectNameList({}).subscribe((res: any) => this.projectList = res.success && res.extData || []);
   }
 
+  clickReset = () => {
+    for (const key in this.page) {
+      if (Object.prototype.hasOwnProperty.call(this.page, key)) {
+        if (!['total', 'page', 'size'].includes(key)) {
+          this.page[key] = null;
+        }
+      }
+    }
+  }
+
   searchData = (reset: boolean = false) => {
     if (reset) {
       this.page.page = 1;
@@ -74,7 +84,7 @@ export class FlowTableComponent implements OnInit, OnDestroy {
   private getList(data: any) {
     this.isLoading = true;
     if (this.getser$) { this.getser$.unsubscribe(); }
-    this.getser$ = this.service.getListFlow(Object.assign({}, data, { page: data.page - 1 })).pipe(
+    this.getser$ = this.service.getListFlow(Object.assign({}, data, { pageNum: data.page, pageSize: data.size })).pipe(
       tap(v => this.isLoading = false)
     ).subscribe(
       (res: any) => {

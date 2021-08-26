@@ -17,7 +17,7 @@ export class TableComponent implements OnInit, OnDestroy {
   private getser$: any;
 
   page: any = {
-    total: 0, page: 1, size: 10,
+    total: 0, page: 1, size: 20,
     projectName: null, trueName: null, phone: null, identityCard: null, workStatus: null
   };
 
@@ -86,6 +86,16 @@ export class TableComponent implements OnInit, OnDestroy {
     this.service.getProjectName().subscribe((res: any) => this.projectList = res.success && res.extData || []);
   }
 
+  clickReset = () => {
+    for (const key in this.page) {
+      if (Object.prototype.hasOwnProperty.call(this.page, key)) {
+        if (!['total', 'page', 'size'].includes(key)) {
+          this.page[key] = null;
+        }
+      }
+    }
+  }
+
   searchData = (reset: boolean = false) => {
     if (reset) {
       this.page.page = 1;
@@ -130,7 +140,6 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   changeFile = (file: UploadFile): boolean => {
-    console.log(file);
     this.company.file = file;
     return false;
   }
@@ -139,13 +148,13 @@ export class TableComponent implements OnInit, OnDestroy {
     const modal = this.modalService.confirm({
       nzTitle: '导入成员',
       nzContent: this.tplContent,
-      nzWidth: '400',
+      nzWidth: '440',
       nzOnOk: () =>
         new Promise((resolve, reject) => {
-          this.service.getImport(this.company).subscribe(
+          this.service.getImport(this.company.projectId, this.company.file).subscribe(
             (com: any) => {
               if (com.success) {
-                location.reload();
+                this.searchData(true);
                 resolve();
               } else {
                 this.msg.error(com.message);
@@ -161,13 +170,13 @@ export class TableComponent implements OnInit, OnDestroy {
     const modal = this.modalService.confirm({
       nzTitle: '导入个体工商户',
       nzContent: this.tplContent,
-      nzWidth: '400',
+      nzWidth: '440',
       nzOnOk: () =>
         new Promise((resolve, reject) => {
-          this.service.getImportIndividual(this.company).subscribe(
+          this.service.getImportIndividual(this.company.projectId, this.company.file).subscribe(
             (com: any) => {
               if (com.success) {
-                location.reload();
+                this.searchData(true);
                 resolve();
               } else {
                 this.msg.error(com.message);

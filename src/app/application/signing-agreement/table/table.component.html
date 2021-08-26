@@ -3,7 +3,7 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">项目名称</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <nz-select class="wb100" id="projectName" name="projectName" [(ngModel)]="page.projectName">
+        <nz-select nzAllowClear class="wb100" id="projectName" name="projectName" [(ngModel)]="page.projectName">
           <nz-option *ngFor="let option of projectList" [nzValue]="option.name" [nzLabel]="option.name">
           </nz-option>
         </nz-select>
@@ -30,7 +30,7 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">成员状态</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <nz-select class="wb100" id="workStatus" name="workStatus" [(ngModel)]="page.workStatus">
+        <nz-select nzAllowClear class="wb100" id="workStatus" name="workStatus" [(ngModel)]="page.workStatus">
           <nz-option nzValue="0" nzLabel="未电签"></nz-option>
           <nz-option nzValue="1" nzLabel="已电签"></nz-option>
         </nz-select>
@@ -43,7 +43,7 @@
           <i nz-icon nzType="loading" *ngIf="isLoading"></i>
           查询
         </a>
-        <a nz-button class="user-select" (click)="searchData(true)">
+        <a nz-button class="user-select" (click)="clickReset()">
           重置
         </a>
       </nz-form-control>
@@ -66,7 +66,7 @@
   <nz-form-item class="w300">
     <nz-form-label [nzSpan]="6">所属项目</nz-form-label>
     <nz-form-control [nzSpan]="18">
-      <nz-select class="wb100" id="projectId" name="projectId" [(ngModel)]="company.projectId">
+      <nz-select nzAllowClear class="wb100" id="projectId" name="projectId" [(ngModel)]="company.projectId">
         <nz-option *ngFor="let option of projectList" [nzValue]="option.id" [nzLabel]="option.name">
         </nz-option>
       </nz-select>
@@ -77,8 +77,15 @@
     <nz-form-label [nzSpan]="6">上传文件</nz-form-label>
     <nz-form-control [nzSpan]="18">
       <nz-upload [nzBeforeUpload]="changeFile">
-        <button nz-button><i nz-icon nzType="upload"></i><span>Click to Upload</span></button>
+        <button nz-button><i nz-icon nzType="upload"></i><span>点击上传</span></button>
       </nz-upload>
+    </nz-form-control>
+  
+  </nz-form-item>
+  <nz-form-item class="w300">
+    <nz-form-label [nzSpan]="6">模板文件</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <a href="https://cdn.qiyingfu.com/file/kmg/%E9%A1%B9%E7%9B%AE%E6%88%90%E5%91%98%E5%AF%BC%E5%85%A5.xlsx" target="_blank">下载模板</a>
     </nz-form-control>
   </nz-form-item>
 

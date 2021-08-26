@@ -62,7 +62,8 @@ export class HttpsInterceptor implements HttpInterceptor {
     const started = Date.now();
     let $headers = new HttpHeaders()
       .set('Authorization', token)
-      .set('Content-Type', 'application/x-www-form-urlencoded');
+      .set('X-Requested-Source', 'Browser')
+      .set('X-Requested-With', 'XMLHttpRequest');
     req.headers.keys().forEach(item => {
       $headers = $headers.set(item, req.headers.get(item));
     });
@@ -82,9 +83,9 @@ export class HttpsInterceptor implements HttpInterceptor {
           }
         }),
         tap(f => {
-          console.log(f);
+          // console.log(f);
         }, f => {
-          console.log(f);
+          // console.log(f);
         }),
         catchError((res: HttpResponse<any>) => {
           clearTimeout(this.timer);

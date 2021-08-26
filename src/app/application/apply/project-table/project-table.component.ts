@@ -16,7 +16,7 @@ export class ProjectTableComponent implements OnInit, OnDestroy {
   private getser$: any;
 
   page: any = {
-    total: 0, page: 1, size: 10,
+    total: 0, page: 1, size: 20,
     projectName: null, projectType: null,
     date: null, startTime: null, endTime: null,
   };
@@ -57,6 +57,16 @@ export class ProjectTableComponent implements OnInit, OnDestroy {
     if (this.getser$) { this.getser$.unsubscribe(); }
   }
 
+  clickReset = () => {
+    for (const key in this.page) {
+      if (Object.prototype.hasOwnProperty.call(this.page, key)) {
+        if (!['total', 'page', 'size'].includes(key)) {
+          this.page[key] = null;
+        }
+      }
+    }
+  }
+
   searchData = (reset: boolean = false) => {
     if (reset) {
       this.page.page = 1;
@@ -69,7 +79,7 @@ export class ProjectTableComponent implements OnInit, OnDestroy {
   private getList(data: any) {
     this.isLoading = true;
     if (this.getser$) { this.getser$.unsubscribe(); }
-    this.getser$ = this.service.getListProjects(Object.assign({}, data, { page: data.page - 1 })).pipe(
+    this.getser$ = this.service.getListProjects(Object.assign({}, data, { pageNum: data.page, pageSize: data.size })).pipe(
       tap(v => this.isLoading = false)
     ).subscribe(
       (res: any) => {

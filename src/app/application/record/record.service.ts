@@ -24,7 +24,7 @@ export class RecordService {
    * 资金列表
    */
   getListFund = (data: any) => {
-    return this.http.get(`/company/api/company/reconciliation/list`, { params: isObjectToString(data) });
+    return this.http.get(`/company/api/company/accountList`, { params: isObjectToString(data) });
   }
 
   /**
@@ -39,6 +39,13 @@ export class RecordService {
    */
   getProjectNameList = (data: any) => {
     return this.http.get(`/company/api/company/reconciliation/projectNameList`, { params: isObjectToString(data) });
+  }
+
+  /**
+   * 账户-下拉框数据
+   */
+  getAccountNameList = () => {
+    return this.http.get(`/company/api/company/accountName`);
   }
 
 }

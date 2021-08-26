@@ -16,7 +16,7 @@ export class TableComponent implements OnInit, OnDestroy {
   private getser$: any;
 
   page: any = {
-    total: 0, page: 1, size: 10,
+    total: 0, page: 1, size: 20,
     idCard: null, callback: null, phone: null, companyId: null, userName: null
   };
 
@@ -64,6 +64,16 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     if (this.getser$) { this.getser$.unsubscribe(); }
+  }
+
+  clickReset = () => {
+    for (const key in this.page) {
+      if (Object.prototype.hasOwnProperty.call(this.page, key)) {
+        if (!['total', 'page', 'size'].includes(key)) {
+          this.page[key] = null;
+        }
+      }
+    }
   }
 
   searchData = (reset: boolean = false) => {

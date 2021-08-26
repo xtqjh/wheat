@@ -9,7 +9,7 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">项目名称</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <nz-select class="wb100" id="projectId" name="projectId" [(ngModel)]="page.projectId">
+        <nz-select nzAllowClear class="wb100" id="projectId" name="projectId" [(ngModel)]="page.projectId">
           <nz-option *ngFor="let option of projectList" [nzValue]="option.id" [nzLabel]="option.name">
           </nz-option>
         </nz-select>
@@ -36,7 +36,7 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">付款状态</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <nz-select class="wb100" id="status" name="status" [(ngModel)]="page.status">
+        <nz-select nzAllowClear class="wb100" id="status" name="status" [(ngModel)]="page.status">
           <nz-option nzValue="0" nzLabel="未体现提现"></nz-option>
           <nz-option nzValue="1" nzLabel="提现中"></nz-option>
           <nz-option nzValue="2" nzLabel="提现完成"></nz-option>
@@ -58,7 +58,7 @@
           <i nz-icon nzType="loading" *ngIf="isLoading"></i>
           查询
         </a>
-        <a nz-button class="mg-r8 user-select" (click)="searchData(true)">
+        <a nz-button class="user-select" (click)="clickReset()">
           重置
         </a>
         <a nz-button class="mg-r8 user-select" (click)="getDownload()">

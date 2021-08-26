@@ -26,7 +26,7 @@
 <ng-template #tplContent>
   请选择以下需要管理的公司：
   <br />
-  <nz-select class="wb100" id="companyId" name="companyId" [(ngModel)]="company.companyId">
+  <nz-select nzAllowClear class="wb100" id="companyId" name="companyId" [(ngModel)]="company.companyId">
     <nz-option *ngFor="let option of listEnterprise" [nzValue]="option.companyId" [nzLabel]="option.companyName">
     </nz-option>
   </nz-select>

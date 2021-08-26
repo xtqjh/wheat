@@ -3,7 +3,8 @@ import { HttpClient, HttpHeaders, HttpRequest, HttpResponse } from '@angular/com
 import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { isObjectToString } from 'ng-ylzx/core/util';
-import { filter } from 'rxjs/operators';
+import { concatMap, filter, switchMap, toArray } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -50,27 +51,39 @@ export class SigningAgreementService {
     return this.http.get(`/company/api/member/download`, { params: isObjectToString(data) });
   }
 
+  private uploadMultipart = (file: any, projectId: string, url: string): Observable<any> => {
+    return new Observable(observer => of(file).pipe(
+      switchMap((ut: any) => {
+        const formData = new FormData();
+        formData.append('file', ut);
+        formData.append('projectId', projectId);
+        const req = new HttpRequest('POST', `${url}`, formData);
+        return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
+      }),
+    ).subscribe(
+      (res: any) => {
+        observer.next(res.body);
+        observer.complete();
+      },
+      err => {
+        observer.error(err);
+        observer.complete();
+      }
+    ));
+  }
+
   /**
    * 项目导入成员
    */
-  public getImport = (data: { projectId: string, file: any }) => {
-    console.log(data);
-    const formData = new FormData();
-    formData.append('file', data.file);
-    // formData.append('projectId', data.projectId);
-    const req = new HttpRequest('POST', `/company/api/member/import?projectId=${data.projectId}`, formData);
-    return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
+  public getImport = (projectId: string, file: any) => {
+    return this.uploadMultipart(file, projectId, `/company/api/member/import?projectId=${projectId}`);
   }
 
   /**
    * 导入个体工商户
    */
-  getImportIndividual = (data: { projectId: string, file: any }) => {
-    const formData = new FormData();
-    formData.append('file', data.file);
-    // formData.append('projectId', data.projectId);
-    const req = new HttpRequest('POST', `/company/api/member/importIndividual?projectId=${data.projectId}`, formData);
-    return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
+  getImportIndividual = (projectId: string, file: any) => {
+    return this.uploadMultipart(file, projectId, `/company/api/member/importIndividual?projectId=${projectId}`);
   }
 
 
