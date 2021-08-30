@@ -1,0 +1,47 @@
+<nz-spin [nzSpinning]="isLoading" nzTip="加载...">
+
+  <div class="pd-10">
+    <nz-list [nzDataSource]="listEnterprise" [nzRenderItem]="item" [nzGrid]="{ gutter: 16, span: 4 }">
+      <ng-template #item let-item>
+        <nz-list-item [nzContent]="nzContent">
+          <ng-template #nzContent>
+            <nz-card [nzTitle]="item.companyName" (click)="clickChoose(item)">
+              <div>管理员：{{item.administrator}}</div>
+              <div>创建时间：{{item?.createTime}}</div>
+              <div>状态：
+                <span [ngClass]="{'color-red':item?.companyStatus==2,'color-green':item?.companyStatus==1}">
+                  {{item?.companyStatusDesc}}
+                </span>
+              </div>
+            </nz-card>
+          </ng-template>
+        </nz-list-item>
+      </ng-template>
+    </nz-list>
+  </div>
+
+  <!-- <ul nz-list [nzDataSource]="listEnterprise" nzBordered [nzRenderItem]="largeItem">
+    <ng-template #largeItem let-item>
+      <li nz-list-item [nzActions]="[opAction]" [nzContent]="nzContent" nzNoFlex></li>
+      <ng-template #nzContent>
+        <span [ngClass]="{'color-red':item?.companyStatus==2,'color-green':item?.companyStatus==1}">
+          {{item?.companyStatusDesc}}
+        </span>
+        <span class="color-888 font-12">{{item?.administrator}}</span>
+        {{item?.companyName}}
+        {{item?.createTime}}
+      </ng-template>
+      <ng-template #opAction><a>选择</a></ng-template>
+    </ng-template>
+  </ul> -->
+
+  <!-- <nz-list [nzDataSource]="listEnterprise" nzBordered [nzRenderItem]="defaultItem">
+    <ng-template #defaultItem let-item>
+      <nz-list-item [nzActions]="[opAction]">
+        {{ item.companyName }}
+      </nz-list-item>
+      <ng-template #opAction><a>选择</a></ng-template>
+    </ng-template>
+  </nz-list> -->
+
+</nz-spin>

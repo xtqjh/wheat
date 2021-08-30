@@ -1,0 +1,25 @@
+::ng-deep .ant-card {
+  cursor: pointer;
+}
+
+::ng-deep .ant-card-bordered:hover {
+  // border-color: #ccc;
+  box-shadow: 0px 0px 8px rgba($color: #666666, $alpha: 0.2);
+  // box-sizing: 0px 0px 5px rgba($color: #000000, $alpha: 0.2);
+}
+
+::ng-deep .ant-card-head {
+  min-height: 34px;
+  line-height: 34px;
+  padding: 0 10px;
+}
+
+::ng-deep .ant-card-head-title {
+  padding: 0;
+  font-size: 15px;
+}
+
+::ng-deep .ant-card-body {
+  padding: 10px;
+  font-size: 12px;
+}

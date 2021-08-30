@@ -62,6 +62,10 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
     this.router.navigate(['/layout/home']);
   }
 
+  private toCompany(): void {
+    this.router.navigate(['/enterprise/company']);
+  }
+
   clickGetCode = () => {
     if (!this.isCountdown) {
       this.enrollService.getCode({ phone: this.dynForm.get('phone').value }).subscribe(
@@ -111,7 +115,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
           (result: any) => {
             if (result.success) {
               this.cookieService.put(environment.storageToken, result.data.token, { expires: moment().day(7).format('YYYY-MM-DD HH:mm:ss') });
-              this.toLayout();
+              this.toCompany();
             } else {
               if (result.code === 5101) {
                 this.dynForm.controls.smsCode.setErrors({ duplicated: result.message || '未能识别错误信息' });

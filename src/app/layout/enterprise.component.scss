@@ -1,0 +1,17 @@
+$top-height: var(--top-height);
+$top-padding: var(--top-padding);
+$top-bg-color: var(--top-bg-color);
+$sidebar-bg-color: var(--sidebar-bg-color);
+
+.ant-layout-header {
+  z-index: 1;
+  height: $top-height;
+  line-height: $top-height;
+  padding: $top-padding;
+  background-color: $top-bg-color;
+  box-shadow: 0 -4px 10px 1px rgba(0, 0, 0, 0.4);
+}
+
+.middle-content {
+  height: calc(100vh - #{$top-height});
+}
