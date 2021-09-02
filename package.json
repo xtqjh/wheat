@@ -5,7 +5,7 @@
     "ng": "ng",
     "info": "npm --loglevel info install",
     "start": "ng serve --port 6100 --open",
-    "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --build-optimizer --output-path=dist/ylzx-wheat --base-href=/ylzx-wheat/",
+    "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --output-path=dist/ylzx-wheat --base-href=/ylzx-wheat/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
     "dom-to-image": "^2.6.0",
-    "ng-ylzx": "0.0.10",
+    "ng-ylzx": "file:dist/ng-ylzx-0.0.10.tgz",
     "rxjs": "~6.4.0",
     "ts-md5": "^1.2.7",
     "tslib": "^1.10.0",

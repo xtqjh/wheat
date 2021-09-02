@@ -1,15 +1,15 @@
 <div class="pd-t10" id="tableHeader">
   <div class="flex flex-row flex-wrap ">
-    <nz-form-item class="w500 mg-b6">
+    <nz-form-item class="w450">
       <nz-form-label [nzSpan]="5">交易时间</nz-form-label>
       <nz-form-control [nzSpan]="19">
-        <nz-range-picker [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
+        <nz-range-picker class="wb100" [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
           (ngModelChange)="onChange($event)" [nzPlaceHolder]="['交易开始时间','交易结束时间']" nzShowTime></nz-range-picker>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w300 mg-b6">
-      <nz-form-label [nzSpan]="8">交易类别</nz-form-label>
-      <nz-form-control [nzSpan]="16">
+    <nz-form-item class="w180">
+      <nz-form-label [nzSpan]="12">交易类别</nz-form-label>
+      <nz-form-control [nzSpan]="12">
         <nz-select nzAllowClear class="wb100" id="transactionType" name="transactionType" [(ngModel)]="page.transactionType">
           <nz-option nzValue="1" nzLabel="充值"></nz-option>
           <nz-option nzValue="2" nzLabel="付款"></nz-option>
@@ -17,7 +17,7 @@
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w300 mg-b6">
+    <nz-form-item class="w200">
       <nz-form-label [nzSpan]="8">账户</nz-form-label>
       <nz-form-control [nzSpan]="16">
         <nz-select nzAllowClear class="wb100" id="accountId" name="accountId" [(ngModel)]="page.accountId">
@@ -26,7 +26,7 @@
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w200 mg-b6">
+    <nz-form-item class="w200">
       <nz-form-control [nzOffset]="4">
         <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
           <i nz-icon nzType="search" *ngIf="!isLoading"></i>

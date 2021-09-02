@@ -7,12 +7,51 @@ $theme-color: var(--theme-color);
   color: $theme-color;
 }
 
+.text-title {
+  padding: 0 10px;
+  color: #5a5c69 !important;
+  font-size: 28px;
+}
 
-.home-content{max-width: 1080px; margin: 0 auto; min-height: 600px; display: flex; flex-direction: column;}
-.home-left{width: 650px; display: flex; flex-direction: column}
-.home-Notice{width: 100%; background: #fff; height: 268px; padding: 0 38px}
-.home-right{width: 400px; margin-left: 30px; background: #fff; padding: 30px; box-sizing: border-box}
-.home-h62{height: 62px;}
-.home-map{width: 100%; height: 120px; box-sizing: border-box; padding: 10px 0}
-.home-map img{width: 340px; height: 100px}
+.card {
+  padding: 0 10px;
+  flex: 1;
 
+  .card-body {
+    padding-bottom: 0.5rem;
+    padding-top: 0.5rem;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    position: relative;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid #e3e6f0;
+    border-left: 0.25rem solid #ccc;
+    border-radius: 0.35rem;
+    .card-body-gutters {
+      flex: 1 1 auto;
+      min-height: 1px;
+      padding: 1.25rem;
+      display: flex;
+      .fas-icon {
+        font-size: 32px;
+        color: #dddfeb;
+        line-height: 48px;
+      }
+    }
+  }
+}
+
+.balance {
+  margin: 0 10px 20px 10px;
+  padding: 16px;
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+  border-radius: 0.35rem;
+  background-color: #fff;
+  background-clip: border-box;
+  .banklogo {
+    width: 50px;
+    height: 50px;
+  }
+}

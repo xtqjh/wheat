@@ -5,7 +5,7 @@
       "/member",
       "/auth"
     ],
-    "target": "http://111.0.99.143:9000"
+    "target": "http://172.16.100.43:8089"
   },
   {
     "context": [

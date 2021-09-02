@@ -25,7 +25,7 @@ export class FundTableComponent implements OnInit, OnDestroy {
     { title: '交易单号', key: 'transactionNo', show: true, width: 190 },
     {
       title: '交易金额', key: 'transactionAmount', show: true, width: 190, suffix: '元',
-      color: (data: any) => data.transactionType === 1 ? 'red' : '#19be6b'
+      color: (data: any) => [1, 9].includes(data.transactionType) ? 'red' : '#19be6b'
     },
     { title: '交易时间', key: 'transactionTime', show: true, width: 190 },
     { title: '任务单号', key: 'taskNo', show: true, width: 190 },
