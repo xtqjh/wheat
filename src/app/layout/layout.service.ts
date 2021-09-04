@@ -13,21 +13,18 @@ export class LayoutService {
     private http: HttpClient,
   ) { }
 
-  public getInfo() {
-    return this.http.get(`/member/info`);
-  }
+  getInfo = () => this.http.get(`/member/info`);
 
-  public getLogout() {
-    return this.http.get(`/member/logout`);
-  }
+  getLogout = () => this.http.get(`/member/logout`);
 
-  public getCompany() {
-    return this.http.get(`/company/api/company/list`);
-  }
+  getCompany = () => this.http.get(`/company/api/company/list`);
 
-  public getCompanyChoose(data: { companyId: string }) {
-    return this.http.get(`/company/api/company/choose`, { params: isObjectToString(data) });
-  }
+  /**
+   * 企业信息
+   */
+  getCompanyInfo = () => this.http.get(`/company/api/company/info`);
+
+  getCompanyChoose = (data: { companyId: string }) => this.http.get(`/company/api/company/choose`, { params: isObjectToString(data) });
 
 }
 

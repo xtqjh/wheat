@@ -25,6 +25,11 @@ export class BaseService {
 
   }
 
+  public get getCompany() {
+    const resou = JSON.parse(sessionStorage.getItem(environment.storageCompany)) as Company;
+    return resou;
+  }
+
   /**
    * 关闭标签
    */
@@ -50,6 +55,7 @@ export class BaseService {
    */
   public cleanCacheRecords = () => {
     this.reuseTabService.clear();
+    sessionStorage.removeItem(environment.storageCompany);
     sessionStorage.removeItem(environment.storageUserResources);
     sessionStorage.removeItem(environment.storageWbis);
     this.cookieService.remove(environment.storageToken);
@@ -68,6 +74,16 @@ export class BaseService {
     return settings;
   }
 
+}
 
 
+export interface Company {
+  balance?: string;
+  collapsedLogoUrl?: string;
+  companyId?: string;
+  companyName?: string;
+  freeze?: string;
+  logoUrl?: string;
+  phone?: string;
+  userName?: string;
 }

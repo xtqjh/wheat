@@ -16,8 +16,8 @@ export class EnrollService {
 
   public createFormLogon() {
     return this.fb.group({
-      // phone: ['18797886579', [Validators.required, ZcValidator.mobile]],
-      phone: [null, [Validators.required, ZcValidator.mobile]],
+      phone: ['18797886579', [Validators.required, ZcValidator.mobile]],
+      // phone: [null, [Validators.required, ZcValidator.mobile]],
       smsCode: [null, [Validators.required, Validators.minLength(4), Validators.maxLength(6)]],
       read: [true, [Validators.required, Validators.pattern(/true/)]]
     });

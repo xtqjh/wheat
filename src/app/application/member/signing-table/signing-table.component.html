@@ -9,13 +9,13 @@
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w300">
+    <nz-form-item class="w200">
       <nz-form-label [nzSpan]="8">姓名</nz-form-label>
       <nz-form-control [nzSpan]="16">
         <input nz-input [(ngModel)]="page.trueName" id="trueName" />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w300">
+    <nz-form-item class="w200">
       <nz-form-label [nzSpan]="8">手机号</nz-form-label>
       <nz-form-control [nzSpan]="16">
         <input nz-input [(ngModel)]="page.phone" id="phone" />
@@ -27,9 +27,9 @@
         <input nz-input [(ngModel)]="page.identityCard" id="identityCard" />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w300">
-      <nz-form-label [nzSpan]="8">成员状态</nz-form-label>
-      <nz-form-control [nzSpan]="16">
+    <nz-form-item class="w200">
+      <nz-form-label [nzSpan]="12">成员状态</nz-form-label>
+      <nz-form-control [nzSpan]="12">
         <nz-select nzAllowClear class="wb100" id="workStatus" name="workStatus" [(ngModel)]="page.workStatus">
           <nz-option nzValue="0" nzLabel="未电签"></nz-option>
           <nz-option nzValue="1" nzLabel="已电签"></nz-option>

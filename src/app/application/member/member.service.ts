@@ -9,7 +9,7 @@ import { from, Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class SigningAgreementService {
+export class MemberService {
 
   constructor(
     private http: HttpClient,
@@ -19,7 +19,21 @@ export class SigningAgreementService {
   /**
    * 查询列表
    */
-  public getList = (data: { pageNum: number, pageSize: number }) => {
+  public getListBank = (data: { pageNum: number, pageSize: number }) => {
+    return this.http.get(`/company/api/project/quick/listAllBankCards`, { params: isObjectToString(data) });
+  }
+
+  /**
+   * 发送绑卡短信
+   */
+  public sendTiedCardSMS = (data: { userId: string }) => {
+    return this.http.get(`/company/api/project/quick/sendTiedCardSMS`, { params: isObjectToString(data) });
+  }
+
+  /**
+   * 查询列表
+   */
+  public getListSigning = (data: { pageNum: number, pageSize: number }) => {
     return this.http.get(`/company/api/member/list`, { params: isObjectToString(data) });
   }
 

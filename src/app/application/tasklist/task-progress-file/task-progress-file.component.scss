@@ -1,0 +1,29 @@
+.alert-warn {
+  padding: 16px 16px 16px 69px;
+  position: relative;
+  border-radius: 4px;
+  color: #515a6e;
+  line-height: 1.5;
+  border: 1px solid #ffd77a;
+  background-color: #fff9e6;
+  .ivu-alert-icon {
+    position: absolute;
+    top: 6px;
+    left: 24px;
+    font-size: 28px;
+    color: #f90;
+  }
+  .ivu-alert-message {
+    font-size: 14px;
+    color: #17233d;
+    display: block;
+  }
+  .ivu-alert-desc {
+    line-height: 24px;
+    margin-top: 5px;
+    display: block;
+    font-size: 12px;
+    color: #515a6e;
+    text-align: justify;
+  }
+}

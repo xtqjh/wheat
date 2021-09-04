@@ -1,26 +1,31 @@
 <div class="pd-t10" id="tableHeader">
   <div class="flex flex-row flex-wrap ">
-    <nz-form-item class="w500">
-      <nz-form-label [nzSpan]="5">交易时间</nz-form-label>
-      <nz-form-control [nzSpan]="19">
-        <nz-range-picker [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
-          (ngModelChange)="onChange($event)" [nzPlaceHolder]="['交易开始时间','交易结束时间']" nzShowTime></nz-range-picker>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item class="w300">
-      <nz-form-label [nzSpan]="8">交易类别</nz-form-label>
+    <nz-form-item class="w200">
+      <nz-form-label [nzSpan]="8">申请名称</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <input nz-input [(ngModel)]="page.phone" id="phone" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item class="w300">
-      <nz-form-label [nzSpan]="8">账户</nz-form-label>
-      <nz-form-control [nzSpan]="16">
-        <input nz-input [(ngModel)]="page.phone" id="phone" />
+        <input nz-input [(ngModel)]="page.name" id="name" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="w200">
-      <nz-form-control [nzOffset]="4">
+      <nz-form-label [nzSpan]="12">申请状态</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-select nzAllowClear class="wb100" id="status" name="status" [(ngModel)]="page.status">
+          <nz-option nzValue="0" nzLabel="待审核"></nz-option>
+          <nz-option nzValue="1" nzLabel="已通过"></nz-option>
+          <nz-option nzValue="2" nzLabel="已拒绝"></nz-option>
+          <nz-option nzValue="3" nzLabel="已作废"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w450">
+      <nz-form-label [nzSpan]="5">申请时间</nz-form-label>
+      <nz-form-control [nzSpan]="19">
+        <nz-range-picker [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
+          (ngModelChange)="onChange($event)" [nzPlaceHolder]="['申请开始时间','申请结束时间']" nzShowTime></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w150">
+      <nz-form-control>
         <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
           <i nz-icon nzType="search" *ngIf="!isLoading"></i>
           <i nz-icon nzType="loading" *ngIf="isLoading"></i>

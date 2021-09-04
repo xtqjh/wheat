@@ -4,17 +4,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { ZcTableModule } from 'ng-ylzx/table';
 import { ZcDirectiveModule } from 'ng-ylzx/directive';
-import { BankCardsRoutingModule } from './bank-cards-routing.module';
 
-import { BankCardsComponent } from './bank-cards.component';
-import { TableComponent } from './table/table.component';
+import { MemberRoutingModule } from './member-routing.module';
+import { MemberComponent } from './member.component';
+import { BankTableComponent } from './bank-table/bank-table.component';
+import { SigningTableComponent } from './signing-table/signing-table.component';
 
-const COMPONENTS = [
-  BankCardsComponent,
-  TableComponent,
-];
 
 @NgModule({
+  declarations: [
+    MemberComponent,
+    BankTableComponent,
+    SigningTableComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,10 +24,7 @@ const COMPONENTS = [
     NgZorroAntdModule,
     ZcTableModule,
     ZcDirectiveModule,
-    BankCardsRoutingModule
-  ],
-  declarations: [
-    ...COMPONENTS
+    MemberRoutingModule
   ]
 })
-export class BankCardsModule { }
+export class MemberModule { }

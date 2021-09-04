@@ -4,6 +4,7 @@ import { NzModalService } from 'ng-zorro-antd';
 import { BaseService, MessageService } from 'src/app/share/service';
 import { ReuseTabService } from 'ng-ylzx/reuse-tab';
 import { LayoutService } from '../layout.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +21,6 @@ export class HeaderComponent implements OnInit {
 
   listEnterprise = [];
 
-  company = { companyId: null };
-
   constructor(
     private base: BaseService,
     private msg: MessageService,
@@ -32,6 +31,8 @@ export class HeaderComponent implements OnInit {
     private reuseTabService: ReuseTabService,
   ) {
     this.getUserInfo();
+    this.getCompanyInfo();
+    this.getCompany();
   }
 
   ngOnInit() {
@@ -43,10 +44,21 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  private getCompanyInfo() {
+    this.layoutService.getCompanyInfo().subscribe((res: any) => {
+      if (res.success) {
+        this.user = Object.assign(this.user || {}, res.extData);
+        sessionStorage.setItem(environment.storageCompany, JSON.stringify(res.extData));
+      } else {
+        this.msg.error(res.message);
+      }
+    });
+  }
+
   private getUserInfo() {
     this.layoutService.getInfo().subscribe((res: any) => {
       if (res.code === 200 && res.success) {
-        this.user = res.data;
+        this.user = Object.assign(this.user || {}, res.data);
       } else {
         this.msg.error(res.message);
       }
@@ -67,36 +79,22 @@ export class HeaderComponent implements OnInit {
     this.router.navigate([url]);
   }
 
-  clickSelectEnterprise() {
-    this.layoutService.getCompany().subscribe(
-      (res: any) => {
-        if (res.success) {
-          this.listEnterprise = res.extData;
-          const modal = this.modalService.confirm({
-            nzTitle: '选择管理公司',
-            nzContent: this.tplContent,
-            nzWidth: '400',
-            nzOnOk: () =>
-              new Promise((resolve, reject) => {
-                this.layoutService.getCompanyChoose(this.company).subscribe(
-                  (com: any) => {
-                    if (com.success) {
-                      location.reload();
-                      resolve();
-                    } else {
-                      this.msg.error(com.message);
-                      reject();
-                    }
-                  }
-                );
-              })
-          });
+  getCompany = () => this.layoutService.getCompany().subscribe(
+    (res: any) => {
+      if (res.success) {
+        this.listEnterprise = res.extData;
+      }
+    })
+
+  clickSelectEnterprise = (companyId: string) =>
+    this.layoutService.getCompanyChoose({ companyId }).subscribe(
+      (com: any) => {
+        if (com.success) {
+          location.reload();
         } else {
-          this.msg.error(res.message);
+          this.msg.error(com.message);
         }
       }
-    );
-
-  }
+    )
 
 }

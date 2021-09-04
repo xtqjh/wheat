@@ -9,11 +9,15 @@ import { ApplyRoutingModule } from './apply-routing.module';
 import { ApplyComponent } from './apply.component';
 import { ProjectTableComponent } from './project-table/project-table.component';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
+import { TaskTableComponent } from './task-table/task-table.component';
+import { TaskEditComponent } from './task-edit/task-edit.component';
 
 const COMPONENTS = [
   ApplyComponent,
   ProjectTableComponent,
   InvoiceTableComponent,
+  TaskTableComponent,
+  TaskEditComponent
 ];
 
 @NgModule({
@@ -28,6 +32,9 @@ const COMPONENTS = [
   ],
   declarations: [
     ...COMPONENTS
+  ],
+  entryComponents: [
+    TaskEditComponent
   ]
 })
 export class ApplyModule { }

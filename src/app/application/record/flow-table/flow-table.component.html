@@ -3,7 +3,10 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">税源地</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <input nz-input [(ngModel)]="page.areaId" id="areaId" />
+        <nz-select nzAllowClear class="wb100" id="areaId" name="areaId" [(ngModel)]="page.areaId">
+          <nz-option *ngFor="let option of areaNameList" [nzValue]="option.areaId" [nzLabel]="option.areaName">
+          </nz-option>
+        </nz-select>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="w300">
@@ -44,7 +47,7 @@
         </nz-select>
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w500">
+    <nz-form-item class="w450">
       <nz-form-label [nzSpan]="5">交易时间</nz-form-label>
       <nz-form-control [nzSpan]="19">
         <nz-range-picker [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
@@ -58,7 +61,7 @@
           <i nz-icon nzType="loading" *ngIf="isLoading"></i>
           查询
         </a>
-        <a nz-button class="user-select" (click)="clickReset()">
+        <a nz-button class="mg-r8 user-select" (click)="clickReset()">
           重置
         </a>
         <a nz-button class="mg-r8 user-select" (click)="getDownload()">

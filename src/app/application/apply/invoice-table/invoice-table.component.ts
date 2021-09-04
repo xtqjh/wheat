@@ -5,6 +5,7 @@ import { isClone } from 'ng-ylzx/core/util';
 import { Page, SearchTemplate, TableHeader } from 'ng-ylzx/table';
 import * as moment from 'moment';
 import { ApplyService } from '../apply.service';
+import { BaseService, MessageService } from 'src/app/share/service';
 
 @Component({
   selector: 'app-invoice-table',
@@ -17,46 +18,52 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
 
   page: any = {
     total: 0, page: 1, size: 20,
-    projectName: null, status: null,
-    date: null, startTime: null, endTime: null,
+    bankOfDeposit: null, categoryName: null, companyAddress: null, contactPhone: null, fileUrl: null,
+    publicAccounts: null, receiveAddress: null, receiveName: null, receivePhone: null, taxAmount: null,
+    type: null, callback: null, companyId: null, companyName: null, id: null, isAllSelect: null,
+    name: null, otherUrl: null, selectTaskNo: null, status: null, taxRemark: null,
+    date: null, beginTime: null, endTime: null,
   };
 
   tableHeader: Array<TableHeader> = [
-    { title: 'id', key: 'id', show: true, width: 120 },
-    { title: 'bankOfDeposit', key: 'bankOfDeposit', show: true, width: 120 },
-    { title: 'categoryName', key: 'categoryName', show: true, width: 120 },
-    { title: 'companyAddress', key: 'companyAddress', show: true, width: 120 },
-    { title: 'companyId', key: 'companyId', show: true, width: 120 },
-    { title: 'companyName', key: 'companyName', show: true, width: 120 },
-    { title: 'contactPhone', key: 'contactPhone', show: true, width: 120 },
-    { title: 'createTime', key: 'createTime', show: true, width: 120 },
-    { title: 'fileUrl', key: 'fileUrl', show: true, width: 120 },
-    { title: 'name', key: 'name', show: true, width: 120 },
-    { title: 'operatorName', key: 'operatorName', show: true, width: 120 },
-    { title: 'otherUrl', key: 'otherUrl', show: true, width: 120 },
-    { title: 'projectId', key: 'projectId', show: true, width: 120 },
-    { title: 'publicAccounts', key: 'publicAccounts', show: true, width: 120 },
-    { title: 'receiveAddress', key: 'receiveAddress', show: true, width: 120 },
-    { title: 'receiveName', key: 'receiveName', show: true, width: 120 },
-    { title: 'receivePhone', key: 'receivePhone', show: true, width: 120 },
-    { title: 'remark', key: 'remark', show: true, width: 120 },
-    { title: 'status', key: 'status', show: true, width: 120 },
-    { title: 'taskNos', key: 'taskNos', show: true, width: 120 },
-    { title: 'taxAmount', key: 'taxAmount', show: true, width: 120 },
-    { title: 'taxNo', key: 'taxNo', show: true, width: 120 },
-    { title: 'taxRemark', key: 'taxRemark', show: true, width: 120 },
-    { title: 'type', key: 'type', show: true, width: 120 },
+    { title: '税源地', key: '', show: true, width: 120 },
+    { title: '项目名称', key: 'projectName', show: true, width: 120 },
+    { title: '项目类型', key: '', show: true, width: 120 },
+    { title: '任务名称', key: 'name', show: true, width: 120 },
+    { title: '任务编号', key: 'taskNo', show: true, width: 120 },
+    { title: '金额', key: 'amount', show: true, width: 120 },
+    { title: '总笔数', key: 'num', show: true, width: 120 },
+    { title: '成功笔数', key: 'successNum', show: true, width: 120 },
+    { title: '失败笔数', key: 'failNum', show: true, width: 120 },
+    { title: '创建时间', key: 'createTime', show: true, width: 120 },
+    {
+      title: '操作', key: 'operate', show: true, width: 140, right: 0,
+      buttons: [
+        {
+          text: '编辑',
+        },
+        {
+          text: '作废',
+        }
+      ]
+    },
   ];
 
   items = [];
 
   isLoading = false;
 
+  areaNameList = [];
+
   constructor(
+    private base: BaseService,
+    private msg: MessageService,
     private service: ApplyService
   ) { }
 
   ngOnInit() {
+    this.page.companyId = this.base.getCompany.companyId;
+    this.loadDataItem();
     this.searchData(true);
   }
 
@@ -64,10 +71,14 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
     if (this.getser$) { this.getser$.unsubscribe(); }
   }
 
+  private loadDataItem = () => {
+    this.service.getAreaNameList({ companyId: this.base.getCompany.companyId }).subscribe((res: any) => this.areaNameList = res.success && res.extData || []);
+  }
+
   clickReset = () => {
     for (const key in this.page) {
       if (Object.prototype.hasOwnProperty.call(this.page, key)) {
-        if (!['total', 'page', 'size'].includes(key)) {
+        if (!['total', 'page', 'size', 'companyId'].includes(key)) {
           this.page[key] = null;
         }
       }
@@ -90,8 +101,12 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
       tap(v => this.isLoading = false)
     ).subscribe(
       (res: any) => {
-        this.page.total = res && res.page.totalElements || 0;
-        this.items = res && res.content || [];
+        if (res.success) {
+          this.page.total = res && res.extData.total || 0;
+          this.items = res && res.extData.list || [];
+        } else {
+          this.msg.error(res.message);
+        }
       },
       error => this.isLoading = false,
       () => this.isLoading = false
@@ -99,15 +114,15 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
   }
 
   onChange(value) {
-    this.page.startTime = value[0] && moment(value[0]).format('YYYY-MM-DD HH:mm:ss') || null;
+    this.page.beginTime = value[0] && moment(value[0]).format('YYYY-MM-DD HH:mm:ss') || null;
     this.page.endTime = value[1] && moment(value[1]).format('YYYY-MM-DD HH:mm:ss') || null;
   }
 
   onChangeDate = (value) => {
     this.page.date = [];
-    this.page.startTime = value[0] && moment(value[0]).format('YYYY-MM-DD') + ' 00:00:00' || null;
+    this.page.beginTime = value[0] && moment(value[0]).format('YYYY-MM-DD') + ' 00:00:00' || null;
     if (value[0]) {
-      this.page.date[0] = new Date(this.page.startTime);
+      this.page.date[0] = new Date(this.page.beginTime);
     }
     this.page.endTime = value[1] && moment(value[1]).format('YYYY-MM-DD') + ' 23:59:59' || null;
     if (value[1]) {

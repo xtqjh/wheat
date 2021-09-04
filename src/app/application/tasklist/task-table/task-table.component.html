@@ -1,0 +1,48 @@
+<div class="pd-t10" id="tableHeader">
+  <div class="flex flex-row flex-wrap ">
+    <nz-form-item class="w300">
+      <nz-form-label [nzSpan]="8">任务名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.taskName" id="taskName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w180">
+      <nz-form-label [nzSpan]="12">发放状态</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-select nzAllowClear class="wb100" id="status" name="status" [(ngModel)]="page.status">
+          <nz-option nzValue="1" nzLabel="创建中"></nz-option>
+          <nz-option nzValue="3" nzLabel="审核中"></nz-option>
+          <nz-option nzValue="4" nzLabel="待确认"></nz-option>
+          <nz-option nzValue="5" nzLabel="银行处理中"></nz-option>
+          <nz-option nzValue="7" nzLabel="已完成"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w450">
+      <nz-form-label [nzSpan]="5">交易时间</nz-form-label>
+      <nz-form-control [nzSpan]="19">
+        <nz-range-picker class="wb100" [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
+          (ngModelChange)="onChange($event)" [nzPlaceHolder]="['交易开始时间','交易结束时间']" nzShowTime></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w350">
+      <nz-form-control [nzOffset]="2">
+        <a nz-button nzType="primary" class="mg-r8 user-select" (click)="searchData(true)">
+          <i nz-icon nzType="search" *ngIf="!isLoading"></i>
+          <i nz-icon nzType="loading" *ngIf="isLoading"></i>
+          查询
+        </a>
+        <a nz-button class="mg-r8 user-select" (click)="clickReset()">
+          重置
+        </a>
+        <a nz-button nzType="primary" class="user-select" routerLink="./progress/0">
+          <i nz-icon nzType="plus"></i>
+          新建结算任务
+        </a>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+<zc-table fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
+  (searchData)="searchData($event)">
+</zc-table>

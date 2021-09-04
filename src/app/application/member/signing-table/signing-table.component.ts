@@ -1,24 +1,25 @@
 import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { NzModalService, UploadFile } from 'ng-zorro-antd';
 import { isClone } from 'ng-ylzx/core/util';
 import { TableHeader } from 'ng-ylzx/table';
-import { SigningAgreementService } from '../signing-agreement.service';
-import { MessageService } from 'src/app/share/service';
+import { BaseService, MessageService } from 'src/app/share/service';
+import { MemberService } from '../member.service';
+
 
 @Component({
-  selector: 'app-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+  selector: 'app-signing-table',
+  templateUrl: './signing-table.component.html',
+  styleUrls: ['./signing-table.component.scss']
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class SigningTableComponent implements OnInit, OnDestroy {
 
   private getser$: any;
 
   page: any = {
     total: 0, page: 1, size: 20,
-    projectName: null, trueName: null, phone: null, identityCard: null, workStatus: null
+    projectName: null, trueName: null, phone: null, identityCard: null, workStatus: null,
+    companyId: null
   };
 
   tableHeader: Array<TableHeader> = [
@@ -68,12 +69,14 @@ export class TableComponent implements OnInit, OnDestroy {
   @ViewChild('tplContent', { static: false }) tplContent: TemplateRef<any>;
 
   constructor(
+    private base: BaseService,
     private msg: MessageService,
     private modalService: NzModalService,
-    private service: SigningAgreementService
+    private service: MemberService
   ) { }
 
   ngOnInit() {
+    this.page.companyId = this.base.getCompany.companyId;
     this.loadDataItem();
     this.searchData(true);
   }
@@ -89,7 +92,7 @@ export class TableComponent implements OnInit, OnDestroy {
   clickReset = () => {
     for (const key in this.page) {
       if (Object.prototype.hasOwnProperty.call(this.page, key)) {
-        if (!['total', 'page', 'size'].includes(key)) {
+        if (!['total', 'page', 'size', 'companyId'].includes(key)) {
           this.page[key] = null;
         }
       }
@@ -108,7 +111,7 @@ export class TableComponent implements OnInit, OnDestroy {
   private getList(data: any) {
     this.isLoading = true;
     if (this.getser$) { this.getser$.unsubscribe(); }
-    this.getser$ = this.service.getList(Object.assign({}, data, { pageNum: data.page, pageSize: data.size })).pipe(
+    this.getser$ = this.service.getListSigning(Object.assign({}, data, { pageNum: data.page, pageSize: data.size })).pipe(
       tap(v => this.isLoading = false)
     ).subscribe(
       (res: any) => {

@@ -1,0 +1,45 @@
+<div class="pd-t10" id="tableHeader">
+  <div class="flex flex-row flex-wrap ">
+    <nz-form-item class="w200">
+      <nz-form-label [nzSpan]="8">项目名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <nz-select nzAllowClear class="wb100" id="projectId" name="projectId" [(ngModel)]="page.projectId">
+          <nz-option *ngFor="let option of projectList" [nzValue]="option.id" [nzLabel]="option.name">
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w200">
+      <nz-form-label [nzSpan]="8">任务名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.taskName" id="taskName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w450">
+      <nz-form-label [nzSpan]="5">创建时间</nz-form-label>
+      <nz-form-control [nzSpan]="19">
+        <nz-range-picker [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
+          (ngModelChange)="onChange($event)" [nzPlaceHolder]="['创建开始时间','创建结束时间']" nzShowTime></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w150">
+      <nz-form-control>
+        <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
+          <i nz-icon nzType="search" *ngIf="!isLoading"></i>
+          <i nz-icon nzType="loading" *ngIf="isLoading"></i>
+          查询
+        </a>
+        <a nz-button class="user-select" (click)="clickReset()">
+          重置
+        </a>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+  <div class="pd-l10 pd-r10 pd-b10">
+    <button nz-button class="mg-r8">申请开票</button>
+    <button nz-button class="mg-r8" (click)="openEdit(null,'申请开票')">提前开票</button>
+  </div>
+</div>
+<zc-table checkBox fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items"
+  [isLoading]="isLoading" (searchData)="searchData($event)">
+</zc-table>

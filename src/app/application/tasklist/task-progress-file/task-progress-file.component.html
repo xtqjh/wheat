@@ -1,0 +1,68 @@
+<div class="pd-t50">
+  <div class="alert-warn ivu-alert ivu-alert-warning ivu-alert-with-icon ivu-alert-with-desc">
+    <span class="ivu-alert-icon">
+      <i nz-icon nzType="exclamation-circle" nzTheme="outline"></i>
+    </span>
+    <span class="ivu-alert-message">
+      项目付款须知
+    </span>
+    <span class="ivu-alert-desc">
+      1. 付款金额需有零有整，符合实际业务逻辑。<br>
+      2. 付款清单避免出现法人、股东、董事、监事、劳动/劳务合同关系人员。<br>
+      3. 付款清单避免出现单人单日多笔付款记录。<br>
+      4. 收款账户分为银行卡和支付宝，付款模板“账户”字段可选择填入银行卡账户或支付宝账户。
+    </span>
+    <a class="ivu-alert-close"><i class="ivu-icon ivu-icon-ios-close"></i></a>
+  </div>
+
+  <form nz-form [formGroup]="dynForm" (ngSubmit)="submitForm()" class="pd-t50">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="projectId">项目</nz-form-label>
+      <nz-form-control [nzSpan]="16" nzErrorTip="请输入项目!">
+        <nz-select nzAllowClear class="wb100" id="projectId" formControlName="projectId">
+          <nz-option *ngFor="let option of projectList" [nzValue]="option.projectId" [nzLabel]="option.projectName">
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <!-- <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzFor="name">收款方式</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+      </nz-form-control>
+    </nz-form-item> -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="taskName">任务名称</nz-form-label>
+      <nz-form-control [nzSpan]="16" nzErrorTip="请输入任务名称!">
+        <input zcTrim id="taskName" formControlName="taskName" nz-input />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5" nzRequired nzFor="name">文件上传</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <div class="mg-b10 font-12">
+          <a nz-button nzType="default"
+            routerLink="https://cdn.qiyingfu.com/kmgcdn/%E6%89%B9%E9%87%8F%E7%BB%93%E7%AE%97%E6%A8%A1%E6%9D%BF-%E9%93%B6%E8%A1%8C%E5%8D%A1.xlsx">
+            <i nz-icon nzType="download" nzTheme="outline"></i>下载批量付款模版
+          </a>
+          下载模板后请按照模板要求填写并上传
+        </div>
+        <nz-upload nzType="drag" [nzLimit]="2" [(nzFileList)]="fileList" [nzBeforeUpload]="beforeUpload">
+          <p class="ant-upload-drag-icon">
+            <i nz-icon nzType="inbox"></i>
+          </p>
+          <p class="ant-upload-text">点击上传</p>
+          <p class="ant-upload-hint">请添加xls，xlsx格式的文件, 大小不超过10M</p>
+        </nz-upload>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="pd-t30 pd-b30">
+      <nz-form-control class="text-c">
+        <button nz-button nzType="primary" [zcRepeatClick]="submitStatus" [zcFormButtonTips]="dynForm">
+          下一步
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+</div>

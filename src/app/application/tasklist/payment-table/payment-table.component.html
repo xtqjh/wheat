@@ -1,0 +1,48 @@
+<div class="pd-t10" id="tableHeader">
+  <div class="flex flex-row flex-wrap ">
+    <nz-form-item class="w200">
+      <nz-form-label [nzSpan]="8">任务名称</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.taskName" id="taskName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w200">
+      <nz-form-label [nzSpan]="8">任务ID</nz-form-label>
+      <nz-form-control [nzSpan]="16">
+        <input nz-input [(ngModel)]="page.taskNo" id="taskNo" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w200">
+      <nz-form-label [nzSpan]="10">发放状态</nz-form-label>
+      <nz-form-control [nzSpan]="14">
+        <nz-select nzAllowClear class="wb100" id="status" name="status" [(ngModel)]="page.status">
+          <nz-option nzValue="0" nzLabel="处理中"></nz-option>
+          <nz-option nzValue="1" nzLabel="通过"></nz-option>
+          <nz-option nzValue="2" nzLabel="不通过"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w450">
+      <nz-form-label [nzSpan]="5">交易时间</nz-form-label>
+      <nz-form-control [nzSpan]="19">
+        <nz-range-picker class="wb100" [(ngModel)]="page.date" (nzOnCalendarChange)="onChangeDate($event)"
+          (ngModelChange)="onChange($event)" [nzPlaceHolder]="['交易开始时间','交易结束时间']" nzShowTime></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="w200">
+      <nz-form-control [nzOffset]="4">
+        <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
+          <i nz-icon nzType="search" *ngIf="!isLoading"></i>
+          <i nz-icon nzType="loading" *ngIf="isLoading"></i>
+          查询
+        </a>
+        <a nz-button class="user-select" (click)="clickReset()">
+          重置
+        </a>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</div>
+<zc-table fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
+  (searchData)="searchData($event)">
+</zc-table>

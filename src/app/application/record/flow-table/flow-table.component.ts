@@ -5,7 +5,7 @@ import { isClone } from 'ng-ylzx/core/util';
 import { Page, SearchTemplate, TableHeader } from 'ng-ylzx/table';
 import { RecordService } from '../record.service';
 import * as moment from 'moment';
-import { MessageService } from 'src/app/share/service';
+import { BaseService, MessageService } from 'src/app/share/service';
 
 @Component({
   selector: 'app-flow-table',
@@ -44,12 +44,16 @@ export class FlowTableComponent implements OnInit, OnDestroy {
 
   projectList = [];
 
+  areaNameList = [];
+
   constructor(
+    private base: BaseService,
     private msg: MessageService,
     private service: RecordService
   ) { }
 
   ngOnInit() {
+    this.page.companyId = this.base.getCompany.companyId;
     this.loadDataItem();
     this.searchData(true);
   }
@@ -60,12 +64,13 @@ export class FlowTableComponent implements OnInit, OnDestroy {
 
   private loadDataItem = () => {
     this.service.getProjectNameList({}).subscribe((res: any) => this.projectList = res.success && res.extData || []);
+    this.service.getAreaNameList({ companyId: this.base.getCompany.companyId }).subscribe((res: any) => this.areaNameList = res.success && res.extData || []);
   }
 
   clickReset = () => {
     for (const key in this.page) {
       if (Object.prototype.hasOwnProperty.call(this.page, key)) {
-        if (!['total', 'page', 'size'].includes(key)) {
+        if (!['total', 'page', 'size', 'companyId'].includes(key)) {
           this.page[key] = null;
         }
       }

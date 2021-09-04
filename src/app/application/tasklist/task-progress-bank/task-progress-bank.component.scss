@@ -1,0 +1,85 @@
+$theme-color: var(--theme-color);
+
+.back-theme {
+  background-color: $theme-color;
+}
+.color-theme {
+  color: $theme-color;
+}
+p {
+  margin-bottom: 0;
+}
+
+.progress-item .progress-title {
+  font-size: 15px;
+  font-weight: 600;
+  border-left: 4px solid $theme-color;
+  padding-left: 10px;
+  margin-bottom: 10px;
+}
+.progress-item .progress-cnt {
+  padding-left: 15px;
+}
+.progress-item .progress-info {
+  line-height: 30px;
+  margin-bottom: 15px;
+}
+
+.progress-item .esign-tip {
+  font-size: 14px;
+  color: #666;
+  margin-top: 15px;
+}
+.progress-item .esign-tip .amount-balance {
+  margin-bottom: 15px;
+}
+.progress-item .esign-tip span {
+  color: #ea841f;
+}
+
+.progress-item .progress-bar {
+  padding: 30px;
+  background: #f5f7f9;
+}
+.progress-item .progress-amount {
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+.progress-item .progress-amount b {
+  font-size: 16px;
+  color: #ea841f;
+}
+.progress-item .progress-bar .bar-cnt {
+  height: 50px;
+  background: #00a4e9;
+  border-radius: 25px;
+  position: relative;
+  text-align: center;
+  padding-top: 5px;
+  color: #fff;
+}
+.progress-item .progress-bar .bar-left {
+  position: relative;
+}
+.progress-item .progress-bar .bar-right {
+  position: absolute;
+  height: 50px;
+  top: 0;
+  right: 0;
+  background: #6cbe63;
+  min-width: 100px;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  padding-top: 5px;
+}
+.progress-item .progress-bar .bar-amount {
+  margin-top: 20px;
+  font-size: 13px;
+}
+.progress-item .progress-bar .bar-amount span {
+  margin-right: 30px;
+}
+.progress-item .progress-bar .bar-amount b {
+  font-size: 20px;
+  color: #ea841f;
+}

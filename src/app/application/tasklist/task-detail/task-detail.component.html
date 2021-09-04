@@ -1,0 +1,88 @@
+<nz-spin [nzSpinning]="isLoading" nzTip="加载...">
+
+  <div class="page track">
+    <div class="track-title">任务详情</div>
+    <div class="track-info">
+      <div class="track-card-left ivu-card ivu-card-bordered">
+        <div class="ivu-card-head">
+          <p>任务信息</p>
+        </div>
+        <div class="ivu-card-body">
+          <div class="track-detail">
+            <p>任务名称：{{item?.taskName}}</p>
+            <p>任务ID：{{item?.taskNo}}</p>
+            <p class="track-project-name">项目名称：{{item?.projectName}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="track-card-left ivu-card ivu-card-bordered">
+        <div class="ivu-card-head">
+          <p>付款信息</p>
+        </div>
+
+        <div class="ivu-card-body">
+          <div class="track-amount">
+            <p>
+              应付总额：<b class="amount-total"> {{item?.totalAmount}} </b>元
+              （付款金额：<b> {{item?.commissionAmount}} </b>元，
+              个税：<b> {{item?.taxAmount}} </b>元，
+              服务费：<b> {{item?.serviceAmount}} </b>元）
+            </p>
+
+            <p class="track-num">
+              笔数：共 <b class="total-num"> {{item?.totalNum}} </b>笔（
+              校验成功<b class="green"> {{item?.successNum}} </b>笔 ）
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="track-title">任务明细</div>
+
+    <div class="">
+      <div class="flex flex-row flex-wrap ">
+        <nz-form-item class="w200">
+          <nz-form-label [nzSpan]="8">姓名</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input [(ngModel)]="page.name" id="name" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="w200">
+          <nz-form-label [nzSpan]="8">手机号</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input [(ngModel)]="page.phone" id="phone" />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="w200">
+          <nz-form-label [nzSpan]="10">发放状态</nz-form-label>
+          <nz-form-control [nzSpan]="14">
+            <nz-select nzAllowClear class="wb100" id="withdrawStatus" name="withdrawStatus" [(ngModel)]="page.withdrawStatus">
+              <nz-option nzValue="1" nzLabel="创建中"></nz-option>
+              <nz-option nzValue="2" nzLabel="审核中"></nz-option>
+              <nz-option nzValue="3" nzLabel="待确认"></nz-option>
+              <nz-option nzValue="4" nzLabel="银行处理中"></nz-option>
+              <nz-option nzValue="5" nzLabel="已完成"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item class="w200">
+          <nz-form-control [nzOffset]="4">
+            <a nz-button nzType="primary" class="mg-r8 user-select bor-r-theme" (click)="searchData(true)">
+              <i nz-icon nzType="search" *ngIf="!isLoading"></i>
+              <i nz-icon nzType="loading" *ngIf="isLoading"></i>
+              查询
+            </a>
+            <a nz-button class="user-select" (click)="clickReset()">
+              重置
+            </a>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <zc-table showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
+        (searchData)="searchData($event)">
+      </zc-table>
+    </div>
+  </div>
+</nz-spin>

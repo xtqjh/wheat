@@ -42,6 +42,13 @@ export class RecordService {
   }
 
   /**
+   * 企业下面的税源地名称列表
+   */
+  getAreaNameList = (data: any) => {
+    return this.http.get(`/company/api/company/reconciliation/areaNameList`, { params: isObjectToString(data) });
+  }
+
+  /**
    * 账户-下拉框数据
    */
   getAccountNameList = () => {

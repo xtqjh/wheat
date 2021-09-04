@@ -1,0 +1,51 @@
+<div class="progress-item pd-t50">
+  <div class="progress-title">任务概览</div>
+  <div class="progress-cnt">
+    <div class="progress-info">
+      <p>任务名称：{{item?.taskName}}</p>
+      <p>任务ID：{{item?.taskNo}}</p>
+      <p>项目名称：{{item?.projectName}}</p>
+      <p>创建人：{{item?.creater}}</p>
+      <p>创建时间：{{item?.createTime}}</p>
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-amount">
+        付款金额<b> {{item?.commissionAmount}} </b>元，
+        服务费<b> {{item?.serviceAmount}} </b>元，
+        共<b> {{item?.totalNum}} </b>笔，
+        共<b> {{item?.personNum}} </b>人
+      </div>
+      <div class="bar-cnt">
+        <div class="bar-left" [ngStyle]="{'width.%':toPercent(item?.commissionAmount,item?.totalAmount)}">
+          <p>{{item?.commissionAmount}}</p><span>付款金额</span>
+        </div>
+        <div class="bar-right" [ngStyle]="{'width.%':toPercent(item?.serviceAmount,item?.totalAmount)}">
+          <p>{{item?.serviceAmount}}</p><span>平台服务费</span>
+        </div>
+      </div>
+      <div class="bar-amount">
+        <span>总计支出：<b>{{item?.totalAmount}}</b> 元</span>
+        <span>大写：<b>{{item?.capitalAmount}}</b></span>
+      </div>
+    </div>
+
+    <div class="esign-tip">
+      <p class="amount-balance">当前账户余额：{{item?.amount}}元 （正在发放资金：{{item?.freezeAmount}}元）</p>
+      <span>提示：</span>
+      请尽快将总计支出金额汇款至金蘑菇，到账且批次审核通过后开始付款，如已充值请忽略。
+    </div>
+  </div>
+
+  <div class="text-c pd-t30 pd-b30">
+    <a nz-button nzType="default" class="mg-r10" (click)="getTaskConfirmation()">
+      下载确认单
+    </a>
+    <a nz-button nzType="default" class="mg-r10" href="{{item?.detailUrl}}">
+      查看上传明细
+    </a>
+  </div>
+
+  <pre>{{item|json}}</pre>
+
+</div>

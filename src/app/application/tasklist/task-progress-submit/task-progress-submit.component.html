@@ -1,0 +1,23 @@
+<div class="taskCommit pd-t50">
+  <h3 class="commit-title">{{fund?.taskName}}（合计{{fund?.totalNum}} 笔 | {{fund?.totalAmount}} 元）</h3>
+
+  <div class="commit-tabs clearfix">
+    <div class="tab-item tab-success fl tab-active">
+      <p class="tab-title">通过验证订单（笔 | 元）</p>
+      <p class="tab-num">{{fund?.successNum}} | {{fund?.successAmount}}</p>
+    </div>
+  </div>
+
+  <zc-table showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
+    (searchData)="searchData($event)">
+  </zc-table>
+
+  <div class="text-c pd-t30 pd-b30">
+    <button nz-button nzType="primary" [zcRepeatClick]="submitStatus" (click)="getTaskCommit()">
+      确认提交
+    </button>
+  </div>
+
+  <!-- <pre>{{fund|json}}</pre> -->
+
+</div>
