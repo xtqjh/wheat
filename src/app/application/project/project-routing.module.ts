@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ProjectComponent } from './project.component';
+import { DetailComponent } from './detail/detail.component';
 import { TemplateTableComponent } from './template-table/template-table.component';
 
 const routes: Routes = [
@@ -10,6 +11,7 @@ const routes: Routes = [
     component: ProjectComponent,
     children: [
       { path: 'template', component: TemplateTableComponent, data: { title: '模板数据导出' } },
+      { path: 'detail/:id', component: DetailComponent, data: { title: '项目详情' } },
 
     ]
   }

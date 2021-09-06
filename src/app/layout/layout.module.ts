@@ -19,6 +19,9 @@ import { HeaderComponent } from './header/header.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HeaderTabsComponent } from './header-tabs/header-tabs.component';
 import { CompanyComponent } from './company/company.component';
+import { AccountComponent } from './home/account/account.component';
+import { FinanceComponent } from './home/finance/finance.component';
+import { ProjectComponent } from './home/project/project.component';
 
 
 @NgModule({
@@ -31,6 +34,9 @@ import { CompanyComponent } from './company/company.component';
     HomeComponent,
     SettingsComponent,
     CompanyComponent,
+    AccountComponent,
+    FinanceComponent,
+    ProjectComponent,
   ],
   imports: [
     CommonModule,

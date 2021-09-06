@@ -20,5 +20,10 @@ export class HomeService {
    * 企业资金
    */
   getCompanyCapital = () => this.http.get(`/company/api/account/capital`);
+
+  /**
+   * 项目列表
+   */
+  getProjectList = () => this.http.get(`/company/api/project/list`);
 }
 

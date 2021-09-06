@@ -8,12 +8,14 @@ import { ZcDirectiveModule } from 'ng-ylzx/directive';
 import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
 import { TemplateTableComponent } from './template-table/template-table.component';
+import { DetailComponent } from './detail/detail.component';
 
 
 @NgModule({
   declarations: [
     ProjectComponent,
-    TemplateTableComponent
+    TemplateTableComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,

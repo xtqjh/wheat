@@ -1,0 +1,34 @@
+<div class="pd-t20">
+  <h3 class="text-title mg-b10">项目列表</h3>
+  <div class="project-list clearfix">
+    <div class="project-item fl" *ngFor="let item of project">
+      <div class="ivu-card ivu-card-bordered" (click)="onGoToUrl('/layout/project/detail/'+item.projectId)">
+        <div class="ivu-card-head">
+          <div class="project-title">
+            <span class="project-online">{{item.projectName || '--'}}</span>
+            <div class="project-btn fr">
+              <button type="button" class="ivu-btn" (click)="clickImportMember(item)">
+                导入成员
+              </button>
+              <button type="button" class="ivu-btn ivu-btn-primary" (click)="clickTelegraphic(item)">
+                电签结算
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="ivu-card-body">
+          <p class="line-26">
+            成员人数：{{item.member || '--'}} 人
+            <span class="check-member">
+              查看成员
+            </span>
+          </p>
+          <p class="line-26">电签人数：{{item.signatureNumber || '--'}} 人</p>
+          <p class="line-26">税源地：{{item.originName || '--'}}</p>
+          <p class="line-26">付款账户：{{item.accountName || '--'}}</p>
+          <p class="line-26">付款方式：{{item.signType || '--'}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

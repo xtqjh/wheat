@@ -1,0 +1,64 @@
+<nz-spin [nzSpinning]="isLoading" nzTip="加载...">
+
+  <div class="project-title">
+    <b>{{item?.projectName}}</b>
+    （项目编号：{{item?.projectId}}）
+  </div>
+
+  <div class="ivu-card">
+    <div class="ivu-card-head">
+      <p>数据概况</p>
+    </div>
+    <div class="ivu-card-body project-data">
+      <div class="project-data-head">
+        <span class="color-333">成员概况：</span>
+        <span class="mg-r10">总人数：{{workStatus?.isApply}}人</span>
+        <span class="mg-r10">已电签：{{workStatus?.isWork}}人</span>
+        <span>未电签：{{workStatus?.isMogu}}人</span>
+        <div class="fr">
+          <button type="button" class="grant-btn ivu-btn ivu-btn-primary">
+            导入成员
+          </button>
+          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/member/signing">
+            项目成员管理
+          </button>
+        </div>
+      </div>
+      <div class="project-data-head">
+        <span class="color-333">结算统计：</span>
+        <span class="mg-r10">总计：{{statistics?.commissionTotal || '--'}}元</span>
+        <span class="mg-r10">金额：{{statistics?.commissionActual || '--'}}元</span>
+        <span>服务费：{{statistics?.serviceAmount || '--'}}元</span>
+        <div class="fr">
+          <button type="button" class="grant-btn ivu-btn ivu-btn-primary" routerLink="/layout/tasklist/task/progress/0">
+            新建结算任务
+          </button>
+          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/tasklist/task">
+            结算记录
+          </button>
+        </div>
+      </div>
+      <div class="pd-b50">
+        <p class="line-40 color-000">最近结算记录：</p>
+        <zc-table showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
+          (searchData)="searchData($event)">
+        </zc-table>
+      </div>
+    </div>
+  </div>
+
+  <div class="ivu-card">
+    <div class="ivu-card-head">
+      <p>项目信息</p>
+    </div>
+    <div class="ivu-card-body">
+      <h4>{{item?.projectName}}</h4>
+      <p>项目类型：{{item?.projectType}}</p>
+      <p>项目任务描述：{{item?.projectContent}}</p>
+      <p>计费比例：
+        <span>平台服务费：{{item?.serviceRate}}</span>
+      </p>
+    </div>
+  </div>
+
+</nz-spin>
