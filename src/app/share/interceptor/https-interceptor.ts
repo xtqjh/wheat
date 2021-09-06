@@ -100,14 +100,14 @@ export class HttpsInterceptor implements HttpInterceptor {
 
   // 报错信息
   private handleError(error) {
-    // if ((error.status >= 200 && error.status < 300) || error.status === 401) {
-    //   if (error.status === 401) {
-    //     this.msg.error((error.error && error.error.message || null) || (error.error && error.error.sys_message || null) || '登录超时，重新登录。');
-    //     this.base.cleanCacheRecords();
-    //     this.router.navigate(['/login'], { replaceUrl: false });
-    //   }
-    //   return;
-    // }
+    if ((error.status >= 200 && error.status < 300) || error.status === 401) {
+      if (error.status === 401) {
+        this.msg.error((error.error && error.error.message || null) || (error.error && error.error.sys_message || null) || '登录超时，重新登录。');
+        this.base.cleanCacheRecords();
+        this.router.navigate(['/login'], { replaceUrl: false });
+      }
+      return;
+    }
     if (error.status === 0) {
       this.notification.error(
         '网络不可用，无法连接到服务器！',

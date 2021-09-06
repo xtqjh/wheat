@@ -20,7 +20,7 @@
     </ng-container>
 
     <a class="name" nz-popover [nzPopoverContent]="contentTemplate" nzPopoverPlacement="bottomRight">
-      {{user?.userName || user?.name || '名称'}}
+      {{user?.userName || user?.username || user?.name || '名称'}}
       <i class="icon" nz-icon nzType="down" nzTheme="outline"></i>
     </a>
     <ng-template #contentTemplate>

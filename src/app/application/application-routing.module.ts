@@ -11,6 +11,7 @@ const routes: Routes = [
       { path: 'record', loadChildren: () => import('./record/record.module').then(m => m.RecordModule), data: { title: '记录管理' } },
       { path: 'apply', loadChildren: () => import('./apply/apply.module').then(m => m.ApplyModule), data: { title: '申请管理' } },
       { path: 'tasklist', loadChildren: () => import('./tasklist/tasklist.module').then(m => m.TasklistModule), data: { title: '结算付款' } },
+      { path: 'project', loadChildren: () => import('./project/project.module').then(m => m.ProjectModule), data: { title: '项目管理' } },
     ]
   }
 ];

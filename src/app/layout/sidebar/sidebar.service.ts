@@ -34,7 +34,7 @@ export class SidebarService {
           { text: '流水记录', path: '/layout/record/flow' },
         ]
       },
-      { text: '项目管理', path: '/', icon: 'deployment-unit' },
+      { text: '项目管理', path: '/layout/project/template', icon: 'deployment-unit' },
       {
         text: '申请管理', icon: 'audit', children: [
           { text: '项目发布记录', path: '/layout/apply/project' },

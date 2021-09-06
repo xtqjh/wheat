@@ -42,6 +42,13 @@ export class RecordService {
   }
 
   /**
+   * 项目名称列表
+   */
+  getListProject = (data: any) => {
+    return this.http.get(`/company/api/project/nameList`, { params: isObjectToString(data) });
+  }
+
+  /**
    * 企业下面的税源地名称列表
    */
   getAreaNameList = (data: any) => {

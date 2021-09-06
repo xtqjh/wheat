@@ -63,7 +63,7 @@ export class FlowTableComponent implements OnInit, OnDestroy {
   }
 
   private loadDataItem = () => {
-    this.service.getProjectNameList({}).subscribe((res: any) => this.projectList = res.success && res.extData || []);
+    this.service.getListProject({}).subscribe((res: any) => this.projectList = res.success && res.extData || []);
     this.service.getAreaNameList({ companyId: this.base.getCompany.companyId }).subscribe((res: any) => this.areaNameList = res.success && res.extData || []);
   }
 
