@@ -41,10 +41,5 @@ export class AccountComponent implements OnInit, AfterViewInit, OnDestroy {
     (result: any) => this.capital = result && result.extData || null
   )
 
-  onGoToUrl = (url) => {
-    this.router.navigate([url]);
-  }
-
-
 
 }

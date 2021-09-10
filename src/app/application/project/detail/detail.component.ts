@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { isClone } from 'ng-ylzx/core/util';
 import { TableHeader } from 'ng-ylzx/table';
+import { NzModalService, UploadFile } from 'ng-zorro-antd';
 import { filter, switchMap, tap } from 'rxjs/operators';
 import { BaseService, MessageService } from 'src/app/share/service';
 import { ProjectService } from '../project.service';
@@ -50,10 +51,17 @@ export class DetailComponent implements OnInit, OnDestroy {
     { title: '创建人手机号', key: 'operatorPhone', show: true, width: 120 },
   ];
 
+  fileList = [];
+
+  company = { projectName: null, projectId: null, file: null };
+
+  @ViewChild('tplContent', { static: false }) tplContent: TemplateRef<any>;
+
   constructor(
     public base: BaseService,
     private msg: MessageService,
     private route: ActivatedRoute,
+    private modalService: NzModalService,
     private service: ProjectService
   ) { }
 
@@ -74,6 +82,8 @@ export class DetailComponent implements OnInit, OnDestroy {
     ).subscribe(
       (data: any) => {
         this.item = data && data.extData;
+        this.company.projectId = this.item.projectId;
+        this.company.projectName = this.item.projectName;
 
         this.isLoading = false;
         this.page.projectId = this.item.projectId;
@@ -115,6 +125,33 @@ export class DetailComponent implements OnInit, OnDestroy {
       error => this.isLoading = false,
       () => this.isLoading = false
     );
+  }
+
+  changeFile = (file: UploadFile): boolean => {
+    this.company.file = file;
+    return false;
+  }
+
+  getImport = () => {
+    const modal = this.modalService.confirm({
+      nzTitle: '导入成员',
+      nzContent: this.tplContent,
+      nzWidth: '440',
+      nzOnOk: () =>
+        new Promise((resolve, reject) => {
+          this.service.getImport(this.company.projectId, this.company.file).subscribe(
+            (com: any) => {
+              if (com.success) {
+                this.searchData(true);
+                resolve();
+              } else {
+                this.msg.error(com.message);
+                reject();
+              }
+            }
+          );
+        })
+    });
   }
 
 }

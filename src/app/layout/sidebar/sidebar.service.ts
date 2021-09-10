@@ -18,8 +18,8 @@ export class SidebarService {
     return new Observable(observer => observer.next([
       {
         text: '成员管理', icon: 'user', children: [
-          { text: '电签协议管理', path: '/layout/member/signing' },
-          { text: '银行卡管理', path: '/layout/member/bank' },
+          { text: '电签协议', path: '/layout/member/signing' },
+          { text: '银行卡', path: '/layout/member/bank' },
         ]
       },
       {

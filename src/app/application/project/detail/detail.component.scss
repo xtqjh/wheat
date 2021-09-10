@@ -7,6 +7,10 @@ $theme-color: var(--theme-color);
   color: $theme-color;
 }
 
+::ng-deep .ant-form-item {
+  margin-bottom: 6px !important;
+}
+
 .project-title {
   font-size: 13px;
   padding: 25px 4px 15px;

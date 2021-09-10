@@ -5,6 +5,7 @@ import { isClone } from 'ng-ylzx/core/util';
 import { TableHeader } from 'ng-ylzx/table';
 import { BaseService, MessageService } from 'src/app/share/service';
 import { MemberService } from '../member.service';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class SigningTableComponent implements OnInit, OnDestroy {
 
   page: any = {
     total: 0, page: 1, size: 20,
-    projectName: null, trueName: null, phone: null, identityCard: null, workStatus: null,
+    projectId: null, name: null, phone: null, idNo: null, workStatus: null,
     companyId: null
   };
 
@@ -71,12 +72,14 @@ export class SigningTableComponent implements OnInit, OnDestroy {
   constructor(
     private base: BaseService,
     private msg: MessageService,
+    private route: ActivatedRoute,
     private modalService: NzModalService,
     private service: MemberService
   ) { }
 
   ngOnInit() {
     this.page.companyId = this.base.getCompany.companyId;
+    this.page.projectId = this.route.snapshot.queryParamMap.get('projectId');
     this.loadDataItem();
     this.searchData(true);
   }

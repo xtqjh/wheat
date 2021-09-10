@@ -3,8 +3,8 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">项目名称</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <nz-select nzAllowClear class="wb100" id="projectName" name="projectName" [(ngModel)]="page.projectName">
-          <nz-option *ngFor="let option of projectList" [nzValue]="option.name" [nzLabel]="option.name">
+        <nz-select nzAllowClear class="wb100" id="projectId" name="projectId" [(ngModel)]="page.projectId">
+          <nz-option *ngFor="let option of projectList" [nzValue]="option.id" [nzLabel]="option.name">
           </nz-option>
         </nz-select>
       </nz-form-control>
@@ -12,7 +12,7 @@
     <nz-form-item class="w200">
       <nz-form-label [nzSpan]="8">姓名</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <input nz-input [(ngModel)]="page.trueName" id="trueName" />
+        <input nz-input [(ngModel)]="page.name" id="name" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="w200">
@@ -24,7 +24,7 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">身份证号</nz-form-label>
       <nz-form-control [nzSpan]="16">
-        <input nz-input [(ngModel)]="page.identityCard" id="identityCard" />
+        <input nz-input [(ngModel)]="page.idNo" id="idNo" />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="w200">

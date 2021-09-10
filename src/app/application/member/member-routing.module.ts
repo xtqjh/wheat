@@ -11,8 +11,8 @@ const routes: Routes = [
     component: MemberComponent,
     children: [
       { path: '', redirectTo: 'list', pathMatch: 'full' },
-      { path: 'signing', component: SigningTableComponent, data: { title: '电签协议管理' } },
-      { path: 'bank', component: BankTableComponent, data: { title: '银行卡管理' } },
+      { path: 'signing', component: SigningTableComponent, data: { title: '电签协议' } },
+      { path: 'bank', component: BankTableComponent, data: { title: '银行卡' } },
     ]
   }
 ];

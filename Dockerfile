@@ -25,14 +25,14 @@ CMD ["nginx", "-g", "daemon off;"]
 
 #FILES=wheat
 # NAMES=172.16.111.21:5000/wheat
-# docker build -f Dockerfile -t $NAMES
+# docker build -f Dockerfile -t xtqjh/wheat .
 # docker stop $FILES
 # docker rm -f $FILES
 # docker rmi $NAMES
 # docker pull $NAMES
 # docker run -d --env API_IP=172.16.111.11:8087 --restart=always --name $FILES -p 42000:80 --rm $NAMES
 # docker run -d -e API_IP=172.16.111.11:8087 --restart=always --name=wheat -p 31001:80 --rm 172.16.111.21:5000/wheat:tag
-# docker run -d -e API_IP=111.0.99.143:9000 --restart=always --name=wheat -p 31001:80 -p 80:80 localhost/wheat:tag
+# docker run -d -e API_IP=111.0.99.143:9000 --restart=always --name=wheat -p 31001:80 xtqjh/wheat
 # docker ps -a --filter name=$FILES
 
 # server {

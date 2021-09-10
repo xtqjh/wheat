@@ -5,6 +5,7 @@ import { TableHeader } from 'ng-ylzx/table';
 import * as moment from 'moment';
 import { MessageService } from 'src/app/share/service';
 import { RecordService } from '../record.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-fund-table',
@@ -47,10 +48,12 @@ export class FundTableComponent implements OnInit, OnDestroy {
 
   constructor(
     private msg: MessageService,
+    private route: ActivatedRoute,
     private service: RecordService
   ) { }
 
   ngOnInit() {
+    this.page.accountId = this.route.snapshot.queryParamMap.get('accountId');
     this.loadDataItem();
     this.searchData(true);
   }

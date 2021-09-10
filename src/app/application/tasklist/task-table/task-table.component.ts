@@ -18,7 +18,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
 
   page: any = {
     total: 0, page: 1, size: 20,
-    transactionType: null, accountId: null,
+    projectId: null, transactionType: null, accountId: null,
     date: null, beginTime: null, endTime: null,
   };
 
@@ -94,6 +94,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    this.page.projectId = this.route.snapshot.queryParamMap.get('projectId');
     this.searchData(true);
   }
 

@@ -16,10 +16,10 @@
         <span class="mg-r10">已电签：{{workStatus?.isWork}}人</span>
         <span>未电签：{{workStatus?.isMogu}}人</span>
         <div class="fr">
-          <button type="button" class="grant-btn ivu-btn ivu-btn-primary">
+          <button type="button" class="grant-btn ivu-btn ivu-btn-primary" (click)="getImport()">
             导入成员
           </button>
-          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/member/signing">
+          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/member/signing" [queryParams]="{projectId: item?.projectId}">
             项目成员管理
           </button>
         </div>
@@ -30,10 +30,10 @@
         <span class="mg-r10">金额：{{statistics?.commissionActual || '--'}}元</span>
         <span>服务费：{{statistics?.serviceAmount || '--'}}元</span>
         <div class="fr">
-          <button type="button" class="grant-btn ivu-btn ivu-btn-primary" routerLink="/layout/tasklist/task/progress/0">
+          <button type="button" class="grant-btn ivu-btn ivu-btn-primary" routerLink="/layout/tasklist/task/progress/0" [queryParams]="{projectId: item?.projectId}">
             新建结算任务
           </button>
-          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/tasklist/task">
+          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/tasklist/task" [queryParams]="{projectId: item?.projectId}">
             结算记录
           </button>
         </div>
@@ -62,3 +62,34 @@
   </div>
 
 </nz-spin>
+
+
+
+
+<ng-template #tplContent>
+  <nz-form-item class="w300">
+    <nz-form-label [nzSpan]="6">所属项目</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      {{company.projectName}}
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item class="w300">
+    <nz-form-label [nzSpan]="6">上传文件</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <nz-upload [nzBeforeUpload]="changeFile" [nzFileList]="fileList">
+        <button nz-button><i nz-icon nzType="upload"></i><span>点击上传</span></button>
+      </nz-upload>
+    </nz-form-control>
+
+  </nz-form-item>
+  <nz-form-item class="w300">
+    <nz-form-label [nzSpan]="6">模板文件</nz-form-label>
+    <nz-form-control [nzSpan]="18">
+      <a href="https://cdn.qiyingfu.com/file/kmg/%E9%A1%B9%E7%9B%AE%E6%88%90%E5%91%98%E5%AF%BC%E5%85%A5.xlsx"
+        target="_blank">下载模板</a>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!-- {{company|json}} -->
+</ng-template>

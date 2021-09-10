@@ -1,6 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { isObjectToString, setFormatGetUrl } from 'ng-ylzx/core/util';
+import { Observable, of } from 'rxjs';
+import { switchMap, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -59,6 +61,31 @@ export class ProjectService {
    */
   getStatistics = (data: { projectId: string }) => this.http.get(`/company/api/project/statistics`, { params: isObjectToString(data) });
 
+  private uploadMultipart = (file: any, projectId: string, url: string): Observable<any> => {
+    return new Observable(observer => of(file).pipe(
+      switchMap((ut: any) => {
+        const formData = new FormData();
+        formData.append('file', ut);
+        formData.append('projectId', projectId);
+        const req = new HttpRequest('POST', `${url}`, formData);
+        return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
+      }),
+    ).subscribe(
+      (res: any) => {
+        observer.next(res.body);
+        observer.complete();
+      },
+      err => {
+        observer.error(err);
+        observer.complete();
+      }
+    ));
+  }
+
+  /**
+   * 项目导入成员
+   */
+  getImport = (projectId: string, file: any) => this.uploadMultipart(file, projectId, `/company/api/member/import?projectId=${projectId}`);
 
 
 }

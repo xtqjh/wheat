@@ -43,6 +43,8 @@ export class TaskProgressFileComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    const projectId = this.route.snapshot.queryParamMap.get('projectId');
+    this.dynForm.get('projectId').setValue(projectId);
     this.getListProject();
   }
 

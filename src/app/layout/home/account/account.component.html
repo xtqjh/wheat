@@ -83,7 +83,7 @@
           <div class="flex">
             <div class="text-ellipsis" style="flex:1;">{{item?.accountName}}</div>
             <div class="font-12 back-gray-2 color-666 cur-p" style="line-height:21px;padding:0 4px;"
-              (click)="onGoToUrl('/layout/record/fund')">资金明细</div>
+              routerLink="/layout/record/fund" [queryParams]="{accountId: item?.accountId}">资金明细</div>
           </div>
         </div>
       </div>
