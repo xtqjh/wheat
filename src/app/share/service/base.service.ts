@@ -86,4 +86,5 @@ export interface Company {
   logoUrl?: string;
   phone?: string;
   userName?: string;
+  isOpenBeforeInvoice?: boolean;
 }

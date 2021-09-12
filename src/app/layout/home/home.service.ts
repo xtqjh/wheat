@@ -34,6 +34,9 @@ export class HomeService {
    */
   getCategoryList = () => this.http.get(`/company/api/apply/category`);
 
+  /**
+   * 企业项目申请
+   */
   getProjectApply = (data: any) => this.http.get(`/company/api/apply/project/apply`, { params: isObjectToString(data) });
 
   uploadFile = (file: any): Observable<any> => {

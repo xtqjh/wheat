@@ -41,3 +41,68 @@
 <zc-table fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
   (searchData)="searchData($event)">
 </zc-table>
+
+
+
+
+
+<ng-template #tplContent>
+
+  <form nz-form [formGroup]="applyForm" class="">
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>项目类型</nz-form-label>
+      <nz-form-control [nzSpan]="9" nzErrorTip="请输入项目类型!">
+        <nz-select nzAllowClear class="wb100" formControlName="categoryId" id="categoryId">
+          <nz-option *ngFor="let option of categoryList" [nzValue]="option.id" [nzLabel]="option.name">
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="9" nzErrorTip="请输入项目名称!">
+        <input zcTrim nz-input formControlName="secondCategory" id="secondCategory" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>项目名称</nz-form-label>
+      <nz-form-control [nzSpan]="18" nzErrorTip="请输入项目名称!">
+        <input zcTrim nz-input formControlName="name" id="name" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>服务费率</nz-form-label>
+      <nz-form-control [nzSpan]="18" nzErrorTip="请输入服务费率!">
+        <nz-input-group [nzSuffix]="suffixTemplateInfo">
+          <input type="number" nz-input formControlName="rate" id="rate" />
+        </nz-input-group>
+        <ng-template #suffixTemplateInfo>%</ng-template>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6">模板文件</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <a href="https://cdn.qiyingfu.com/kmgcdn/2021/03/05/%E4%B8%9A%E5%8A%A1%E6%A8%A1%E5%BC%8F%E5%8F%8A%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E8%AF%B4%E6%98%8E.doc"
+          target="_blank">下载模板</a>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>业务场景</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-upload nzAction="fileUrl" [nzCustomRequest]="uploadRequest">
+          <button nz-button><i nz-icon nzType="upload"></i><span>点击上传</span></button>
+        </nz-upload>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="6" nzRequired>合同</nz-form-label>
+      <nz-form-control [nzSpan]="18">
+        <nz-upload nzAction="contractUrl" [nzCustomRequest]="uploadRequest">
+          <button nz-button><i nz-icon nzType="upload"></i><span>点击上传</span></button>
+        </nz-upload>
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+  {{applyForm.value|json}}
+</ng-template>

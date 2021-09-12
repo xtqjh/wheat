@@ -1,10 +1,10 @@
 <div class="pd-t10" id="tableHeader">
   <div class="flex flex-row flex-wrap ">
-    <nz-form-item class="w200">
+    <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">项目名称</nz-form-label>
-      <nz-form-control [nzSpan]="16">
+      <nz-form-control [nzSpan]="15">
         <nz-select nzAllowClear class="wb100" id="projectId" name="projectId" [(ngModel)]="page.projectId">
-          <nz-option *ngFor="let option of projectList" [nzValue]="option.id" [nzLabel]="option.name">
+          <nz-option *ngFor="let option of projectList" [nzValue]="option.projectId" [nzLabel]="option.projectName">
           </nz-option>
         </nz-select>
       </nz-form-control>
@@ -37,7 +37,8 @@
   </div>
   <div class="pd-l10 pd-r10 pd-b10">
     <button nz-button class="mg-r8">申请开票</button>
-    <button nz-button class="mg-r8" (click)="openEdit(null,'申请开票')">提前开票</button>
+    <button nz-button class="mg-r8" *ngIf="base.getCompany.isOpenBeforeInvoice"
+      (click)="openEdit(null,'申请开票',true)">提前开票</button>
   </div>
 </div>
 <zc-table checkBox fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items"

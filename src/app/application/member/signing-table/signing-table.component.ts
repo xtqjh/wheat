@@ -40,7 +40,7 @@ export class SigningTableComponent implements OnInit, OnDestroy {
     { title: 'workStatusStr', key: 'workStatusStr', show: false, width: 100 },
     { title: '描述', key: 'remarks', show: false, width: 100 },
     {
-      title: '操作', key: 'operate', show: true, width: 140, right: 0,
+      title: '操作', key: 'operate', show: true, width: 240, right: 0,
       buttons: [
         {
           text: '重发短信',

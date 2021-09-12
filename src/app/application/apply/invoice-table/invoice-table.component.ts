@@ -3,9 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { isClone } from 'ng-ylzx/core/util';
 import { Page, SearchTemplate, TableHeader } from 'ng-ylzx/table';
+import { NzDrawerService } from 'ng-zorro-antd';
 import * as moment from 'moment';
-import { ApplyService } from '../apply.service';
 import { BaseService, MessageService } from 'src/app/share/service';
+import { TaskEditComponent } from '../task-edit/task-edit.component';
+import { ApplyService } from '../apply.service';
 
 @Component({
   selector: 'app-invoice-table',
@@ -26,24 +28,50 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
   };
 
   tableHeader: Array<TableHeader> = [
-    { title: '税源地', key: '', show: true, width: 120 },
-    { title: '项目名称', key: 'projectName', show: true, width: 120 },
-    { title: '项目类型', key: '', show: true, width: 120 },
-    { title: '任务名称', key: 'name', show: true, width: 120 },
-    { title: '任务编号', key: 'taskNo', show: true, width: 120 },
-    { title: '金额', key: 'amount', show: true, width: 120 },
-    { title: '总笔数', key: 'num', show: true, width: 120 },
-    { title: '成功笔数', key: 'successNum', show: true, width: 120 },
-    { title: '失败笔数', key: 'failNum', show: true, width: 120 },
-    { title: '创建时间', key: 'createTime', show: true, width: 120 },
+    { title: '税源地', key: 'areaName', show: true, width: 120 },
     {
-      title: '操作', key: 'operate', show: true, width: 140, right: 0,
+      title: '开票类型', key: 'invoiceType', show: true, width: 120,
+      pipeType: 'enabled', pipeContent: [{ key: 0, value: '提前开票' }, { key: 1, value: '正常开票' }]
+    },
+    { title: '开票类目', key: 'categoryName', show: true, width: 120 },
+    { title: '开票金额', key: 'taxAmount', show: true, width: 120 },
+    { title: '申请时间', key: 'createTime', show: true, width: 190 },
+    { title: '操作人', key: 'operatorName', show: true, width: 120 },
+    {
+      title: '状态', key: 'status', show: true, width: 100,
+      pipeType: 'enabled', pipeContent: [
+        { key: 0, value: '待开票' },
+        { key: 1, value: '已开票' },
+        { key: 2, value: '已拒绝', color: 'red' },
+        { key: 3, value: '已作废', color: 'red' },
+      ]
+    },
+    {
+      title: '操作', key: 'operate', show: true, width: 100, right: 0,
       buttons: [
         {
+          text: '详情',
+          show: (node) => [1, 2, 3].includes(node.status),
+          click: (node) => this.openEdit(node, '申请开票详情', false)
+        },
+        {
           text: '编辑',
+          show: (node) => [0].includes(node.status),
+          click: (node) => this.openEdit(node, '申请开票编辑', true)
         },
         {
           text: '作废',
+          show: (node) => [0].includes(node.status),
+          pop: { title: '确定要作废发票申请吗？' },
+          click: (node) => this.service.getInvoiceCancel({ id: node.id }).subscribe(
+            (res: any) => {
+              if (res.success) {
+                this.searchData();
+              } else {
+                this.msg.error(res.message);
+              }
+            }
+          )
         }
       ]
     },
@@ -58,7 +86,8 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
   constructor(
     private base: BaseService,
     private msg: MessageService,
-    private service: ApplyService
+    private service: ApplyService,
+    private drawerService: NzDrawerService,
   ) { }
 
   ngOnInit() {
@@ -128,6 +157,21 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
     if (value[1]) {
       this.page.date[1] = new Date(this.page.endTime);
     }
+  }
+
+  openEdit = (id: any, title: string, isShowSubmitButton?: boolean) => {
+    const drawerRef = this.drawerService.create<TaskEditComponent, { id: any, isShowSubmitButton?: boolean }, any>({
+      nzBodyStyle: { height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px', 'padding-top': '16px' },
+      nzTitle: title,
+      nzWidth: '70%',
+      nzContent: TaskEditComponent,
+      nzContentParams: { id, isShowSubmitButton }
+    });
+    drawerRef.afterClose.subscribe((data: any) => {
+      if (data && data.refresh) {
+        this.searchData();
+      }
+    });
   }
 
 }

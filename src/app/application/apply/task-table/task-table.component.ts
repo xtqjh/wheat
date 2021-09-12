@@ -4,9 +4,9 @@ import { isClone } from 'ng-ylzx/core/util';
 import { TableHeader } from 'ng-ylzx/table';
 import { NzDrawerService } from 'ng-zorro-antd';
 import * as moment from 'moment';
-import { MessageService } from 'src/app/share/service';
-import { ApplyService } from '../apply.service';
+import { BaseService, MessageService } from 'src/app/share/service';
 import { TaskEditComponent } from '../task-edit/task-edit.component';
+import { ApplyService } from '../apply.service';
 
 @Component({
   selector: 'app-task-table',
@@ -24,27 +24,17 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   };
 
   tableHeader: Array<TableHeader> = [
-    { title: '税源地', key: '', show: true, width: 120 },
-    { title: '项目名称', key: 'projectName', show: true, width: 120 },
-    { title: '项目类型', key: '', show: true, width: 120 },
-    { title: '任务名称', key: 'name', show: true, width: 120 },
-    { title: '任务编号', key: 'taskNo', show: true, width: 120 },
+    // { title: '税源地', key: '', show: true, width: 120 },
+    // { title: '项目类型', key: '', show: true, width: 120 },
+    { title: '任务名称', key: 'name', show: true, width: 140 },
+    { title: '任务编号', key: 'taskNo', show: true, width: 160 },
+    { title: '项目名称', key: 'projectName', show: true, width: 160 },
     { title: '金额', key: 'amount', show: true, width: 120 },
-    { title: '总笔数', key: 'num', show: true, width: 120 },
-    { title: '成功笔数', key: 'successNum', show: true, width: 120 },
-    { title: '失败笔数', key: 'failNum', show: true, width: 120 },
-    { title: '创建时间', key: 'createTime', show: true, width: 120 },
-    {
-      title: '操作', key: 'operate', show: true, width: 140, right: 0,
-      buttons: [
-        {
-          text: '编辑',
-        },
-        {
-          text: '作废',
-        }
-      ]
-    },
+    { title: '总笔数', key: 'num', show: true, width: 70 },
+    { title: '成功笔数', key: 'successNum', show: true, width: 80 },
+    { title: '失败笔数', key: 'failNum', show: true, width: 80 },
+    { title: '创建时间', key: 'createTime', show: true, width: 190 },
+    { title: '操作人手机号', key: 'operatorPhone', show: true, width: 160 }
   ];
 
   items = [];
@@ -54,6 +44,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   projectList = [];
 
   constructor(
+    public base: BaseService,
     private msg: MessageService,
     private service: ApplyService,
     private drawerService: NzDrawerService,
@@ -94,7 +85,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   private getList(data: any) {
     this.isLoading = true;
     if (this.getser$) { this.getser$.unsubscribe(); }
-    this.getser$ = this.service.getListProjects(Object.assign({}, data, { pageNum: data.page, pageSize: data.size })).pipe(
+    this.getser$ = this.service.getListTask(Object.assign({}, data, { pageNum: data.page, pageSize: data.size })).pipe(
       tap(v => this.isLoading = false)
     ).subscribe(
       (res: any) => {
@@ -127,13 +118,13 @@ export class TaskTableComponent implements OnInit, OnDestroy {
     }
   }
 
-  openEdit = (id: string, title: string) => {
-    const drawerRef = this.drawerService.create<TaskEditComponent, { id: string }, any>({
+  openEdit = (id: any, title: string, isShowSubmitButton?: boolean) => {
+    const drawerRef = this.drawerService.create<TaskEditComponent, { id: any, isShowSubmitButton?: boolean }, any>({
       nzBodyStyle: { height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px', 'padding-top': '16px' },
       nzTitle: title,
       nzWidth: '70%',
       nzContent: TaskEditComponent,
-      nzContentParams: { id }
+      nzContentParams: { id, isShowSubmitButton }
     });
     drawerRef.afterClose.subscribe((data: any) => {
       if (data && data.refresh) {
