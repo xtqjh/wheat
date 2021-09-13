@@ -1,0 +1,44 @@
+<nz-spin [nzSpinning]="isLoading" nzTip="加载...">
+  <form nz-form [formGroup]="dynForm" (ngSubmit)="submitForm()" class="">
+
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired nzFor="projectName">项目名称</nz-form-label>
+      <nz-form-control [nzSpan]="16" nzErrorTip="请输入项目名称!">
+        <input zcTrim nz-input formControlName="projectName" id="projectName" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired nzFor="enterCustomer">录入客户</nz-form-label>
+      <nz-form-control [nzSpan]="16" nzErrorTip="请输入录入客户!">
+        <input zcTrim nz-input formControlName="enterCustomer" id="enterCustomer" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired nzFor="visitCustomer">带看客户</nz-form-label>
+      <nz-form-control [nzSpan]="16" nzErrorTip="请输入带看客户!">
+        <input zcTrim nz-input formControlName="visitCustomer" id="visitCustomer" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired nzFor="saleHouse">房屋销售</nz-form-label>
+      <nz-form-control [nzSpan]="16" nzErrorTip="请输入房屋销售!">
+        <input zcTrim nz-input formControlName="saleHouse" id="saleHouse" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="8" nzRequired nzFor="leaseHouse">房屋租赁</nz-form-label>
+      <nz-form-control [nzSpan]="16" nzErrorTip="请输入房屋租赁!">
+        <input zcTrim nz-input formControlName="leaseHouse" id="leaseHouse" />
+      </nz-form-control>
+    </nz-form-item>
+
+  </form>
+</nz-spin>
+
+<pre>{{dynForm.value|json}}</pre>
+
+<div class="text-l pos-a border-top back-fff" style="bottom:0px;left:0px;right:0px;z-index:2;padding:10px 20px;">
+  <button nz-button nzType="primary" [zcRepeatClick]="submitStatus" [zcFormButtonTips]="dynForm"
+    (click)="submitForm()">保存</button>
+  <button nz-button (click)="close(false)" class="mg-l8">返回</button>
+</div>

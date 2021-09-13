@@ -9,13 +9,20 @@ import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
 import { TemplateTableComponent } from './template-table/template-table.component';
 import { DetailComponent } from './detail/detail.component';
+import { CrowdTableComponent } from './crowd-table/crowd-table.component';
+import { CrowdEditComponent } from './crowd-edit/crowd-edit.component';
 
 
 @NgModule({
+  entryComponents: [
+    CrowdEditComponent
+  ],
   declarations: [
     ProjectComponent,
     TemplateTableComponent,
-    DetailComponent
+    DetailComponent,
+    CrowdTableComponent,
+    CrowdEditComponent
   ],
   imports: [
     CommonModule,

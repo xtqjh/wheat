@@ -87,5 +87,20 @@ export class ProjectService {
    */
   getImport = (projectId: string, file: any) => this.uploadMultipart(file, projectId, `/company/api/member/import?projectId=${projectId}`);
 
+  /**
+   * 项目列表
+   */
+  getListProjects = (data: {
+    projectName: string,
+    startTime: string,
+    endTime: string,
+    companyId: string,
+    pageNum: number,
+    pageSize: number,
+  }) => this.http.get(`/company/api/publish/project/listProjects`, { params: isObjectToString(data) })
 
+  /**
+   * 项目增删改
+   */
+  getAublishAddOrUpdate = (data: any) => this.http.get(`/company/api/publish/project/addOrUpdate`, { params: isObjectToString(data) });
 }
