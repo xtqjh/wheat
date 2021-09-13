@@ -75,11 +75,14 @@ export class ApplyService {
   getCategory = (data: any) => this.http.get(`/company/api/apply/category`, { params: isObjectToString(data) });
 
   /**
+   * 企业申请开票
+   */
+  getInvoiceApply = (data: any) => this.http.get(`/company/api/apply/invoice/apply`, { params: isObjectToString(data) });
+
+  /**
    * 获取开票信息--提前开票
    */
   getApplyHeads = () => this.http.get(`/company/api/apply/invoice/heads`);
-
-  getDetailsTask = (id: string) => this.http.get(``);
 
   /**
    * 企业申请开票————提前开票
@@ -111,5 +114,10 @@ export class ApplyService {
       }),
     );
   }
+
+  /**
+   * 获取开票信息
+   */
+  getInvoiceDetails = (data: { projectId: string, selectTaskNo: string }) => this.http.get(`/company/api/apply/invoice/details`, { params: isObjectToString(data) });
 
 }

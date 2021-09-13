@@ -1,0 +1,177 @@
+<nz-spin [nzSpinning]="isLoading" nzTip="加载...">
+  <form nz-form [formGroup]="dynForm" (ngSubmit)="submitForm()" class="">
+
+    <div class="line-28 border-bottom mg-b20">开票抬头信息</div>
+    <div class="flex flex-row flex-wrap pd-b30 pd-t0">
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="companyName">开票抬头</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入开票抬头!">
+          <input zcTrim nz-input formControlName="companyName" id="companyName" readonly disabled />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="taxNo">纳税人识别号</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入纳税人识别号!">
+          <input zcTrim nz-input formControlName="taxNo" id="taxNo" readonly disabled />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="companyAddress">地址</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入地址!">
+          <input zcTrim nz-input formControlName="companyAddress" id="companyAddress" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="contactPhone">电话</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入电话!">
+          <input zcTrim nz-input formControlName="contactPhone" id="contactPhone" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="bankOfDeposit">开户银行</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入开户银行!">
+          <input zcTrim nz-input formControlName="bankOfDeposit" id="bankOfDeposit" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="publicAccounts">银行账户</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入银行账户!">
+          <input nz-input formControlName="publicAccounts" id="publicAccounts" />
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+
+    <div class="line-28 border-bottom mg-b20">税源地开票信息</div>
+    <div class="flex flex-row flex-wrap pd-b30 pd-t0">
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="actualTaxAmount">开票金额</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入开票金额!">
+          <nz-input-group [nzSuffix]="suffixTemplateInfo">
+            <input zcTrim nz-input formControlName="actualTaxAmount" id="actualTaxAmount" type="number" min="0" />
+          </nz-input-group>
+          <ng-template #suffixTemplateInfo>元</ng-template>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="categoryName">开票类目</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入开票类目!">
+          <input zcTrim nz-input formControlName="categoryName" id="categoryName" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="type">发票类型</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入发票类型!">
+          <nz-radio-group formControlName="type" id="type">
+            <label nz-radio nzValue="1">增值税专用发票</label>
+            <label nz-radio nzValue="2">增值税普通发票</label>
+          </nz-radio-group>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzFor="invoiceRemark">发票备注</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <textarea class="wb100" nz-input formControlName="invoiceRemark" id="invoiceRemark"
+            [nzAutosize]="{ minRows: 2 }"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzFor="taxRemark">开票注意点</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <textarea class="wb100" nz-input formControlName="taxRemark" id="taxRemark"
+            [nzAutosize]="{ minRows: 2 }"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w600">
+        <nz-form-label [nzSpan]="4" nzRequired>业务结算单</nz-form-label>
+        <nz-form-control [nzSpan]="20" nzErrorTip="请输入业务结算单!">
+          <nz-upload nzAction="fileUrl" [nzCustomRequest]="uploadRequest">
+            <button nz-button><i nz-icon nzType="upload"></i><span>点击上传</span></button>
+          </nz-upload>
+          <a class="mg-l10 font-12 ant-upload-hint" *ngIf="editType"
+            href="https://precompany.fuxiaokeji.com/api/apply/invoice/download?selectTaskNo={{dynForm.value?.taskNos}}">
+            <i nz-icon nzType="download" nzTheme="outline"></i>点击下载模板</a>
+          <a class="mg-l10 font-12 ant-upload-hint" *ngIf="!editType" href="{{dynForm.value?.fileUrl}}">
+            <i nz-icon nzType="download" nzTheme="outline"></i>下载查看</a>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w600">
+        <nz-form-label [nzSpan]="4">其他资料</nz-form-label>
+        <nz-form-control [nzSpan]="20">
+          <nz-upload nzAction="otherUrl" [nzCustomRequest]="uploadRequest">
+            <button nz-button><i nz-icon nzType="upload"></i><span>点击上传</span></button>
+          </nz-upload>
+          <span class="mg-l10 font-12 color-ccc ant-upload-hint"
+            *ngIf="editType">如开票类目为市场推广，除结算单外，还需提供相应的照片或证明材料</span>
+          <a class="mg-l10 font-12 ant-upload-hint" *ngIf="!editType" href="{{dynForm.value?.otherUrl}}">
+            <i nz-icon nzType="download" nzTheme="outline"></i>下载查看</a>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+
+    <div class="line-28 border-bottom mg-b20">邮寄信息</div>
+    <div class="flex flex-row flex-wrap pd-b30 pd-t0">
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="receiveName">邮寄姓名</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入邮寄姓名!">
+          <input zcTrim nz-input formControlName="receiveName" id="receiveName" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="receivePhone">邮寄电话</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入邮寄电话!">
+          <input zcTrim nz-input formControlName="receivePhone" id="receivePhone" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="receiveAddress">邮寄地址</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入邮寄地址!">
+          <input zcTrim nz-input formControlName="receiveAddress" id="receiveAddress" />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item class="w300">
+        <nz-form-label [nzSpan]="8" nzRequired nzFor="receiveMail">收件人邮箱</nz-form-label>
+        <nz-form-control [nzSpan]="16" nzErrorTip="请输入收件人邮箱!">
+          <input zcTrim nz-input formControlName="receiveMail" id="receiveMail" />
+        </nz-form-control>
+      </nz-form-item>
+
+    </div>
+
+  </form>
+</nz-spin>
+
+<div>
+  <h3>开票注意事项：</h3>
+  <div class="color-red">
+    <div>1、开票信息必须填写完整并正确，除公司名称和税号以外，其他信息均可修改。（由于客户填写的开票信息不正确造成的发票错误，在不影响发票使用的前提下，不予作废重开）</div>
+    <div>2、开票类目必须要写完整，具体到二级类目，比如要开“市场推广”发票，要填写“现代服务*市场推广” 技术服务费要写“信息技术服务*技术服务费”</div>
+    <div>3、如果需要开具的是增值税普通发票，则必须要填写发票接收的邮箱</div>
+    <div>4、建议一周申请一次，每月最后一个工作日申请的发票我们不保证当月开出，会在次月初开具，请提前申请</div>
+  </div>
+</div>
+
+<pre>{{dynForm.value|json}}</pre>
+
+<div class="text-l pos-a border-top back-fff" style="bottom:0px;left:0px;right:0px;z-index:2;padding:10px 20px;">
+  <button nz-button nzType="primary" [zcRepeatClick]="submitStatus" [zcFormButtonTips]="dynForm" (click)="submitForm()"
+    *ngIf="isShowSubmitButton">保存</button>
+  <button nz-button (click)="close(false)" class="mg-l8">返回</button>
+</div>

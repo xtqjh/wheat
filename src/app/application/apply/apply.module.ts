@@ -11,13 +11,15 @@ import { ProjectTableComponent } from './project-table/project-table.component';
 import { InvoiceTableComponent } from './invoice-table/invoice-table.component';
 import { TaskTableComponent } from './task-table/task-table.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
+import { TaskEditInvoiceComponent } from './task-edit-invoice/task-edit-invoice.component';
 
 const COMPONENTS = [
   ApplyComponent,
   ProjectTableComponent,
   InvoiceTableComponent,
   TaskTableComponent,
-  TaskEditComponent
+  TaskEditComponent,
+  TaskEditInvoiceComponent,
 ];
 
 @NgModule({
@@ -34,7 +36,8 @@ const COMPONENTS = [
     ...COMPONENTS
   ],
   entryComponents: [
-    TaskEditComponent
+    TaskEditComponent,
+    TaskEditInvoiceComponent
   ]
 })
 export class ApplyModule { }

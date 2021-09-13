@@ -6,6 +6,7 @@ import { NzDrawerService } from 'ng-zorro-antd';
 import * as moment from 'moment';
 import { BaseService, MessageService } from 'src/app/share/service';
 import { TaskEditComponent } from '../task-edit/task-edit.component';
+import { TaskEditInvoiceComponent } from '../task-edit-invoice/task-edit-invoice.component';
 import { ApplyService } from '../apply.service';
 
 @Component({
@@ -42,6 +43,8 @@ export class TaskTableComponent implements OnInit, OnDestroy {
   isLoading = false;
 
   projectList = [];
+
+  checkIds = [];
 
   constructor(
     public base: BaseService,
@@ -92,6 +95,7 @@ export class TaskTableComponent implements OnInit, OnDestroy {
         if (res.success) {
           this.page.total = res && res.extData.total || 0;
           this.items = res && res.extData.list || [];
+          this.items = this.items.map(m => Object.assign(m, { id: m.taskNo }));
         } else {
           this.msg.error(res.message);
         }
@@ -125,6 +129,21 @@ export class TaskTableComponent implements OnInit, OnDestroy {
       nzWidth: '70%',
       nzContent: TaskEditComponent,
       nzContentParams: { id, isShowSubmitButton }
+    });
+    drawerRef.afterClose.subscribe((data: any) => {
+      if (data && data.refresh) {
+        this.searchData();
+      }
+    });
+  }
+
+  openEditInvoice = (title: string, isShowSubmitButton?: boolean) => {
+    const drawerRef = this.drawerService.create<TaskEditInvoiceComponent, { projectId: any, checkIds: string[], isShowSubmitButton?: boolean }, any>({
+      nzBodyStyle: { height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px', 'padding-top': '16px' },
+      nzTitle: title,
+      nzWidth: '70%',
+      nzContent: TaskEditInvoiceComponent,
+      nzContentParams: { projectId: this.page.projectId, checkIds: this.checkIds, isShowSubmitButton }
     });
     drawerRef.afterClose.subscribe((data: any) => {
       if (data && data.refresh) {

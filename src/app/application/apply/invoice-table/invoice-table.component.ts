@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { BaseService, MessageService } from 'src/app/share/service';
 import { TaskEditComponent } from '../task-edit/task-edit.component';
 import { ApplyService } from '../apply.service';
+import { TaskEditInvoiceComponent } from '../task-edit-invoice/task-edit-invoice.component';
 
 @Component({
   selector: 'app-invoice-table',
@@ -52,12 +53,24 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
         {
           text: '详情',
           show: (node) => [1, 2, 3].includes(node.status),
-          click: (node) => this.openEdit(node, '申请开票详情', false)
+          click: (node) => {
+            if (node.invoiceType === 0) {
+              this.openEdit(node, '申请开票编辑', false);
+            } else {
+              this.openEditInvoice(node, '申请开票编辑', false);
+            }
+          }
         },
         {
           text: '编辑',
           show: (node) => [0].includes(node.status),
-          click: (node) => this.openEdit(node, '申请开票编辑', true)
+          click: (node) => {
+            if (node.invoiceType === 0) {
+              this.openEdit(node, '申请开票编辑', true);
+            } else {
+              this.openEditInvoice(node, '申请开票编辑', true);
+            }
+          }
         },
         {
           text: '作废',
@@ -165,6 +178,21 @@ export class InvoiceTableComponent implements OnInit, OnDestroy {
       nzTitle: title,
       nzWidth: '70%',
       nzContent: TaskEditComponent,
+      nzContentParams: { id, isShowSubmitButton }
+    });
+    drawerRef.afterClose.subscribe((data: any) => {
+      if (data && data.refresh) {
+        this.searchData();
+      }
+    });
+  }
+
+  openEditInvoice = (id: any, title: string, isShowSubmitButton?: boolean) => {
+    const drawerRef = this.drawerService.create<TaskEditInvoiceComponent, { id: any, isShowSubmitButton?: boolean }, any>({
+      nzBodyStyle: { height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px', 'padding-top': '16px' },
+      nzTitle: title,
+      nzWidth: '70%',
+      nzContent: TaskEditInvoiceComponent,
       nzContentParams: { id, isShowSubmitButton }
     });
     drawerRef.afterClose.subscribe((data: any) => {

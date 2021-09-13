@@ -90,8 +90,8 @@ export class TaskEditComponent implements OnInit, OnDestroy {
       this.getApplyHeads();
     } else {
       this.editType = false;
-      id.type = id.type.toString(),
-        this.dynForm.patchValue(id);
+      id.type = id.type.toString();
+      this.dynForm.patchValue(id);
       for (const i in this.dynForm.controls) {
         if (this.dynForm.controls.hasOwnProperty(i)) {
           this.dynForm.controls[i].markAsDirty();

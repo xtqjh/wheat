@@ -3,7 +3,8 @@
     <nz-form-item class="w300">
       <nz-form-label [nzSpan]="8">项目名称</nz-form-label>
       <nz-form-control [nzSpan]="15">
-        <nz-select nzAllowClear class="wb100" id="projectId" name="projectId" [(ngModel)]="page.projectId">
+        <nz-select nzAllowClear class="wb100" id="projectId" name="projectId" [(ngModel)]="page.projectId"
+          (ngModelChange)="searchData(true)">
           <nz-option *ngFor="let option of projectList" [nzValue]="option.projectId" [nzLabel]="option.projectName">
           </nz-option>
         </nz-select>
@@ -36,11 +37,12 @@
     </nz-form-item>
   </div>
   <div class="pd-l10 pd-r10 pd-b10">
-    <button nz-button class="mg-r8">申请开票</button>
+    <button nz-button class="mg-r8" (click)="openEditInvoice('申请开票',true)"
+      [disabled]="checkIds.length==0 || !page.projectId">申请开票</button>
     <button nz-button class="mg-r8" *ngIf="base.getCompany.isOpenBeforeInvoice"
-      (click)="openEdit(null,'申请开票',true)">提前开票</button>
+      (click)="openEdit(null,'申请开票【提前开票】',true)">提前开票</button>
   </div>
 </div>
 <zc-table checkBox fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items"
-  [isLoading]="isLoading" (searchData)="searchData($event)">
+  [isLoading]="isLoading" (searchData)="searchData($event)" (checkBoxChange)="checkIds = $event">
 </zc-table>

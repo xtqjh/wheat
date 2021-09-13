@@ -25,12 +25,12 @@ export class SigningTableComponent implements OnInit, OnDestroy {
 
   tableHeader: Array<TableHeader> = [
     { title: '身份证', key: 'identityCard', show: true, disabled: true, left: 60, width: 190 },
-    { title: '昵称', key: 'nickName', show: true, width: 160 },
-    { title: '手机号', key: 'phone', show: true, width: 200 },
+    { title: '昵称', key: 'nickName', show: true, width: 80 },
+    { title: '手机号', key: 'phone', show: true, width: 120 },
     { title: 'projectId', key: 'projectId', show: false, width: 160 },
-    { title: '项目名', key: 'projectName', show: true, width: 160 },
-    { title: '真实姓名', key: 'trueName', show: true, width: 160 },
-    { title: '用户ID', key: 'userId', show: true, width: 160 },
+    { title: '项目名', key: 'projectName', show: true, width: 200 },
+    { title: '真实姓名', key: 'trueName', show: true, width: 80 },
+    { title: '用户ID', key: 'userId', show: true, width: 200 },
     { title: 'relationName', key: 'relationName', show: false, width: 160 },
     { title: 'statusTime', key: 'statusTime', show: false, width: 160 },
     { title: 'statusTimeStr', key: 'statusTimeStr', show: true, width: 160 },
@@ -40,11 +40,11 @@ export class SigningTableComponent implements OnInit, OnDestroy {
     { title: 'workStatusStr', key: 'workStatusStr', show: false, width: 100 },
     { title: '描述', key: 'remarks', show: false, width: 100 },
     {
-      title: '操作', key: 'operate', show: true, width: 240, right: 0,
+      title: '操作', key: 'operate', show: true, width: 180, right: 0,
       buttons: [
         {
           text: '重发短信',
-          click: (node) => this.service.getSendMsg({ projectId: node.getSendMsg, userId: node.userId }).subscribe(
+          click: (node) => this.service.getSendMsg({ projectId: node.projectId, userId: node.userId }).subscribe(
             (res: any) => res.success ? this.msg.success(res.message) : this.msg.error(res.message)
           )
         },
