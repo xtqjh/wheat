@@ -88,7 +88,7 @@ export class ProjectService {
   getImport = (projectId: string, file: any) => this.uploadMultipart(file, projectId, `/company/api/member/import?projectId=${projectId}`);
 
   /**
-   * 项目列表
+   * 众包项目列表
    */
   getListProjects = (data: {
     projectName: string,
@@ -97,10 +97,25 @@ export class ProjectService {
     companyId: string,
     pageNum: number,
     pageSize: number,
-  }) => this.http.get(`/company/api/publish/project/listProjects`, { params: isObjectToString(data) })
+  }) => this.http.get(`/company/api/zb/project/listProjects`, { params: isObjectToString(data) })
 
   /**
-   * 项目增删改
+   * 众包项目增
    */
-  getAublishAddOrUpdate = (data: any) => this.http.get(`/company/api/publish/project/addOrUpdate`, { params: isObjectToString(data) });
+  getAddProjects = (data: any) => this.http.get(`/company/api/zb/project/insert`, { params: isObjectToString(data) });
+
+  /**
+   * 众包项目改
+   */
+  getUpdateProjects = (data: any) => this.http.get(`/company/api/zb/project/update`, { params: isObjectToString(data) });
+
+  /**
+   * 众包项目删
+   */
+  getDeleteProjects = (data: any) => this.http.get(`/company/api/zb/project/delete`, { params: isObjectToString(data) });
+
+  /**
+   * 众包项目 任务信息 人员跟任务信息一对一
+   */
+  getDetailsProjects = (data: any) => this.http.get(`/company/api/zb/project/details`, { params: isObjectToString(data) });
 }

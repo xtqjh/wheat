@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
-import { NzModalService, UploadFile, NzDrawerService } from 'ng-zorro-antd';
-import { isClone, isGuid } from 'ng-ylzx/core/util';
+import { NzModalService, NzDrawerService } from 'ng-zorro-antd';
+import { isClone } from 'ng-ylzx/core/util';
 import { TableHeader } from 'ng-ylzx/table';
 import { BaseService, MessageService } from 'src/app/share/service';
-import { ProjectService } from '../project.service';
 import * as moment from 'moment';
 import { CrowdEditComponent } from '../crowd-edit/crowd-edit.component';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-crowd-table',
@@ -25,14 +25,16 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
   };
 
   tableHeader: Array<TableHeader> = [
-    { title: '项目名称', key: 'projectName', show: true, width: 190 },
-    { title: '创建时间', key: 'createTime', show: true, width: 200 },
-    { title: '接单情况', key: 'phone', show: true, width: 200 },
-    { title: 'amount', key: 'amount', show: true, width: 120 },
-    { title: 'peopleCount', key: 'peopleCount', show: true, width: 120 },
-    { title: 'personRequirement', key: 'personRequirement', show: true, width: 120 },
-    { title: 'projectDescription', key: 'projectDescription', show: true, width: 120 },
-    { title: 'projectType', key: 'projectType', show: true, width: 120 },
+    { title: '项目名称', key: 'projectName', show: true, width: 200 },
+    {
+      title: '创建时间', key: 'createTime', show: true, width: 190,
+      pipeType: 'custom', pipeContent: (node) => moment(node.createTime).format('YYYY-MM-DD HH:mm:ss')
+    },
+    {
+      title: '接单情况', key: '', show: true, width: 140,
+      pipeType: 'custom', pipeContent: (node) => '明细',
+      clickEvent: (node) => this.router.navigate([`./${node.id}`], { relativeTo: this.route })
+    },
     {
       title: '操作', key: 'operate', show: true, width: 100, right: 0,
       buttons: [
@@ -42,6 +44,16 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
         },
         {
           text: '删除',
+          pop: { title: '是否确定删除项目？' },
+          click: (node) => this.service.getDeleteProjects({ id: node.id }).subscribe(
+            (res: any) => {
+              if (res.success) {
+                this.searchData();
+              } else {
+                this.msg.error(res.message);
+              }
+            }
+          )
         }
       ]
     }
@@ -54,6 +66,8 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
   constructor(
     private base: BaseService,
     private msg: MessageService,
+    private router: Router,
+    private route: ActivatedRoute,
     private modalService: NzModalService,
     private drawerService: NzDrawerService,
     private service: ProjectService
@@ -97,7 +111,6 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
         if (res.success) {
           this.page.total = res && res.extData.total || 0;
           this.items = res && res.extData.list || [];
-          this.items = this.items.map(m => Object.assign(m, { id: m.userId }));
         } else {
           this.msg.error(res.message);
         }

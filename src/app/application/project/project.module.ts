@@ -8,9 +8,10 @@ import { ZcDirectiveModule } from 'ng-ylzx/directive';
 import { ProjectRoutingModule } from './project-routing.module';
 import { ProjectComponent } from './project.component';
 import { TemplateTableComponent } from './template-table/template-table.component';
-import { DetailComponent } from './detail/detail.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { CrowdTableComponent } from './crowd-table/crowd-table.component';
 import { CrowdEditComponent } from './crowd-edit/crowd-edit.component';
+import { CrowdDetailComponent } from './crowd-detail/crowd-detail.component';
 
 
 @NgModule({
@@ -20,9 +21,10 @@ import { CrowdEditComponent } from './crowd-edit/crowd-edit.component';
   declarations: [
     ProjectComponent,
     TemplateTableComponent,
-    DetailComponent,
+    ProjectDetailComponent,
     CrowdTableComponent,
-    CrowdEditComponent
+    CrowdEditComponent,
+    CrowdDetailComponent
   ],
   imports: [
     CommonModule,

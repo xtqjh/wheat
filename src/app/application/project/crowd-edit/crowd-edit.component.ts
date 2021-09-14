@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
-import { of } from 'rxjs';
-import { tap, filter, switchMap } from 'rxjs/operators';
 import { NzDrawerRef } from 'ng-zorro-antd';
 import { BaseService, MessageService } from 'src/app/share/service';
 import { ProjectService } from '../project.service';
@@ -73,10 +71,10 @@ export class CrowdEditComponent implements OnInit, OnDestroy {
     data.approvalValidPeriod = data.approvalValidPeriod && moment(data.approvalValidPeriod).format('YYYY-MM-DD HH:mm:ss') || null;
     data.reportlValidPeriod = data.reportlValidPeriod && moment(data.reportlValidPeriod).format('YYYY-MM-DD HH:mm:ss') || null;
     if (!this.editType) {
-      return this.service.getAublishAddOrUpdate(data);
+      return this.service.getUpdateProjects(data);
     } else {
       data.companyId = this.base.getCompany.companyId;
-      return this.service.getAublishAddOrUpdate(data);
+      return this.service.getAddProjects(data);
     }
   }
 

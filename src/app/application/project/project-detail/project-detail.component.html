@@ -19,7 +19,8 @@
           <button type="button" class="grant-btn ivu-btn ivu-btn-primary" (click)="getImport()">
             导入成员
           </button>
-          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/member/signing" [queryParams]="{projectId: item?.projectId}">
+          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/member/signing"
+            [queryParams]="{projectId: item?.projectId}">
             项目成员管理
           </button>
         </div>
@@ -30,10 +31,12 @@
         <span class="mg-r10">金额：{{statistics?.commissionActual || '--'}}元</span>
         <span>服务费：{{statistics?.serviceAmount || '--'}}元</span>
         <div class="fr">
-          <button type="button" class="grant-btn ivu-btn ivu-btn-primary" routerLink="/layout/tasklist/task/progress/0" [queryParams]="{projectId: item?.projectId}">
+          <button type="button" class="grant-btn ivu-btn ivu-btn-primary" routerLink="/layout/tasklist/task/progress/0"
+            [queryParams]="{projectId: item?.projectId}">
             新建结算任务
           </button>
-          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/tasklist/task" [queryParams]="{projectId: item?.projectId}">
+          <button type="button" class="ivu-btn ivu-btn-default" routerLink="/layout/tasklist/task"
+            [queryParams]="{projectId: item?.projectId}">
             结算记录
           </button>
         </div>
@@ -91,5 +94,4 @@
     </nz-form-control>
   </nz-form-item>
 
-  <!-- {{company|json}} -->
 </ng-template>

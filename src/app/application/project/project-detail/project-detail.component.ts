@@ -9,10 +9,10 @@ import { ProjectService } from '../project.service';
 
 @Component({
   selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.scss']
+  templateUrl: './project-detail.component.html',
+  styleUrls: ['./project-detail.component.scss']
 })
-export class DetailComponent implements OnInit, OnDestroy {
+export class ProjectDetailComponent implements OnInit, OnDestroy {
 
   private getser$: any;
 

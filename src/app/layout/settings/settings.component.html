@@ -28,7 +28,8 @@
         <nz-form-item class="mg-b0 w300">
           <nz-form-label [nzSpan]="8" nzFor="topBgColor">背景色</nz-form-label>
           <nz-form-control [nzSpan]="16">
-            <input  zcTrim type="color" name="topBgColor" [(ngModel)]="setting.topBgColor" (ngModelChange)="setViewHtml()">
+            <input zcTrim type="color" name="topBgColor" [(ngModel)]="setting.topBgColor"
+              (ngModelChange)="setViewHtml()">
             <span class="color-999 font-12 mg-l4">默认同主色系</span>
           </nz-form-control>
         </nz-form-item>
@@ -56,7 +57,7 @@
         <nz-form-item class="mg-b0 w300">
           <nz-form-label [nzSpan]="8" nzFor="sidebarBgColor">背景色</nz-form-label>
           <nz-form-control [nzSpan]="16">
-            <input  zcTrim type="color" name="sidebarBgColor" [(ngModel)]="setting.sidebarBgColor"
+            <input zcTrim type="color" name="sidebarBgColor" [(ngModel)]="setting.sidebarBgColor"
               (ngModelChange)="setViewHtml()">
             <span class="color-999 font-12 mg-l4">默认同主色系</span>
           </nz-form-control>
@@ -107,7 +108,8 @@
         <nz-form-item class="mg-b0 w300" *ngIf="setting.tableShowPageSize">
           <nz-form-label [nzSpan]="8" nzFor="tablePageSizeOptions">页数可选值</nz-form-label>
           <nz-form-control [nzSpan]="16">
-            <nz-select nzAllowClear name="tablePageSizeOptions" [(ngModel)]="setting.tablePageSizeOptions" class="wb100">
+            <nz-select nzAllowClear name="tablePageSizeOptions" [(ngModel)]="setting.tablePageSizeOptions"
+              class="wb100">
               <nz-option nzValue="[ 10, 20, 30, 40, 50 ]" nzLabel="[ 10, 20, 30, 40, 50 ]"></nz-option>
               <nz-option nzValue="[ 10, 20, 50, 70, 100 ]" nzLabel="[ 10, 20, 50, 70, 100 ]"></nz-option>
               <nz-option nzValue="[ 10, 20, 50, 100, 200 ]" nzLabel="[ 10, 20, 50, 100, 200 ]"></nz-option>
@@ -116,9 +118,6 @@
         </nz-form-item>
       </div>
     </div>
-
-    
-    <pre *ngIf="base.debuger">{{setting|json}}</pre>
 
   </div>
 

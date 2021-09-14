@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ProjectComponent } from './project.component';
-import { DetailComponent } from './detail/detail.component';
+import { ProjectDetailComponent } from './project-detail/project-detail.component';
 import { TemplateTableComponent } from './template-table/template-table.component';
 import { CrowdTableComponent } from './crowd-table/crowd-table.component';
+import { CrowdDetailComponent } from './crowd-detail/crowd-detail.component';
 
 const routes: Routes = [
   {
@@ -12,9 +13,9 @@ const routes: Routes = [
     component: ProjectComponent,
     children: [
       { path: 'template', component: TemplateTableComponent, data: { title: '模板数据导出' } },
-      { path: 'detail/:id', component: DetailComponent, data: { title: '项目详情' } },
+      { path: 'detail/:id', component: ProjectDetailComponent, data: { title: '项目详情' } },
       { path: 'crowd', component: CrowdTableComponent, data: { title: '项目众包' } },
-
+      { path: 'crowd/:id', component: CrowdDetailComponent, data: { title: '项目详情' } },
     ]
   }
 ];
