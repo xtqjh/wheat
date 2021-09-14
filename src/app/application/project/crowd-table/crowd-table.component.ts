@@ -36,7 +36,8 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
       clickEvent: (node) => this.router.navigate([`./${node.id}`], { relativeTo: this.route })
     },
     {
-      title: '操作', key: 'operate', show: true, width: 100, right: 0,
+      title: '操作', key: 'operate', show: true, width: 200, right: 0,
+      buttonShowNumber: 4,
       buttons: [
         {
           text: '编辑',
@@ -54,6 +55,30 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
               }
             }
           )
+        },
+        {
+          text: '导入1:1',
+          click: (node) => {
+            const inputObj = document.createElement('input');
+            inputObj.setAttribute('id', node.id);
+            inputObj.setAttribute('type', 'file');
+            inputObj.onchange = () => this.service.getProjectsExcelImportPerson(node.id, inputObj.files[0]).subscribe(
+              (res: any) => res.success ? this.msg.success('导入成功') : this.msg.error(res.message)
+            );
+            inputObj.click();
+          }
+        },
+        {
+          text: '导入1:N',
+          click: (node) => {
+            const inputObj = document.createElement('input');
+            inputObj.setAttribute('id', node.id);
+            inputObj.setAttribute('type', 'file');
+            inputObj.onchange = () => this.service.getProjectsImport(node.id, inputObj.files[0]).subscribe(
+              (res: any) => res.success ? this.msg.success('导入成功') : this.msg.error(res.message)
+            );
+            inputObj.click();
+          }
         }
       ]
     }

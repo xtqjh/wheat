@@ -61,12 +61,14 @@ export class ProjectService {
    */
   getStatistics = (data: { projectId: string }) => this.http.get(`/company/api/project/statistics`, { params: isObjectToString(data) });
 
-  private uploadMultipart = (file: any, projectId: string, url: string): Observable<any> => {
+  private uploadMultipart = (file: any, url: string, projectId?: string): Observable<any> => {
     return new Observable(observer => of(file).pipe(
       switchMap((ut: any) => {
         const formData = new FormData();
         formData.append('file', ut);
-        formData.append('projectId', projectId);
+        if (projectId) {
+          formData.append('projectId', projectId);
+        }
         const req = new HttpRequest('POST', `${url}`, formData);
         return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
       }),
@@ -85,7 +87,7 @@ export class ProjectService {
   /**
    * 项目导入成员
    */
-  getImport = (projectId: string, file: any) => this.uploadMultipart(file, projectId, `/company/api/member/import?projectId=${projectId}`);
+  getImport = (projectId: string, file: any) => this.uploadMultipart(file, `/company/api/member/import?projectId=${projectId}`, projectId);
 
   /**
    * 众包项目列表
@@ -118,4 +120,14 @@ export class ProjectService {
    * 众包项目 任务信息 人员跟任务信息一对一
    */
   getDetailsProjects = (data: any) => this.http.get(`/company/api/zb/project/details`, { params: isObjectToString(data) });
+
+  /**
+   * 众包项目 导入一对一execl:人员信息
+   */
+  getProjectsExcelImportPerson = (id: string, file: any) => this.uploadMultipart(file, `/company/api/zb/project/excelImportPerson?id=${id}`);
+
+  /**
+   * 众包项目 导入一对多execl（任务详情）：任务详情
+   */
+  getProjectsImport = (id: string, file: any) => this.uploadMultipart(file, `/company/api/zb/project/import?id=${id}`);
 }

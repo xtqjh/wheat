@@ -25,10 +25,10 @@ export class CrowdDetailComponent implements OnInit, OnDestroy {
     { title: '姓名', key: 'personName', show: true, width: 120 },
     { title: '身份证', key: 'idCard', show: true, width: 200 },
     { title: '接单手机号', key: 'phone', show: true, width: 140 },
-    { title: '录入客户(条)', key: 'sale', show: true, width: 140 },
-    { title: '带看客户(组)', key: 'lease', show: true, width: 140 },
-    { title: '房屋销售(套)', key: 'qualifiedCount', show: true, width: 140 },
-    { title: '房屋租赁(套)', key: 'visitCount', show: true, width: 140 },
+    { title: '录入客户(条)', key: 'qualifiedCount', show: true, width: 140 },
+    { title: '带看客户(组)', key: 'visitCount', show: true, width: 140 },
+    { title: '房屋销售(套)', key: 'sale', show: true, width: 140 },
+    { title: '房屋租赁(套)', key: 'lease', show: true, width: 140 },
   ];
 
   items = [];
