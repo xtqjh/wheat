@@ -3,15 +3,10 @@
     "context": [
       "/company",
       "/member",
-      "/auth"
+      "/taxscheme",
+      "/auth",
+      "/captcha"
     ],
     "target": "http://111.0.99.143:9000"
-  },
-  {
-    "context": [
-      "/purchasebackgateway",
-      "/fileserver"
-    ],
-    "target": "http://service.mcloudlink.com:8089"
   }
 ]

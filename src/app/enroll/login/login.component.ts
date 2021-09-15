@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
-import { FormGroup, } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 import { HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -37,15 +37,18 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   countdownNumber = 60;
 
+  captcha = null;
+
   constructor(
     private router: Router,
+    private fb: FormBuilder,
     private msg: NzMessageService,
     private enrollService: EnrollService,
     private cookieService: CookieService
   ) { }
 
   ngOnInit(): void {
-
+    this.getCaptcha();
   }
 
   ngAfterViewInit(): void {
@@ -68,7 +71,11 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
 
   clickGetCode = () => {
     if (!this.isCountdown) {
-      this.enrollService.getCode({ phone: this.dynForm.get('phone').value }).subscribe(
+      this.enrollService.getCode({
+        captcha: this.dynForm.get('captcha').value,
+        captchaId: this.dynForm.get('captchaId').value,
+        phone: this.dynForm.get('phone').value
+      }).subscribe(
         (res: any) => {
           if (res.code === 200 && res.success) {
             this.msg.success(`验证码已发送至${this.dynForm.get('phone').value}请注意查收`);
@@ -84,6 +91,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
             });
           } else {
             this.msg.error(res.message);
+            this.getCaptcha();
           }
         },
         error => {
@@ -94,6 +102,24 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
       this.msg.warning('请勿频繁操作');
     }
   }
+
+  getCaptcha = () => this.enrollService.getCaptcha().subscribe(
+    (cap: any) => {
+      if (cap.code === 200 && cap.success) {
+        if (this.dynForm.get('captchaId')) {
+          this.dynForm.get('captcha').setValue(null);
+          this.dynForm.get('captchaId').setValue(cap.data.captchaId);
+        } else {
+          this.dynForm.addControl('captcha', this.fb.control(null, [Validators.required]));
+          this.dynForm.addControl('captchaId', this.fb.control(cap.data.captchaId, [Validators.required]));
+        }
+        this.captcha = {
+          captchaId: cap.data.captchaId,
+          img: `data:image/jpeg;base64,${cap.data.img}`,
+        };
+      }
+    }
+  )
 
   submitForm = () => {
     for (const i in this.dynForm.controls) {
@@ -114,7 +140,7 @@ export class LoginComponent implements OnInit, OnDestroy, AfterViewInit {
         ).subscribe(
           (result: any) => {
             if (result.success) {
-              this.cookieService.put(environment.storageToken, result.data.token, { expires: moment().day(7).format('YYYY-MM-DD HH:mm:ss') });
+              this.cookieService.put(environment.storageToken, result.data, { expires: moment().day(7).format('YYYY-MM-DD HH:mm:ss') });
               this.toCompany();
             } else {
               if (result.code === 5101) {

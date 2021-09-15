@@ -14,7 +14,7 @@ export class EnrollService {
     private http: HttpClient,
   ) { }
 
-  public createFormLogon() {
+  createFormLogon() {
     return this.fb.group({
       phone: ['18797886579', [Validators.required, ZcValidator.mobile]],
       // phone: [null, [Validators.required, ZcValidator.mobile]],
@@ -23,16 +23,14 @@ export class EnrollService {
     });
   }
 
-  public getCode(data: { phone: string, captchaId?: string, captcha?: string }) {
-    return this.http.post(`/member/login/sms/code`, data);
+  getCode(data: { phone: string, captchaId: string, captcha: string }) {
+    return this.http.post(`/taxscheme/login/sms/code`, data);
     // return this.http.get(`/auth/smsCheck/code/${data.phone}`);
   }
 
-  public getSms(data: { phone: string, smsCode: string }) {
-    return this.http.post(`/member/login/sms`, data);
-  }
+  getSms = (data: { phone: string, smsCode: string }) => this.http.post(`/taxscheme/login/sms`, data);
 
-  public getInfo(data: { phone: string, smsCode: string }) {
-    return this.http.post(`/member/info`, data);
-  }
+  getInfo = (data: { phone: string, smsCode: string }) => this.http.post(`/member/info`, data);
+
+  getCaptcha = () => this.http.get(`/captcha`);
 }

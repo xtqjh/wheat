@@ -15,7 +15,7 @@ export class LayoutService {
 
   getInfo = () => this.http.get(`/member/info`);
 
-  getLogout = () => this.http.get(`/member/logout`);
+  getLogout = () => this.http.get(`/taxscheme/logout`);
 
   getCompany = () => this.http.get(`/company/api/company/list`);
 

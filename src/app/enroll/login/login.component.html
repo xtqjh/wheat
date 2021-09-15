@@ -24,7 +24,8 @@
           <form nz-form [formGroup]="dynForm" class="user" (ngSubmit)="submitForm()">
             <nz-form-item>
               <nz-form-control [nzErrorTip]="phoneErrorTpl">
-                <input nz-input class="form-control form-control-user" type="tel" id="phone" formControlName="phone" placeholder="输入手机号" />
+                <input nz-input class="form-control form-control-user" type="tel" id="phone" formControlName="phone"
+                  placeholder="输入手机号" />
                 <ng-template #phoneErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('required')">
                     请输入手机号码!
@@ -39,21 +40,33 @@
               </nz-form-control>
             </nz-form-item>
 
+            <nz-form-item *ngIf="captcha">
+              <nz-form-control nzErrorTip="请输入图形验码">
+                <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
+                  <input class="form-control form-control-user smsCode" type="text" nz-input placeholder="输入图形验证码"
+                    formControlName="captcha">
+                </nz-input-group>
+                <ng-template #suffixButton>
+                  <img [src]="captcha.img" style="height: 50px;" *ngIf="captcha">
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+
             <nz-form-item>
               <nz-form-control [nzErrorTip]="codeErrorTpl">
                 <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-                  <input class="form-control form-control-user smsCode" type="text" nz-input id="verify_code"
-                    placeholder="输入验证码" formControlName="smsCode">
+                  <input class="form-control form-control-user smsCode" type="text" nz-input placeholder="输入短信验证码"
+                    formControlName="smsCode">
                 </nz-input-group>
                 <ng-template #suffixButton>
-                  <button class="btn btn-primary btn_verify_code" id="btn_verify_code" type="button" style="height: 50px;"
-                    [disabled]="dynForm.get('phone').errors" (click)="clickGetCode()">
+                  <a class="btn btn-primary btn_verify_code" style="height:50px;line-height:38px;"
+                    (click)="clickGetCode()">
                     {{ !isCountdown ? '获取验码' : countdownNumber+' 秒'}}
-                  </button>
+                  </a>
                 </ng-template>
                 <ng-template #codeErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('required')">
-                    请输入验码!
+                    请输入短信验证码!
                   </ng-container>
                   <ng-container *ngIf="control.hasError('duplicated')">
                     {{control.errors['duplicated']}}
@@ -62,7 +75,7 @@
               </nz-form-control>
             </nz-form-item>
 
-            <nz-form-item>
+            <nz-form-item style="margin-bottom:0 !important;">
               <nz-form-control nzErrorTip="请同意《新麦平台须知》《隐私权政策》">
                 <div class="custom-control custom-checkbox small">
                   <div class="form-check">
@@ -79,7 +92,7 @@
 
             <button class="btn btn-primary btn-block text-white btn-user" id="btn_submit" type="button"
               (click)="submitForm()">登录</button>
-            <hr>
+
           </form>
         </div>
       </div>
