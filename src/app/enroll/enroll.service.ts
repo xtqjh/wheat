@@ -30,7 +30,5 @@ export class EnrollService {
 
   getSms = (data: { phone: string, smsCode: string }) => this.http.post(`/taxscheme/login/sms`, data);
 
-  getInfo = (data: { phone: string, smsCode: string }) => this.http.post(`/member/info`, data);
-
   getCaptcha = () => this.http.get(`/captcha`);
 }

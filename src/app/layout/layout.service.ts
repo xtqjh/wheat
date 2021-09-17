@@ -13,7 +13,7 @@ export class LayoutService {
     private http: HttpClient,
   ) { }
 
-  getInfo = () => this.http.get(`/member/info`);
+  getInfo = () => this.http.get(`/taxscheme/info`);
 
   getLogout = () => this.http.get(`/taxscheme/logout`);
 

@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
     private layoutService: LayoutService,
     private reuseTabService: ReuseTabService,
   ) {
-    this.getUserInfo();
+    // this.getUserInfo();
     this.getCompanyInfo();
     this.getCompany();
   }
@@ -55,15 +55,15 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  private getUserInfo() {
-    this.layoutService.getInfo().subscribe((res: any) => {
-      if (res.code === 200 && res.success) {
-        this.user = Object.assign(this.user || {}, res.data);
-      } else {
-        this.msg.error(res.message);
-      }
-    });
-  }
+  // private getUserInfo() {
+  //   this.layoutService.getInfo().subscribe((res: any) => {
+  //     if (res.code === 200 && res.success) {
+  //       this.user = Object.assign(this.user || {}, res.data);
+  //     } else {
+  //       this.msg.error(res.message);
+  //     }
+  //   });
+  // }
 
   onClickGoto(url: string) {
     this.router.navigate([url], { relativeTo: this.activeRoute, replaceUrl: false });

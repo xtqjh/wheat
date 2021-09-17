@@ -52,7 +52,8 @@ export class ApplyService {
   /**
    * 发票申请列表
    */
-  getListInvoice = (data: any) => this.http.get(`/company/api/apply/invoice/list`, { params: isObjectToString(data) });
+  // getListInvoice = (data: any) => this.http.get(`/company/api/apply/invoice/list`, { params: isObjectToString(data) });
+  getListInvoice = (data: any) => this.http.post(`/company/api/apply/invoice/list`, data);
 
   /**
    * 打款成功的任务列表
@@ -77,7 +78,8 @@ export class ApplyService {
   /**
    * 企业申请开票
    */
-  getInvoiceApply = (data: any) => this.http.get(`/company/api/apply/invoice/apply`, { params: isObjectToString(data) });
+  // getInvoiceApply = (data: any) => this.http.get(`/company/api/apply/invoice/apply`, { params: isObjectToString(data) });
+  getInvoiceApply = (data: any) => this.http.post(`/company/api/apply/invoice/apply`, data);
 
   /**
    * 获取开票信息--提前开票
@@ -118,6 +120,11 @@ export class ApplyService {
   /**
    * 获取开票信息
    */
-  getInvoiceDetails = (data: { projectId: string, selectTaskNo: string }) => this.http.get(`/company/api/apply/invoice/details`, { params: isObjectToString(data) });
+  // getInvoiceDetails = (data: { projectId: string, selectTaskNo: string }) => this.http.get(
+  //   `/company/api/apply/invoice/details`, { params: isObjectToString(data) }
+  // )
+  getInvoiceDetails = (data: { projectId: string, selectTaskNo: string }) => this.http.post(
+    `/company/api/apply/invoice/details`, data
+  )
 
 }
