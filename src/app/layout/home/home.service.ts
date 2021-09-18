@@ -35,6 +35,26 @@ export class HomeService {
   getCategoryList = () => this.http.get(`/company/api/apply/category`);
 
   /**
+   * 获取支付宝认证地址
+   */
+  getCertUrl = (data: { companyMail: string }) => this.http.get(`/company/api/companySign/getCertUrl`, { params: isObjectToString(data) });
+
+  /**
+   * 判断是否企业支付宝
+   */
+  getCompanyAliPay = (data: { authCode: string }) => this.http.get(`/company/api/companySign/companyAliPay`, { params: isObjectToString(data) });
+
+  /**
+   * 获取支付宝授权协议
+   */
+  getSignUrl = (data: { alipayUserId: string, companyMail: string }) => this.http.get(`/company/api/companySign/getSignUrl`, { params: isObjectToString(data) });
+
+  /**
+   * 获取授权签约结果
+   */
+  getSignResult = () => this.http.get(`/company/api/companySign/getSignResult`);
+
+  /**
    * 企业项目申请
    */
   getProjectApply = (data: any) => this.http.get(`/company/api/apply/project/apply`, { params: isObjectToString(data) });

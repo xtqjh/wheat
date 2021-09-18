@@ -130,4 +130,10 @@ export class ProjectService {
    * 众包项目 导入一对多execl（任务详情）：任务详情
    */
   getProjectsImport = (id: string, file: any) => this.uploadMultipart(file, `/company/api/zb/project/import?id=${id}`);
+
+  /**
+   * 众包项目 任务信息 人员跟任务详细一对多
+   */
+  getDetailsTransaction = (data: { zbProjectId: string, transactionType: string, idCard: string }) => this.http.get(`/company/api/zb/project/detailsTransaction`, { params: isObjectToString(data) });
+
 }

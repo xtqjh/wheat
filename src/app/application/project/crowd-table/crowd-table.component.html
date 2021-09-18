@@ -6,11 +6,11 @@
         <input nz-input [(ngModel)]="page.username" id="username" />
       </nz-form-control>
     </nz-form-item>
-    <nz-form-item class="w450">
-      <nz-form-label [nzSpan]="5">交易时间</nz-form-label>
-      <nz-form-control [nzSpan]="19">
+    <nz-form-item class="w400">
+      <nz-form-label [nzSpan]="6">交易时间</nz-form-label>
+      <nz-form-control [nzSpan]="17">
         <nz-range-picker [(ngModel)]="page.date" (ngModelChange)="onChange($event)"
-          [nzPlaceHolder]="['交易开始时间','交易结束时间']" nzShowTime></nz-range-picker>
+          [nzPlaceHolder]="['交易开始时间','交易结束时间']"></nz-range-picker>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="w300">

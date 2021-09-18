@@ -29,3 +29,43 @@
 <zc-table fixedHigh showHead [(page)]="page" [(tableHeader)]="tableHeader" [items]="items" [isLoading]="isLoading"
   (searchData)="searchData($event)">
 </zc-table>
+
+
+<ng-template #drawerTemplate let-data let-drawerRef="drawerRef">
+  <form nz-form>
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="4">任务编号</nz-form-label>
+      <nz-form-control [nzSpan]="19">{{data?.item?.taskNo}}</nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="4">姓名</nz-form-label>
+      <nz-form-control [nzSpan]="19">{{data?.item?.personName}}</nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="4">手机号</nz-form-label>
+      <nz-form-control [nzSpan]="19">{{data?.item?.phone}}</nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="4">任务地点</nz-form-label>
+      <nz-form-control [nzSpan]="19">{{data?.item?.propertyAddresss}}</nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="4">任务名称</nz-form-label>
+      <nz-form-control [nzSpan]="19">
+        <div *ngFor="let name of data?.item?.TransactionName">{{name}}</div>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="4">工作量</nz-form-label>
+      <nz-form-control [nzSpan]="19">{{data?.item?.TransactionNameCount}} 套</nz-form-control>
+    </nz-form-item>
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="4">结算标准</nz-form-label>
+      <nz-form-control [nzSpan]="19">{{data?.item?.result}}</nz-form-control>
+    </nz-form-item>
+  </form>
+
+  <div class="footer">
+    <button nz-button (click)="drawerRef.close()">关闭</button>
+  </div>
+</ng-template>

@@ -90,9 +90,20 @@
     </div>
 
     <div class="balance flex" style="padding: 16px 32px;" *ngIf="capital?.zfbAccount">
-    <!-- <div class="balance flex" style="padding: 16px 32px;"> -->
-      <i class="fa fa-plus cur-p color-theme flex-self-center flex-justify-center" style="font-size: 80px;"></i>
+      <i class="fa fa-plus cur-p color-theme flex-self-center flex-justify-center" style="font-size: 80px;"
+        (click)="openAlipay()"></i>
     </div>
 
   </div>
 </div>
+
+<ng-template #tplContent>
+  <form nz-form [formGroup]="dynForm" class="">
+    <nz-form-item class="mg-b0">
+      <nz-form-label [nzSpan]="8" nzRequired nzFor="companyMail">支付宝账号</nz-form-label>
+      <nz-form-control [nzSpan]="15" nzErrorTip="请输入支付宝账号!">
+        <input zcTrim nz-input id="companyMail" required formControlName="companyMail" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>

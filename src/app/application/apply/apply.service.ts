@@ -123,7 +123,7 @@ export class ApplyService {
   // getInvoiceDetails = (data: { projectId: string, selectTaskNo: string }) => this.http.get(
   //   `/company/api/apply/invoice/details`, { params: isObjectToString(data) }
   // )
-  getInvoiceDetails = (data: { projectId: string, selectTaskNo: string }) => this.http.post(
+  getInvoiceDetails = (data: { projectId: string, selectTaskNo: Array<any> }) => this.http.post(
     `/company/api/apply/invoice/details`, data
   )
 

@@ -28,7 +28,7 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
     { title: '项目名称', key: 'projectName', show: true, width: 200 },
     {
       title: '创建时间', key: 'createTime', show: true, width: 190,
-      pipeType: 'custom', pipeContent: (node) => moment(node.createTime).format('YYYY-MM-DD HH:mm:ss')
+      pipeType: 'custom', pipeContent: (node) => moment(node.createTime).format('YYYY-MM-DD')
     },
     {
       title: '接单情况', key: '', show: true, width: 140,
@@ -36,7 +36,7 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
       clickEvent: (node) => this.router.navigate([`./${node.id}`], { relativeTo: this.route })
     },
     {
-      title: '操作', key: 'operate', show: true, width: 200, right: 0,
+      title: '操作', key: 'operate', show: true, width: 180, right: 0,
       buttonShowNumber: 4,
       buttons: [
         {
@@ -57,7 +57,7 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
           )
         },
         {
-          text: '导入1:1',
+          text: '操作1',
           click: (node) => {
             const inputObj = document.createElement('input');
             inputObj.setAttribute('id', node.id);
@@ -69,7 +69,7 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
           }
         },
         {
-          text: '导入1:N',
+          text: '操作2',
           click: (node) => {
             const inputObj = document.createElement('input');
             inputObj.setAttribute('id', node.id);
@@ -146,8 +146,8 @@ export class CrowdTableComponent implements OnInit, OnDestroy {
   }
 
   onChange(value) {
-    this.page.beginTime = value[0] && moment(value[0]).format('YYYY-MM-DD HH:mm:ss') || null;
-    this.page.endTime = value[1] && moment(value[1]).format('YYYY-MM-DD HH:mm:ss') || null;
+    this.page.beginTime = value[0] && moment(value[0]).format('YYYY-MM-DD') || null;
+    this.page.endTime = value[1] && moment(value[1]).format('YYYY-MM-DD') || null;
   }
 
   openEdit = (id: any, title: string, isShowSubmitButton?: boolean) => {

@@ -1,8 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { filter, tap } from 'rxjs/operators';
 import { isClone } from 'ng-ylzx/core/util';
 import { TableHeader } from 'ng-ylzx/table';
+import { NzDrawerRef, NzDrawerService } from 'ng-zorro-antd';
 import { BaseService, MessageService } from 'src/app/share/service';
 import { ProjectService } from '../project.service';
 
@@ -14,6 +15,11 @@ import { ProjectService } from '../project.service';
 export class CrowdDetailComponent implements OnInit, OnDestroy {
 
   private getser$: any;
+
+  @ViewChild('drawerTemplate', { static: false }) drawerTemplate: TemplateRef<{
+    $implicit: { item: any };
+    drawerRef: NzDrawerRef<string>;
+  }>;
 
   page: any = {
     total: 0, page: 1, size: 20,
@@ -27,8 +33,40 @@ export class CrowdDetailComponent implements OnInit, OnDestroy {
     { title: '接单手机号', key: 'phone', show: true, width: 140 },
     { title: '录入客户(条)', key: 'qualifiedCount', show: true, width: 140 },
     { title: '带看客户(组)', key: 'visitCount', show: true, width: 140 },
-    { title: '房屋销售(套)', key: 'sale', show: true, width: 140 },
-    { title: '房屋租赁(套)', key: 'lease', show: true, width: 140 },
+    {
+      title: '房屋销售(套)', key: 'sale', show: true, width: 140,
+      clickEvent: (node) => this.service.getDetailsTransaction({ zbProjectId: node.taskNo, transactionType: '0', idCard: node.idCard })
+        .subscribe((res: any) => {
+          if (res.success) {
+            this.drawerService.create({
+              nzBodyStyle: { height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' },
+              nzTitle: `任务详情`,
+              nzWidth: '50%',
+              nzContent: this.drawerTemplate,
+              nzContentParams: { item: res.extData }
+            });
+          } else {
+            this.msg.error(res.message);
+          }
+        })
+    },
+    {
+      title: '房屋租赁(套)', key: 'lease', show: true, width: 140,
+      clickEvent: (node) => this.service.getDetailsTransaction({ zbProjectId: node.taskNo, transactionType: '1', idCard: node.idCard })
+        .subscribe((res: any) => {
+          if (res.success) {
+            this.drawerService.create({
+              nzBodyStyle: { height: 'calc(100% - 55px)', overflow: 'auto', 'padding-bottom': '53px' },
+              nzTitle: `任务详情`,
+              nzWidth: '50%',
+              nzContent: this.drawerTemplate,
+              nzContentParams: { item: res.extData }
+            });
+          } else {
+            this.msg.error(res.message);
+          }
+        })
+    },
   ];
 
   items = [];
@@ -39,7 +77,8 @@ export class CrowdDetailComponent implements OnInit, OnDestroy {
     private base: BaseService,
     private msg: MessageService,
     private route: ActivatedRoute,
-    private service: ProjectService
+    private service: ProjectService,
+    private drawerService: NzDrawerService,
   ) { }
 
   ngOnInit() {

@@ -33,7 +33,7 @@ export class SigningTableComponent implements OnInit, OnDestroy {
     { title: '用户ID', key: 'userId', show: true, width: 200 },
     { title: 'relationName', key: 'relationName', show: false, width: 160 },
     { title: 'statusTime', key: 'statusTime', show: false, width: 160 },
-    { title: 'statusTimeStr', key: 'statusTimeStr', show: true, width: 160 },
+    { title: 'statusTimeStr', key: 'statusTimeStr', show: false, width: 160 },
     { title: '状态', key: 'moguStatus', show: false, width: 100 },
     { title: '状态描述', key: 'moguStatusStr', show: true, width: 100 },
     { title: 'workStatus', key: 'workStatus', show: false, width: 100 },

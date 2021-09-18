@@ -21,7 +21,7 @@ export class TaskEditInvoiceComponent implements OnInit, OnDestroy {
   @Input() set projectId(id: string) {
     if (id) {
       this.editType = true;
-      setTimeout(() => this.getInvoiceDetails(id, this.checkIds.toString()), 200);
+      setTimeout(() => this.getInvoiceDetails(id, this.checkIds), 200);
     }
   }
 
@@ -107,7 +107,7 @@ export class TaskEditInvoiceComponent implements OnInit, OnDestroy {
     }
   }
 
-  private getInvoiceDetails = (projectId: string, selectTaskNo: string) => this.service.getInvoiceDetails({ projectId, selectTaskNo }).subscribe((res: any) => {
+  private getInvoiceDetails = (projectId: string, selectTaskNo: string[]) => this.service.getInvoiceDetails({ projectId, selectTaskNo }).subscribe((res: any) => {
     if (res.success) {
       const data = res.extData;
       this.dynForm.patchValue({
