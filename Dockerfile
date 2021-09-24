@@ -35,6 +35,7 @@ CMD ["nginx", "-g", "daemon off;"]
 # docker run -d -e API_IP=111.0.99.143:9000 --restart=always --name=wheat -p 31001:80 xtqjh/wheat
 # docker run -d -e API_IP=49.235.24.149:9000 --restart=always --name=wheat -p 31001:80 xtqjh/wheat
 # docker ps -a --filter name=$FILES
+# npm run build && docker build -f Dockerfile -t xtqjh/wheat . && docker push xtqjh/wheat
 
 # server {
 #      listen 8087;

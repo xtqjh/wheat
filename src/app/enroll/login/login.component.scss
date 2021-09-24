@@ -21,12 +21,27 @@
   }
 }
 
-::ng-deep .has-error .ant-form-explain,
-::ng-deep .has-error .ant-form-split {
+:host ::ng-deep .has-error .ant-form-explain,
+:host ::ng-deep .has-error .ant-form-split {
   margin-left: 20px;
+}
+:host ::ng-deep .ant-input-group-addon{
+  padding:0;
+  border-top-left-radius:  10rem !important;
+  border-bottom-left-radius:  10rem !important;
 }
 
 
+img.captcha{
+  border-top-left-radius:  10rem !important;
+  border-bottom-left-radius:  10rem !important;
+  height: 48px;
+  cursor: pointer;
+}
+input.captcha{
+  border-top-left-radius:  0rem !important;
+  border-bottom-left-radius:  0rem !important;
+}
 
 
 

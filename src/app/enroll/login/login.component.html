@@ -42,12 +42,12 @@
 
             <nz-form-item *ngIf="captcha">
               <nz-form-control nzErrorTip="请输入图形验码">
-                <nz-input-group nzSearch [nzAddOnAfter]="suffixButton">
-                  <input class="form-control form-control-user smsCode" type="text" nz-input placeholder="输入图形验证码"
+                <nz-input-group nzSearch [nzAddOnBefore]="suffixButton">
+                  <input class="form-control form-control-user captcha" type="text" nz-input placeholder="输入图形验证码"
                     formControlName="captcha">
                 </nz-input-group>
                 <ng-template #suffixButton>
-                  <img [src]="captcha.img" style="height: 50px;" *ngIf="captcha">
+                  <img [src]="captcha.img" class="captcha" *ngIf="captcha" (click)="getCaptcha()">
                 </ng-template>
               </nz-form-control>
             </nz-form-item>
