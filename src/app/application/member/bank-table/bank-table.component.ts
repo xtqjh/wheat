@@ -20,10 +20,10 @@ export class BankTableComponent implements OnInit, OnDestroy {
   };
 
   tableHeader: Array<TableHeader> = [
-    { title: '姓名', key: 'userName', show: true, width: 190 },
-    { title: '身份证号码', key: 'idCard', show: true, width: 160 },
-    { title: '手机号', key: 'phone', show: true, width: 200 },
-    { title: '银行卡号', key: 'bankCard', show: true, width: 160 },
+    { title: '姓名', key: 'userName', show: true, width: 100 },
+    { title: '身份证号码', key: 'idCard', show: true, width: 190 },
+    { title: '手机号', key: 'phone', show: true, width: 140 },
+    { title: '银行卡号', key: 'bankCard', show: true, width: 200 },
     {
       title: '操作', key: 'operate', show: true, width: 140,
       buttons: [

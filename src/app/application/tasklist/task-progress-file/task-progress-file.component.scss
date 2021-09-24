@@ -27,3 +27,23 @@
     text-align: justify;
   }
 }
+
+.ivu-alert-error {
+  border: 1px solid #ffb08f;
+  background-color: #ffefe6;
+  position: relative;
+  padding: 20px 48px 20px 38px;
+  border-radius: 4px;
+  color: #515a6e;
+  font-size: 12px;
+  line-height: 16px;
+  margin-top: 10px;
+}
+
+.ivu-alert-error .ivu-alert-icon {
+  font-size: 24px;
+  top: 16px;
+  left: 10px;
+  color: #ed4014;
+  position: absolute;
+}

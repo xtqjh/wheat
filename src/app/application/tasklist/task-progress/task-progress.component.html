@@ -1,12 +1,14 @@
 <nz-spin [nzSpinning]="isLoading" nzTip="加载...">
   <div class="pd-20">
-    <nz-steps [nzCurrent]="indexCurrent">
-      <nz-step nzTitle="上传文件"></nz-step>
-      <nz-step nzTitle="任务提交"></nz-step>
-      <nz-step nzTitle="审核确认"></nz-step>
-      <nz-step nzTitle="银行处理中"></nz-step>
-      <nz-step nzTitle="完成"></nz-step>
-    </nz-steps>
+    <div class="pd-20">
+      <nz-steps [nzCurrent]="indexCurrent">
+        <nz-step nzTitle="上传文件"></nz-step>
+        <nz-step nzTitle="任务提交"></nz-step>
+        <nz-step nzTitle="审核确认"></nz-step>
+        <nz-step nzTitle="银行处理中"></nz-step>
+        <nz-step nzTitle="完成"></nz-step>
+      </nz-steps>
+    </div>
 
     <app-task-progress-file (nextChange)="getTaskStatus()" *ngIf="indexCurrent==0"></app-task-progress-file>
     <app-task-progress-submit [item]="item" (nextChange)="getTaskStatus()" *ngIf="indexCurrent==1">
