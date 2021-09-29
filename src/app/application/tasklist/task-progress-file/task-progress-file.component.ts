@@ -62,6 +62,26 @@ export class TaskProgressFileComponent implements OnInit, OnDestroy {
 
   getListProject = () => this.service.getListProject({}).subscribe((res: any) => this.projectList = res.success && res.extData || []);
 
+  getTaskBatchStatus = (taskNo: string) => this.service.getTaskBatchStatus({ taskNo })
+    .subscribe((gtbs: any) => {
+      if (gtbs.success) {
+        if (gtbs.extData.status === 2) {
+          this.isImportUrl = gtbs.extData.fileUrl;
+          this.submitStatus = false;
+        } else if (gtbs.extData.status === 0) {
+          setTimeout(() => this.getTaskBatchStatus(gtbs.extData.taskNo), 1000 * 1);
+        } else {
+          this.dynForm.get('taskNo').setValue(gtbs.extData.taskNo);
+          this.submitStatus = false;
+          this.router.navigate([`/layout/tasklist/task/progress/${gtbs.extData.taskNo}`]);
+          this.nextChange.emit(true);
+        }
+      } else {
+        this.msg.error(gtbs.message);
+        this.submitStatus = false;
+      }
+    }, err => this.submitStatus = false)
+
   submitForm() {
     for (const i in this.dynForm.controls) {
       if (this.dynForm.controls.hasOwnProperty(i)) {
@@ -75,27 +95,21 @@ export class TaskProgressFileComponent implements OnInit, OnDestroy {
         this.submitStatus = true;
         const data = this.dynForm.value;
         this.getser$ = this.service.postTaskImport({
-          projectId: data.projectId,
-          taskName: data.taskName,
-          file: this.fileList[0]
-        }).subscribe(
-          (res: any) => {
-            if (res.success) {
-              this.submitStatus = false;
-              if (res.extData.fileUrl.length > 0) {
-                this.isImportUrl = res.extData.fileUrl;
-              } else {
-                this.dynForm.get('taskNo').setValue(res.extData.taskNo);
-                setTimeout(() => {
-                  this.router.navigate([`/layout/tasklist/task/progress/${res.extData.taskNo}`]);
-                }, 1200);
-                // this.nextChange.emit(true);
-              }
+          projectId: data.projectId, taskName: data.taskName, file: this.fileList[0]
+        }).subscribe((res: any) => {
+          if (res.success) {
+            if (res.extData.fileUrl && res.extData.fileUrl.length > 0) {
+              this.isImportUrl = res.extData.fileUrl;
             } else {
-              this.msg.error(res.message);
-              this.submitStatus = false;
+              this.getTaskBatchStatus(res.extData.taskNo);
             }
-          },
+            this.submitStatus = false;
+          } else {
+            this.msg.error(res.message);
+            this.submitStatus = false;
+          }
+          this.submitStatus = false;
+        },
           err => this.submitStatus = false
         );
       }
