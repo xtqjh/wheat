@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ZcValidator } from 'ng-ylzx';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +25,11 @@ export class EnrollService {
   }
 
   getCode(data: { phone: string, captchaId: string, captcha: string }) {
-    return this.http.post(`/taxscheme/login/sms/code`, data);
-    // return this.http.get(`/auth/smsCheck/code/${data.phone}`);
+    return this.http.post(`${environment.gateway}/taxscheme/login/sms/code`, data);
+    // return this.http.get(`${environment.gateway}/auth/smsCheck/code/${data.phone}`);
   }
 
-  getSms = (data: { phone: string, smsCode: string }) => this.http.post(`/taxscheme/login/sms`, data);
+  getSms = (data: { phone: string, smsCode: string }) => this.http.post(`${environment.gateway}/taxscheme/login/sms`, data);
 
-  getCaptcha = () => this.http.get(`/captcha`);
+  getCaptcha = () => this.http.get(`${environment.gateway}/captcha`);
 }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { isObjectToString, setFormatGetUrl } from 'ng-ylzx/core/util';
 import { Observable, of } from 'rxjs';
 import { switchMap, filter } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class ProjectService {
   /**
    * 项目名称列表
    */
-  getListProject = () => this.http.get(`/company/api/project/nameList`);
+  getListProject = () => this.http.get(`${environment.gateway}/company/api/project/nameList`);
 
   /**
    * 发佣成员列表
@@ -29,7 +30,7 @@ export class ProjectService {
     companyId: string,
     pageNum: number,
     pageSize: number,
-  }) => this.http.get(`/company/api/project/quick/listAllMembers`, { params: isObjectToString(data) })
+  }) => this.http.get(`${environment.gateway}/company/api/project/quick/listAllMembers`, { params: isObjectToString(data) })
 
   /**
    * 发佣成员列表
@@ -39,27 +40,27 @@ export class ProjectService {
     projectId: string,
     selectUserId: string,
     unSelectUserId?: string,
-  }) => this.http.post(`/company/api/project/quick/commissionTemplateExport?${setFormatGetUrl(data)}`, data)
+  }) => this.http.post(`${environment.gateway}/company/api/project/quick/commissionTemplateExport?${setFormatGetUrl(data)}`, data)
 
   /**
    * 项目详情
    */
-  getDetail = (data: { projectId: string }) => this.http.get(`/company/api/project/detail`, { params: isObjectToString(data) });
+  getDetail = (data: { projectId: string }) => this.http.get(`${environment.gateway}/company/api/project/detail`, { params: isObjectToString(data) });
 
   /**
    * 发佣任务列表
    */
-  getListTask = (data: { projectId: string, pageNum: number, pageSize: number }) => this.http.get(`/company/api/task/list`, { params: isObjectToString(data) });
+  getListTask = (data: { projectId: string, pageNum: number, pageSize: number }) => this.http.get(`${environment.gateway}/company/api/task/list`, { params: isObjectToString(data) });
 
   /**
    * 开工状态列表
    */
-  getWorkStatus = (data: { projectId: string }) => this.http.get(`/company/api/member/workStatus`, { params: isObjectToString(data) });
+  getWorkStatus = (data: { projectId: string }) => this.http.get(`${environment.gateway}/company/api/member/workStatus`, { params: isObjectToString(data) });
 
   /**
    * 项目佣金总计
    */
-  getStatistics = (data: { projectId: string }) => this.http.get(`/company/api/project/statistics`, { params: isObjectToString(data) });
+  getStatistics = (data: { projectId: string }) => this.http.get(`${environment.gateway}/company/api/project/statistics`, { params: isObjectToString(data) });
 
   private uploadMultipart = (file: any, url: string, projectId?: string): Observable<any> => {
     return new Observable(observer => of(file).pipe(
@@ -69,7 +70,7 @@ export class ProjectService {
         if (projectId) {
           formData.append('projectId', projectId);
         }
-        const req = new HttpRequest('POST', `${url}`, formData);
+        const req = new HttpRequest('POST', `${environment.gateway}${url}`, formData);
         return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
       }),
     ).subscribe(
@@ -99,27 +100,27 @@ export class ProjectService {
     companyId: string,
     pageNum: number,
     pageSize: number,
-  }) => this.http.get(`/company/api/zb/project/listProjects`, { params: isObjectToString(data) })
+  }) => this.http.get(`${environment.gateway}/company/api/zb/project/listProjects`, { params: isObjectToString(data) })
 
   /**
    * 众包项目增
    */
-  getAddProjects = (data: any) => this.http.get(`/company/api/zb/project/insert`, { params: isObjectToString(data) });
+  getAddProjects = (data: any) => this.http.get(`${environment.gateway}/company/api/zb/project/insert`, { params: isObjectToString(data) });
 
   /**
    * 众包项目改
    */
-  getUpdateProjects = (data: any) => this.http.get(`/company/api/zb/project/update`, { params: isObjectToString(data) });
+  getUpdateProjects = (data: any) => this.http.get(`${environment.gateway}/company/api/zb/project/update`, { params: isObjectToString(data) });
 
   /**
    * 众包项目删
    */
-  getDeleteProjects = (data: any) => this.http.get(`/company/api/zb/project/delete`, { params: isObjectToString(data) });
+  getDeleteProjects = (data: any) => this.http.get(`${environment.gateway}/company/api/zb/project/delete`, { params: isObjectToString(data) });
 
   /**
    * 众包项目 任务信息 人员跟任务信息一对一
    */
-  getDetailsProjects = (data: any) => this.http.get(`/company/api/zb/project/details`, { params: isObjectToString(data) });
+  getDetailsProjects = (data: any) => this.http.get(`${environment.gateway}/company/api/zb/project/details`, { params: isObjectToString(data) });
 
   /**
    * 众包项目 导入一对一execl:人员信息
@@ -134,6 +135,6 @@ export class ProjectService {
   /**
    * 众包项目 任务信息 人员跟任务详细一对多
    */
-  getDetailsTransaction = (data: { zbProjectId: string, transactionType: string, idCard: string }) => this.http.get(`/company/api/zb/project/detailsTransaction`, { params: isObjectToString(data) });
+  getDetailsTransaction = (data: { zbProjectId: string, transactionType: string, idCard: string }) => this.http.get(`${environment.gateway}/company/api/zb/project/detailsTransaction`, { params: isObjectToString(data) });
 
 }

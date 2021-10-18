@@ -47,71 +47,71 @@ export class ApplyService {
   /**
    * 项目申请列表
    */
-  getListProjects = (data: any) => this.http.get(`/company/api/apply/project/list`, { params: isObjectToString(data) });
+  getListProjects = (data: any) => this.http.get(`${environment.gateway}/company/api/apply/project/list`, { params: isObjectToString(data) });
 
   /**
    * 发票申请列表
    */
-  // getListInvoice = (data: any) => this.http.get(`/company/api/apply/invoice/list`, { params: isObjectToString(data) });
-  getListInvoice = (data: any) => this.http.post(`/company/api/apply/invoice/list`, data);
+  // getListInvoice = (data: any) => this.http.get(`${environment.gateway}/company/api/apply/invoice/list`, { params: isObjectToString(data) });
+  getListInvoice = (data: any) => this.http.post(`${environment.gateway}/company/api/apply/invoice/list`, data);
 
   /**
    * 打款成功的任务列表
    */
-  getListTask = (data: any) => this.http.get(`/company/api/apply/task/list`, { params: isObjectToString(data) });
+  getListTask = (data: any) => this.http.get(`${environment.gateway}/company/api/apply/task/list`, { params: isObjectToString(data) });
 
   /**
    * 项目名称列表
    */
-  getProjectNameList = (data: any) => this.http.get(`/company/api/company/reconciliation/projectNameList`, { params: isObjectToString(data) });
+  getProjectNameList = (data: any) => this.http.get(`${environment.gateway}/company/api/company/reconciliation/projectNameList`, { params: isObjectToString(data) });
 
   /**
    * 企业下面的税源地名称列表
    */
-  getAreaNameList = (data: any) => this.http.get(`/company/api/company/reconciliation/areaNameList`, { params: isObjectToString(data) });
+  getAreaNameList = (data: any) => this.http.get(`${environment.gateway}/company/api/company/reconciliation/areaNameList`, { params: isObjectToString(data) });
 
   /**
    * 一级类型列表
    */
-  getCategory = (data: any) => this.http.get(`/company/api/apply/category`, { params: isObjectToString(data) });
+  getCategory = (data: any) => this.http.get(`${environment.gateway}/company/api/apply/category`, { params: isObjectToString(data) });
 
   /**
    * 企业申请开票
    */
-  // getInvoiceApply = (data: any) => this.http.get(`/company/api/apply/invoice/apply`, { params: isObjectToString(data) });
-  getInvoiceApply = (data: any) => this.http.post(`/company/api/apply/invoice/apply`, data);
+  // getInvoiceApply = (data: any) => this.http.get(`${environment.gateway}/company/api/apply/invoice/apply`, { params: isObjectToString(data) });
+  getInvoiceApply = (data: any) => this.http.post(`${environment.gateway}/company/api/apply/invoice/apply`, data);
 
   /**
    * 获取开票信息--提前开票
    */
-  getApplyHeads = () => this.http.get(`/company/api/apply/invoice/heads`);
+  getApplyHeads = () => this.http.get(`${environment.gateway}/company/api/apply/invoice/heads`);
 
   /**
    * 企业申请开票————提前开票
    */
-  postNewlyTask = (data: any) => this.http.get(`/company/api/apply/invoice/beforeApply`, { params: isObjectToString(data) });
+  postNewlyTask = (data: any) => this.http.get(`${environment.gateway}/company/api/apply/invoice/beforeApply`, { params: isObjectToString(data) });
 
   /**
    * 作废申请记录
    */
-  getProjectCancel = (data: { id: any }) => this.http.get(`/company/api/apply/project/cancel`, { params: isObjectToString(data) });
+  getProjectCancel = (data: { id: any }) => this.http.get(`${environment.gateway}/company/api/apply/project/cancel`, { params: isObjectToString(data) });
 
   /**
    * 作废申请记录
    */
-  getInvoiceCancel = (data: { id: any }) => this.http.get(`/company/api/apply/invoice/cancel`, { params: isObjectToString(data) });
+  getInvoiceCancel = (data: { id: any }) => this.http.get(`${environment.gateway}/company/api/apply/invoice/cancel`, { params: isObjectToString(data) });
 
   /**
    * 企业项目申请
    */
-  getProjectApply = (data: any) => this.http.get(`/company/api/apply/project/apply`, { params: isObjectToString(data) });
+  getProjectApply = (data: any) => this.http.get(`${environment.gateway}/company/api/apply/project/apply`, { params: isObjectToString(data) });
 
   uploadFile = (file: any): Observable<any> => {
     return of(file).pipe(
       switchMap((ut: any) => {
         const formData = new FormData();
         formData.append('file', ut);
-        const req = new HttpRequest('POST', `/company/api/kmg/common/upload`, formData);
+        const req = new HttpRequest('POST', `${environment.gateway}/company/api/kmg/common/upload`, formData);
         return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
       }),
     );
@@ -124,7 +124,7 @@ export class ApplyService {
   //   `/company/api/apply/invoice/details`, { params: isObjectToString(data) }
   // )
   getInvoiceDetails = (data: { projectId: string, selectTaskNo: Array<any> }) => this.http.post(
-    `/company/api/apply/invoice/details`, data
+    `${environment.gateway}/company/api/apply/invoice/details`, data
   )
 
 }

@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  gateway: 'http://49.235.24.149:9000',
   storageToken: 'YLZX_WHEAT_ACCESS_TOKEN',
   storageUserInfo: 'YLZX_WHEAT_USER_INFO',
   storageUserResources: 'YLZX_WHEAT_USER_RESOURCES',

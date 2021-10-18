@@ -17,49 +17,49 @@ export class RecordService {
    * 流水列表
    */
   getListFlow = (data: any) => {
-    return this.http.get(`/company/api/company/reconciliation/list`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/company/reconciliation/list`, { params: isObjectToString(data) });
   }
 
   /**
    * 资金列表
    */
   getListFund = (data: any) => {
-    return this.http.get(`/company/api/company/accountList`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/company/accountList`, { params: isObjectToString(data) });
   }
 
   /**
    * 导出对账流水
    */
   exportReconciliation = (data: any) => {
-    return this.http.get(`/company/api/company/reconciliation/export`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/company/reconciliation/export`, { params: isObjectToString(data) });
   }
 
   /**
    * 项目名称列表
    */
   getProjectNameList = (data: any) => {
-    return this.http.get(`/company/api/company/reconciliation/projectNameList`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/company/reconciliation/projectNameList`, { params: isObjectToString(data) });
   }
 
   /**
    * 项目名称列表
    */
   getListProject = (data: any) => {
-    return this.http.get(`/company/api/project/nameList`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/project/nameList`, { params: isObjectToString(data) });
   }
 
   /**
    * 企业下面的税源地名称列表
    */
   getAreaNameList = (data: any) => {
-    return this.http.get(`/company/api/company/reconciliation/areaNameList`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/company/reconciliation/areaNameList`, { params: isObjectToString(data) });
   }
 
   /**
    * 账户-下拉框数据
    */
   getAccountNameList = () => {
-    return this.http.get(`/company/api/company/accountName`);
+    return this.http.get(`${environment.gateway}/company/api/company/accountName`);
   }
 
 }

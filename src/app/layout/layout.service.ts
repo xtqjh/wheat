@@ -13,18 +13,18 @@ export class LayoutService {
     private http: HttpClient,
   ) { }
 
-  getInfo = () => this.http.get(`/taxscheme/info`);
+  getInfo = () => this.http.get(`${environment.gateway}/taxscheme/info`);
 
-  getLogout = () => this.http.get(`/taxscheme/logout`);
+  getLogout = () => this.http.get(`${environment.gateway}/taxscheme/logout`);
 
-  getCompany = () => this.http.get(`/company/api/company/list`);
+  getCompany = () => this.http.get(`${environment.gateway}/company/api/company/list`);
 
   /**
    * 企业信息
    */
-  getCompanyInfo = () => this.http.get(`/company/api/company/info`);
+  getCompanyInfo = () => this.http.get(`${environment.gateway}/company/api/company/info`);
 
-  getCompanyChoose = (data: { companyId: string }) => this.http.get(`/company/api/company/choose`, { params: isObjectToString(data) });
+  getCompanyChoose = (data: { companyId: string }) => this.http.get(`${environment.gateway}/company/api/company/choose`, { params: isObjectToString(data) });
 
 }
 

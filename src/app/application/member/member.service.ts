@@ -20,49 +20,49 @@ export class MemberService {
    * 查询列表
    */
   public getListBank = (data: { pageNum: number, pageSize: number }) => {
-    return this.http.get(`/company/api/project/quick/listAllBankCards`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/project/quick/listAllBankCards`, { params: isObjectToString(data) });
   }
 
   /**
    * 发送绑卡短信
    */
   public sendTiedCardSMS = (data: { userId: string }) => {
-    return this.http.get(`/company/api/project/quick/sendTiedCardSMS`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/project/quick/sendTiedCardSMS`, { params: isObjectToString(data) });
   }
 
   /**
    * 查询列表
    */
   public getListSigning = (data: { pageNum: number, pageSize: number }) => {
-    return this.http.get(`/company/api/member/list`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/member/list`, { params: isObjectToString(data) });
   }
 
   /**
    * 项目名称列表
    */
   public getProjectName = (data?: { projectType?: string }) => {
-    return this.http.get(`/company/api/project/nameList`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/project/nameList`, { params: isObjectToString(data) });
   }
 
   /**
    * 重发邀请短信
    */
   public getSendMsg = (data: { projectId: string, userId?: string }) => {
-    return this.http.get(`/company/api/member/sendMsg`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/member/sendMsg`, { params: isObjectToString(data) });
   }
 
   /**
    * 修改开工状态
    */
   public setWorkStatus = (data: { idNo?: string, moguStatus?: string, name?: string, phone?: string, projectId?: string, userId?: string, workStatus?: string }) => {
-    return this.http.get(`/company/api/member/setWorkStatus`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/member/setWorkStatus`, { params: isObjectToString(data) });
   }
 
   /**
    * 员工数据导出
    */
   public getDownload = (data: { pageNum: number, pageSize: number }) => {
-    return this.http.get(`/company/api/member/download`, { params: isObjectToString(data) });
+    return this.http.get(`${environment.gateway}/company/api/member/download`, { params: isObjectToString(data) });
   }
 
   private uploadMultipart = (file: any, projectId: string, url: string): Observable<any> => {
@@ -71,7 +71,7 @@ export class MemberService {
         const formData = new FormData();
         formData.append('file', ut);
         formData.append('projectId', projectId);
-        const req = new HttpRequest('POST', `${url}`, formData);
+        const req = new HttpRequest('POST', `${environment.gateway}${url}`, formData);
         return this.http.request(req).pipe(filter(e => e instanceof HttpResponse));
       }),
     ).subscribe(
