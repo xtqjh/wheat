@@ -5,7 +5,7 @@
     "ng": "ng",
     "info": "npm --loglevel info install",
     "start": "ng serve --port 6100 --open",
-    "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --build-optimizer --output-path=dist/wheat --base-href=/wheat/",
+    "build": "node --max_old_space_size=8192 ./node_modules/@angular/cli/bin/ng build --prod --build-optimizer --output-path=dist/s --base-href=/s/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"

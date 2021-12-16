@@ -5,7 +5,7 @@
 # base image
 FROM nginx:1.13.9-alpine
 
-ENV API_IP=49.235.24.149:9000
+ENV API_IP=1.14.240.95:9000
 
 ADD nginx.conf /etc/nginx/nginx.conf.template
 
@@ -33,7 +33,7 @@ CMD ["nginx", "-g", "daemon off;"]
 # docker run -d --env API_IP=172.16.111.11:8087 --restart=always --name $FILES -p 42000:80 --rm $NAMES
 # docker run -d -e API_IP=172.16.111.11:8087 --restart=always --name=wheat -p 31001:80 --rm 172.16.111.21:5000/wheat:tag
 # docker run -d -e API_IP=111.0.99.143:9000 --restart=always --name=wheat -p 31001:80 xtqjh/wheat
-# docker run -d -e API_IP=49.235.24.149:9000 --restart=always --name=wheat -p 31001:80 xtqjh/wheat
+# docker run -d -e API_IP=1.14.240.95:9000 --restart=always --name=wheat -p 31001:80 xtqjh/wheat
 # docker ps -a --filter name=$FILES
 # npm run build && docker build -f Dockerfile -t xtqjh/wheat . && docker push xtqjh/wheat
 
